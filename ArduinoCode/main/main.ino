@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
-#include "src/JSONHandler.h"
-#include "src/DHTHandler.h"
-#include "src/MQTTHandler.h"
+#include "../src/JSONHandler.h"
+#include "../src/DHTHandler.h"
+#include "../src/MQTTHandler.h"
 
 // Update these with values suitable for your network.
 const char* ssid = "";
