@@ -1,5 +1,6 @@
 #include "esp_camera.h"
 #include <WiFi.h>
+#include "actualiza_dual.h"
 
 //
 // WARNING!!! PSRAM IC required for UXGA resolution and high JPEG quality
@@ -19,12 +20,20 @@
 
 #include "camera_pins.h"
 
+// ------  Configuración WiFi  ------- //
+
 //const char* ssid = "vodafoneAAXFSN";
 //const char* password = "AfG7CZqGYRMJYRG3";
 //const char* ssid = "infind";
 //const char* password = "1518wifi";
-const char* ssid = "Redmi";
-const char* password = "mamawevo";
+//const char* ssid = "Redmi";
+//const char* password = "mamawevo";
+const char* ssid = "Lecom-e0-31-0E";
+const char* password = "athoo5ooJai6aif8";
+//const char* ssid = "Lecom-Fibra-69-99-d6";
+//const char* password = "fie6roh5Xah9ua4D";
+//const char* ssid = "OnePlus Nord2 5G";
+//const char* password = "1234567890";
 
 void startCameraServer();
 
@@ -94,6 +103,7 @@ void setup() {
   s->set_hmirror(s, 1);
 #endif
 
+  
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED) {
@@ -108,6 +118,11 @@ void setup() {
   Serial.print("Camera Ready! Use 'http://");
   Serial.print(WiFi.localIP());
   Serial.println("' to connect");
+
+  //setup_wifi(ssid,password);
+  setup_OTA();
+
+  Serial.print("sin actualizar");
 }
 
 void loop() {
