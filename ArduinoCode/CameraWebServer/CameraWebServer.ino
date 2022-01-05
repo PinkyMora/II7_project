@@ -1,6 +1,8 @@
 #include "esp_camera.h"
 #include <WiFi.h>
 #include "actualiza_dual.h"
+#include <PubSubClient.h>
+#include <ArduinoJson.h>
 
 //
 // WARNING!!! PSRAM IC required for UXGA resolution and high JPEG quality
@@ -20,7 +22,7 @@
 
 #include "camera_pins.h"
 
-// ------  Configuración WiFi  ------- //
+// -------------------  Configuración WiFi  ------------------- //
 
 //const char* ssid = "vodafoneAAXFSN";
 //const char* password = "AfG7CZqGYRMJYRG3";
@@ -34,6 +36,93 @@ const char* password = "athoo5ooJai6aif8";
 //const char* password = "fie6roh5Xah9ua4D";
 //const char* ssid = "OnePlus Nord2 5G";
 //const char* password = "1234567890";
+
+
+// ---------------------------------------------------------- //
+// ------------------- Configuración MQTT ------------------- //
+// ---------------------------------------------------------- //
+
+const char* mqtt_server = "";
+const char* mqtt_user = "";
+const char* mqtt_pass = "";
+WiFiClient espClient;
+PubSubClient client(espClient);
+unsigned long lastMsg = 0;
+unsigned long lastFOTA = 0;
+#define MSG_BUFFER_SIZE  (50)
+char msg[MSG_BUFFER_SIZE];
+int value = 0;
+
+char mensaje[128];  // cadena de 128 caracteres
+
+// ------- Función callback ------ //
+
+void callback(char* topic, byte* payload, unsigned int length) {
+  Serial.print("Message arrived [");
+  Serial.print(topic);
+  Serial.print("] ");
+  for (int i = 0; i < length; i++) {
+    Serial.print((char)payload[i]);
+  }
+  Serial.println();
+
+  if ((String)topic=="II7/ESP32/FOTA"){
+    // instrucción de actualización independientemente del payload
+    setup_OTA();
+    lastFOTA = millis();
+  }
+}
+
+// ------- Función reconexión ------- //
+
+void reconnect() {
+  // Loop until we're reconnected
+  while (!client.connected()) {
+    Serial.print("Attempting MQTT connection...");
+    // Create a client ID
+    String clientId = "ESP32Client";
+    //clientId += String(ESP.getChipId());  // .getChipId() no funciona con ESP32
+    // Attempt to connect
+
+    // Construcción dell mensaje de estatus
+    String output = "";
+    StaticJsonDocument<64> doc;
+    doc["CHIPID"] = "ESP32";
+    doc["online"] = "false";
+    serializeJson(doc, output);
+    
+    if (client.connect(clientId.c_str(),mqtt_user,mqtt_pass,"II7/ESP32/conexion",1,true,output.c_str())) { // Definición de LWM en modo retenido
+      Serial.println("connected");
+      // Once connected, publish an announcement...
+      doc["online"] = "true";
+      serializeJson(doc, output);
+      client.publish("II7/ESP32/conexion",output.c_str(),true); // Mensaje de aviso de conexion en modo retenido
+      // ... and resubscribe to topics
+      client.subscribe("II7/ESP32/FOTA",1);
+      client.subscribe("II7/ESP32/config",1);
+    } else {
+      Serial.print("failed, rc=");
+      Serial.print(client.state());
+      Serial.println(" try again in 5 seconds");
+      // Wait 5 seconds before retrying
+      delay(5000);
+    }
+  }
+}
+
+// -------- Función de inicialización ---------- //
+
+void setup_MQTT()
+{
+  client.setServer(mqtt_server, 1883);
+  client.setCallback(callback);
+}
+
+// -------------------------------------------------------//
+// -------------------------------------------------------//
+// -------------------------------------------------------//
+
+
 
 void startCameraServer();
 
@@ -119,13 +208,29 @@ void setup() {
   Serial.print(WiFi.localIP());
   Serial.println("' to connect");
 
-  //setup_wifi(ssid,password);
+  //setup_wifi(ssid,password); // tiene que hacerse con el código del ejemplo para
+                               // montar el servidor http de la cámara
   setup_OTA();
+  lastFOTA = millis();
+  setup_MQTT();
 
   Serial.print("sin actualizar");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  delay(10000);
+  if (!client.connected()) {
+    reconnect();
+  }
+  client.loop();
+
+  unsigned long now = millis();
+  
+    if ((now - lastFOTA) > (1000*60*2.5)){
+      setup_OTA();
+      lastFOTA = now;
+    }
+
+    
+
+  
 }
