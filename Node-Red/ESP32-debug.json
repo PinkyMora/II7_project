@@ -1,0 +1,274 @@
+[
+    {
+        "id": "aa2bc7e70c7b1ca2",
+        "type": "tab",
+        "label": "ESP32",
+        "disabled": false,
+        "info": "This flow contains nodes for plate recognition using ESP32-cam and XXXX.com"
+    },
+    {
+        "id": "38586517.a5bf9a",
+        "type": "plate-recognizer",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "inputField": "payload",
+        "inputFieldType": "msg",
+        "outputField": "payload",
+        "outputFieldType": "msg",
+        "url": "https://api.platerecognizer.com/v1/plate-reader/",
+        "ignoreDuring": false,
+        "makeAndModel": false,
+        "statusText": "none",
+        "cameraId": "",
+        "separateMsg": false,
+        "regionFilter": false,
+        "regionList": "",
+        "regionListType": "json",
+        "x": 580,
+        "y": 180,
+        "wires": [
+            [
+                "30cb89da.c35546"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "e4699284.081c7",
+        "type": "inject",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 180,
+        "wires": [
+            [
+                "9e2c9295.7f9a9"
+            ]
+        ]
+    },
+    {
+        "id": "30cb89da.c35546",
+        "type": "debug",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 760,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "9e2c9295.7f9a9",
+        "type": "http request",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "method": "GET",
+        "ret": "bin",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.103/capture",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 380,
+        "y": 180,
+        "wires": [
+            [
+                "38586517.a5bf9a"
+            ]
+        ]
+    },
+    {
+        "id": "43f5dfb756fc0bb8",
+        "type": "comment",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "camera IP here!",
+        "info": "",
+        "x": 380,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "2fcd648f92f4e86d",
+        "type": "json",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 410,
+        "y": 460,
+        "wires": [
+            [
+                "70494a6e16de534c"
+            ]
+        ]
+    },
+    {
+        "id": "0e18f4cb80821ffe",
+        "type": "mqtt in",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "topic": "II7/ESP32/config",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "7324406cf4d4e550",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 620,
+        "y": 520,
+        "wires": [
+            [
+                "c12d30d2e9e56d88"
+            ]
+        ]
+    },
+    {
+        "id": "70494a6e16de534c",
+        "type": "mqtt out",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "topic": "II7/ESP32/config",
+        "qos": "",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7324406cf4d4e550",
+        "x": 630,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "81e0a3a4d3ad4689",
+        "type": "inject",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "FOTA actualization freq",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"frec_FOTA\": 100000}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 460,
+        "wires": [
+            [
+                "2fcd648f92f4e86d"
+            ]
+        ]
+    },
+    {
+        "id": "c12d30d2e9e56d88",
+        "type": "debug",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "d49e62cd827958c0",
+        "type": "mqtt in",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "topic": "II7/ESP32/conexion",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "7324406cf4d4e550",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 190,
+        "y": 320,
+        "wires": [
+            [
+                "5596cfa379caa9c4"
+            ]
+        ]
+    },
+    {
+        "id": "1c7cd19dfaae4ae9",
+        "type": "debug",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "5596cfa379caa9c4",
+        "type": "json",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 430,
+        "y": 320,
+        "wires": [
+            [
+                "1c7cd19dfaae4ae9"
+            ]
+        ]
+    },
+    {
+        "id": "7324406cf4d4e550",
+        "type": "mqtt-broker",
+        "name": "proyecto (iot.ac.uma.es)",
+        "broker": "iot.ac.uma.es",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]
