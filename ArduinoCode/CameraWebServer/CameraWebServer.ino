@@ -4,6 +4,8 @@
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
 
+// QUEDA EL CALLBACK DE TOPIC CONFIG !!!!
+
 //
 // WARNING!!! PSRAM IC required for UXGA resolution and high JPEG quality
 //            Ensure ESP32 Wrover Module or other board with PSRAM is selected
@@ -53,6 +55,10 @@ unsigned long lastFOTA = 0;
 char msg[MSG_BUFFER_SIZE];
 int value = 0;
 
+// Parámetros configurables mediante II7/ESP32/config
+unsigned long frec_actualiza_FOTA = 1000*60*2;  // inicialmente 2 min
+                                                // debe venir en un json
+                                                // y ser un valor, no string
 char mensaje[128];  // cadena de 128 caracteres
 
 // ------- Función callback ------ //
@@ -70,6 +76,19 @@ void callback(char* topic, byte* payload, unsigned int length) {
     // instrucción de actualización independientemente del payload
     setup_OTA();
     lastFOTA = millis();
+  } else if ((String)topic=="II7/ESP32/config"){
+    // Parámetros configurables:
+    // frec_actualiza_FOTA
+
+      // String input;
+      StaticJsonDocument<48> docFrecFOTA;
+      DeserializationError error = deserializeJson(docFrecFOTA, payload);
+      if (error) {
+        Serial.print("deserializeJson() failed: ");
+        Serial.println(error.c_str());
+        return;
+      }
+      frec_actualiza_FOTA = docFrecFOTA["frec_FOTA"];
   }
 }
 
