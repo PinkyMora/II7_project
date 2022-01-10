@@ -48,7 +48,8 @@ void setup_OTA() {
   Serial.print(HTTP_OTA_ADDRESS);Serial.print(":");Serial.print(HTTP_OTA_PORT);Serial.println(HTTP_OTA_PATH);
   Serial.println( "--------------------------" );  
   #ifdef ESP32
-  WiFiClient client;
+  WiFiClientSecure client;
+  client.setInsecure();
   switch(httpUpdate.update(client,HTTP_OTA_ADDRESS, HTTP_OTA_PORT, HTTP_OTA_PATH,HTTP_OTA_VERSION)) {
      case HTTP_UPDATE_FAILED:
       Serial.printf(" HTTP update failed: Error (%d): %s\n", httpUpdate.getLastError(), httpUpdate.getLastErrorString().c_str());
