@@ -5,7 +5,7 @@
 #endif
 
 // datos para actualización   >>>> SUSTITUIR IP <<<<<
-#define HTTP_OTA_ADDRESS      F("https://iot.ac.uma.es")       // Address of OTA update server
+#define HTTP_OTA_ADDRESS      F("iot.ac.uma.es")       // Address of OTA update server
 #define HTTP_OTA_PATH         F("/esp8266-ota/update") // Path to update firmware
 #define HTTP_OTA_PORT         1880                     // Port of update server
                                                        // Name of firmware
