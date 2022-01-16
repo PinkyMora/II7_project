@@ -255,6 +255,7 @@ void loop() {
     if ((now - lastFOTA) > (frec_actualiza_FOTA)){
       setup_OTA();
       lastFOTA = now;
+      Serial.println("Actualizado!!!!");
     }
 
     
