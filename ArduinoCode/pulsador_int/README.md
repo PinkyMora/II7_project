@@ -13,6 +13,8 @@ volatile int pulsador_evento;
 volatile unsigned long pulsador_ultima_int;
 volatile unsigned long pulsador_btn_baja;
 ```
+No es necesario definir ni declarar ninguna de estas variables.
+
 Se incluye el ejemplo de uso en **pulsador_int.ino**.
 ```
 #include "pulsador_int.h"
