@@ -10,8 +10,8 @@
 //const char* password = "AfG7CZqGYRMJYRG3";
 //const char* ssid = "infind";
 //const char* password = "1518wifi";
-char* ssid = "Redmi";
-char* password = "Redmi103";
+const char* ssid = "Redmi";
+const char* password = "Redmi103";
 //const char* ssid = "Lecom-e0-31-0E";
 //const char* password = "athoo5ooJai6aif8";
 //const char* ssid = "Lecom-Fibra-69-99-d6";
@@ -60,11 +60,11 @@ char mensaje[128];  // cadena de 128 caracteres
 //  }
 //  Serial.println();
 //
-//  if ((String)topic=="II7/ESP32/FOTA"){
+//  if ((String)topic=="II7/Entrada/FOTA"){
 //    // instrucción de actualización independientemente del payload
 //    setup_OTA();
 //    lastFOTA = millis();
-//  } else if ((String)topic=="II7/ESP32/config"){
+//  } else if ((String)topic=="II7/Entrada/config"){
 //    // Parámetros configurables:
 //    // frec_actualiza_FOTA
 //
@@ -90,31 +90,31 @@ void reconnect() {
   while (!client.connected()) {
     Serial.print("\nAttempting MQTT connection...");
     // Create a client ID
-    String clientId = "ESP32Client";
-    //clientId += String(ESP.getChipId());  // .getChipId() no funciona con ESP32
+    String clientId = "ESP8266Client-";
+    clientId += String(ESP.getChipId());  // .getChipId() no funciona con ESP32
     // Attempt to connect
 
     // Construcción dell mensaje de estatus
     String output = "";
     StaticJsonDocument<64> docFalse;
-    docFalse["CHIPID"] = "ESP32";
+    docFalse["CHIPID"] = "Entrada";
     docFalse["online"] = "false";
     serializeJson(docFalse, output);
     
-    if (client.connect(clientId.c_str(),mqtt_user,mqtt_pass,"II7/ESP32/conexion",1,true,output.c_str())) { // Definición de LWM en modo retenido
+    if (client.connect(clientId.c_str(),mqtt_user,mqtt_pass,"II7/Entrada/conexion",1,true,output.c_str())) { // Definición de LWM en modo retenido
       Serial.println("connected");
       // Once connected, publish an announcement...
       // Construcción dell mensaje de estatus
       String output = "";
       StaticJsonDocument<64> docTrue;
-      docTrue["CHIPID"] = "ESP32";
+      docTrue["CHIPID"] = "Entrada";
       docTrue["online"] = "true";
       serializeJson(docTrue, output);
       // -------------------------------------
-      client.publish("II7/ESP32/conexion",output.c_str(),true); // Mensaje de aviso de conexion en modo retenido
+      client.publish("II7/Entrada/conexion",output.c_str(),true); // Mensaje de aviso de conexion en modo retenido
       // ... and resubscribe to topics
-      client.subscribe("II7/ESP32/FOTA",1);
-      client.subscribe("II7/ESP32/config",1);
+      client.subscribe("II7/Entrada/FOTA",1);
+      client.subscribe("II7/Entrada/config",1);
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
@@ -139,7 +139,6 @@ void setup_MQTT()
 
 void setup() {
   Serial.begin(115200);
-  Serial.setDebugOutput(true);
   Serial.println();
   WiFi.begin(ssid, password);
 
@@ -147,8 +146,8 @@ void setup() {
 //    delay(500);
 //    Serial.print(".");
 //  }
-//  Serial.println("");
-//  Serial.println("WiFi connected");
+  Serial.println("");
+  Serial.println("WiFi connected");
 
 //  setup_OTA();
 //  lastFOTA = millis();
@@ -209,7 +208,7 @@ void loop() {
 //        doc["data"][1] = 2.302038;
 //        
 //        serializeJson(doc, Serial);
-        client.publish("II7/ESP8266/Pulsador", "1");
+        client.publish("II7/Entrada/Pulsador", "1");
         delay(5000);
         servo_in.write(90);
         delay(5000);
