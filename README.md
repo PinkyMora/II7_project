@@ -16,3 +16,9 @@ II7/Entrada/BotonPulsado
 II7/Entrada/BarreraEstado
 II7/Entrada/BarreraCMD
 ```
+### Colecciones de la base de datos II7
+- matriculas_validas
+- registro_matriculas_entrada
+- registro_estado_plazas
+- registro_conexion
+- registro_barrera_entrada
