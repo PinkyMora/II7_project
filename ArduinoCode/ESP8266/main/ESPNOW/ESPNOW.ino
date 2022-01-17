@@ -1,35 +1,20 @@
-/**
- * 
- * Author: Andreas Spiess, 2017
- * Slightly adapted by Diy_bloke 2020
-  This sketch receives ESP-Now message and sends it as an MQTT messge
-  It is heavily based on of Anthony's gateway setch sketch
 
-https://github.com/HarringayMakerSpace/ESP-Now
-Anthony Elder
- */
 #include <ESP8266WiFi.h>
 #include "PubSubClient.h"
-//#include "src/JSONHandler.h"
 #include <ArduinoJson.h>
-//#include "actualiza_dual.h"
+#include "src/actualiza_dual.h"
+#include "src/pulsador_int.h" 
 
 extern "C" {                          // Utiliza librerias definidas en C, por lo que se introducen con la palabra extern
   #include "user_interface.h"
   #include <espnow.h>
 }
 
-
 //-------- Customise the above values --------
-#define SENSORTOPIC "II7/ESP8266/ESPNOW"
-#define COMMANDTOPIC "infind/ESPNow/command"
-#define SERVICETOPIC "infind/ESPNow/service"
+#define SENSORTOPIC "II7/sensoresPlaza"
+#define CONEXIONTOPIC "II7/sensoresPlaza/conexion"
+#define CONFIGTOPIC "II7/sensoresPlaza/config"
 
-/* Set a private Mac Address
- *  http://serverfault.com/questions/40712/what-range-of-mac-addresses-can-i-safely-use-for-my-virtual-machines
- * Note: the point of setting a specific MAC is so you can replace this Gateway ESP8266 device with a new one
- * and the new gateway will still pick up the remote sensors which are still sending to the old MAC 
- */
 uint8_t mac[] = {0x48, 0x3F, 0xDA, 0x0C, 0xB7, 0xCF};// your MACMORA--> 48:3F:DA:0C:B7:CF     MACDAVID--> 48:3F:DA:77:1F:67
 void initVariant() {
   //wifi_set_macaddr(SOFTAP_IF, &mac[0]);
@@ -56,6 +41,7 @@ String deviceMac;
 
 // keep in sync with ESP_NOW sensor struct
 struct __attribute__((packed)) SENSOR_DATA { // packed significa que utilizará el menor espacio posible
+ String chipID;
  bool ocupado;
  float temp;
  float humedad;
@@ -65,13 +51,6 @@ struct __attribute__((packed)) SENSOR_DATA { // packed significa que utilizará 
 
 volatile boolean haveReading = false;
 
-/* Presently it doesn't seem posible to use both WiFi and ESP-NOW at the
- * same time. This gateway gets around that be starting just ESP-NOW and
- * when a message is received switching on WiFi to sending the MQTT message
- * to Watson, and then restarting the ESP. The restart is necessary as 
- * ESP-NOW doesn't seem to work again even after WiFi is disabled.
- * Hopefully this will get fixed in the ESP SDK at some point.
- */
 unsigned long tiempo_Escucha = 15000;
 
 unsigned long heartBeat;
@@ -84,7 +63,9 @@ void setup() {
   Serial.println();
   Serial.println();
   Serial.println("ESP_Now Controller");
-    Serial.println();
+  Serial.println();
+
+  setup_pulsador_int(); // SETUP DE LA PULSACION DEL BOTON 
 
   WiFi.mode(WIFI_AP);
   Serial.print("This node AP mac: "); Serial.println(WiFi.softAPmacAddress());
@@ -93,58 +74,6 @@ void setup() {
 
   initEspNow();  
   Serial.println("Setup done");
-}
-
-
-void loop() {
-  if (millis()-heartBeat > 30000) {
-    Serial.println("Waiting for ESP-NOW messages...");
-    heartBeat = millis();
-  }
-
-  if (haveReading) {
-    
-    haveReading = false;
-    wifiConnect();
-    client.setServer(mqtt_server, 1883);
-    reconnectMQTT();
-    client.setCallback(callback);
-    
-    sendToBroker(); //  SI VAMOS A RECIBIR DATOS POR MQTT DE ACTUS O ALGO DEBERÍA ENTRAR AQUI Y LLAMAR AL 
-                    // CALLBACK ADEMÁS DE SUBSCRIBIRNOS AL TOPIC PERTINENTE
-    heartBeat1 = millis();
-    while (millis()-heartBeat1 < tiempo_Escucha){
-      client.loop();
-    }
-    Serial.print("SALGO BUCLE");
-    heartBeat = millis();
-    client.disconnect();
-    delay(200);
-    ESP.restart(); // <----- Reboots to re-enable ESP-NOW
-  }
-}
-void publishMQTT(String topic, String message) {
-  Serial.println("Publish");
-  if (!client.connected()) {
-    reconnectMQTT();
-  }
-  client.publish(SENSORTOPIC, message.c_str());
-}
-
-void sendToBroker() {
-
-
-  StaticJsonDocument<128> doc;
-  String espnow;
-  doc["Ocupado"] = sensorData.ocupado;
-  doc["Temperatura"] = sensorData.temp;
-  doc["Humedad"] = sensorData.humedad;
-  doc["NumPlaza"] = sensorData.numPlaza;
-  doc["status"] = sensorData.ok;
-  
-  serializeJson(doc, espnow);
-  Serial.println(espnow);
-  publishMQTT(SENSORTOPIC,espnow);
 }
 
 void initEspNow() {
@@ -176,6 +105,52 @@ void initEspNow() {
   });
 }
 
+void loop() 
+{
+    if (millis()-heartBeat > 30000) {
+      Serial.println("Waiting for ESP-NOW messages...");
+      heartBeat = millis();
+    }
+    if(pulsador_evento==HIGH)
+    {
+      pulsador_evento = LOW;
+      if (pulsador_estado_int == LOW)
+      {
+        Serial.printf("Se detecto una pulsacion en %d ms, \n", pulsador_btn_baja);
+      }
+      else
+      {
+        Serial.printf("Termino la pulsacion, duracion de %d ms\n", pulsador_ultima_int-pulsador_btn_baja);
+        if (pulsador_ultima_int-pulsador_btn_baja > 1500) // PULSACION LARGA --> ACTUALIZAMOS FOTA
+        {
+          
+        }
+      }
+    }
+    
+    if (haveReading) {
+      
+      haveReading = false;
+      wifiConnect();
+      client.setServer(mqtt_server, 1883);
+      reconnectMQTT();
+      client.setCallback(callback);
+      
+      sendToBroker(); //  SI VAMOS A RECIBIR DATOS POR MQTT DE ACTUS O ALGO DEBERÍA ENTRAR AQUI Y LLAMAR AL 
+                      // CALLBACK ADEMÁS DE SUBSCRIBIRNOS AL TOPIC PERTINENTE
+      heartBeat1 = millis();
+      while (millis()-heartBeat1 < tiempo_Escucha){
+        client.loop();
+      }
+      Serial.print("SALGO BUCLE");
+      heartBeat = millis();
+      client.disconnect();
+      delay(200);
+      ESP.restart(); // <----- Reboots to re-enable ESP-NOW
+    }
+}
+
+
 void wifiConnect() {
   WiFi.mode(WIFI_STA);
   Serial.println();
@@ -187,8 +162,6 @@ void wifiConnect() {
   }  
   Serial.print("\nWiFi connected, IP address: "); Serial.println(WiFi.localIP());
 }
-
-
 
 void reconnectMQTT() {
   Serial.println(" Loop until we're reconnected");
@@ -216,6 +189,31 @@ void reconnectMQTT() {
     }
   }
 }
+void sendToBroker() {
+
+  String espnow;
+  StaticJsonDocument<192> doc;
+  
+  doc["chipID"] = sensorData.chipID;
+  doc["NumPlaza"] = sensorData.numPlaza;
+  doc["Ocupado"] = sensorData.ocupado;
+  
+  JsonObject DHT11 = doc.createNestedObject("DHT11");
+  DHT11["Temperatura"] = sensorData.temp;
+  DHT11["Humedad"] = sensorData.humedad;
+  
+  serializeJson(doc, espnow);
+  Serial.println(espnow);
+  publishMQTT(SENSORTOPIC,espnow);
+}
+
+void publishMQTT(String topic, String message) {
+  Serial.println("Publish");
+  if (!client.connected()) {
+    reconnectMQTT();
+  }
+  client.publish(SENSORTOPIC, message.c_str());
+}
 
 // ------- Función callback ------ //
 
@@ -228,24 +226,24 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
   Serial.println();
 
-  if ((String)topic=="II7/ESP8266/FOTA"){
+  if ((String)topic=="II7/sensoresPlaza/FOTA"){
     // instrucción de actualización independientemente del payload
-    //setup_OTA();
+    setup_OTA();
     lastFOTA = millis();
-  } else if ((String)topic=="II7/ESP8266/config"){
+  } else if ((String)topic==CONFIGTOPIC){
     // Parámetros configurables:
     // frec_actualiza_FOTA
 
       // String input;
-      StaticJsonDocument<48> docFrecFOTA;
-      DeserializationError error = deserializeJson(docFrecFOTA, payload);
+      StaticJsonDocument<48> docConfig;
+      DeserializationError error = deserializeJson(docConfig, payload);
       if (error) {
         Serial.print("deserializeJson() failed: ");
         Serial.println(error.c_str());
         return;
       }
-      frec_actualiza_FOTA = docFrecFOTA["frec_FOTA"];
-      tiempo_Escucha = docFrecFOTA["tiempo_Escucha"];
+      frec_actualiza_FOTA = docConfig["frec_FOTA"];
+      tiempo_Escucha = docConfig["tiempo_Escucha"];
       Serial.print("Frecuencia de actualizacion FOTA cambiada a: ");
       Serial.print(frec_actualiza_FOTA);
       Serial.println(" milisegundos");
