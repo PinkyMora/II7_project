@@ -1,0 +1,272 @@
+[
+    {
+        "id": "3e7acabb10d9a032",
+        "type": "tab",
+        "label": "entrada_mongoDB",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "65e493e623b22577",
+        "type": "mongodb out",
+        "z": "3e7acabb10d9a032",
+        "mongodb": "17e1c16e7a1086e9",
+        "name": "",
+        "collection": "registro_conexion",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 780,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "3dbda18f7cdc4567",
+        "type": "mqtt in",
+        "z": "3e7acabb10d9a032",
+        "name": "",
+        "topic": "II7/+/conexion",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "7324406cf4d4e550",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 90,
+        "y": 220,
+        "wires": [
+            [
+                "69f43628e0402169"
+            ]
+        ]
+    },
+    {
+        "id": "851156f0d31a1592",
+        "type": "function",
+        "z": "3e7acabb10d9a032",
+        "name": "+ fecha",
+        "func": "msg.payload.date = new Date();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 220,
+        "wires": [
+            [
+                "65e493e623b22577"
+            ]
+        ]
+    },
+    {
+        "id": "fea8520c7929ea04",
+        "type": "mqtt in",
+        "z": "3e7acabb10d9a032",
+        "name": "",
+        "topic": "II7/SensoresPlazas/EstadoPlazas",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "7324406cf4d4e550",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 150,
+        "y": 300,
+        "wires": [
+            [
+                "94e47fef85612eb6",
+                "bea8a0e3debb64ce"
+            ]
+        ]
+    },
+    {
+        "id": "94e47fef85612eb6",
+        "type": "function",
+        "z": "3e7acabb10d9a032",
+        "name": "+ fecha",
+        "func": "msg.payload.date = new Date();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 300,
+        "wires": [
+            [
+                "a4545b9c44e07c06"
+            ]
+        ]
+    },
+    {
+        "id": "a4545b9c44e07c06",
+        "type": "mongodb out",
+        "z": "3e7acabb10d9a032",
+        "mongodb": "17e1c16e7a1086e9",
+        "name": "",
+        "collection": "registro_estado_plazas",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 800,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "0334d94dc3676f4e",
+        "type": "mqtt in",
+        "z": "3e7acabb10d9a032",
+        "name": "",
+        "topic": "II7/Entrada/BarreraEstado",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "7324406cf4d4e550",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "521830dae5d21b42"
+            ]
+        ]
+    },
+    {
+        "id": "344f9f82335d2e94",
+        "type": "function",
+        "z": "3e7acabb10d9a032",
+        "name": "+ fecha",
+        "func": "msg.payload.date = new Date();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 380,
+        "wires": [
+            [
+                "63736539685d9b84"
+            ]
+        ]
+    },
+    {
+        "id": "63736539685d9b84",
+        "type": "mongodb out",
+        "z": "3e7acabb10d9a032",
+        "mongodb": "17e1c16e7a1086e9",
+        "name": "",
+        "collection": "registro_barrera_entrada",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 810,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "7afcab387cfbe66b",
+        "type": "debug",
+        "z": "3e7acabb10d9a032",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "69f43628e0402169",
+        "type": "json",
+        "z": "3e7acabb10d9a032",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 310,
+        "y": 220,
+        "wires": [
+            [
+                "851156f0d31a1592",
+                "7afcab387cfbe66b"
+            ]
+        ]
+    },
+    {
+        "id": "521830dae5d21b42",
+        "type": "json",
+        "z": "3e7acabb10d9a032",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 350,
+        "y": 380,
+        "wires": [
+            [
+                "344f9f82335d2e94"
+            ]
+        ]
+    },
+    {
+        "id": "bea8a0e3debb64ce",
+        "type": "debug",
+        "z": "3e7acabb10d9a032",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "17e1c16e7a1086e9",
+        "type": "mongodb",
+        "hostname": "iot.ac.uma.es",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "II7",
+        "name": "Base de datos proyecto"
+    },
+    {
+        "id": "7324406cf4d4e550",
+        "type": "mqtt-broker",
+        "name": "proyecto (iot.ac.uma.es)",
+        "broker": "iot.ac.uma.es",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]

@@ -1,0 +1,565 @@
+[
+    {
+        "id": "aa2bc7e70c7b1ca2",
+        "type": "tab",
+        "label": "ESP32",
+        "disabled": false,
+        "info": "This flow contains nodes for plate recognition using ESP32-cam and XXXX.com"
+    },
+    {
+        "id": "38586517.a5bf9a",
+        "type": "plate-recognizer",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "inputField": "payload",
+        "inputFieldType": "msg",
+        "outputField": "payload",
+        "outputFieldType": "msg",
+        "url": "https://api.platerecognizer.com/v1/plate-reader/",
+        "ignoreDuring": false,
+        "makeAndModel": false,
+        "statusText": "none",
+        "cameraId": "",
+        "separateMsg": false,
+        "regionFilter": false,
+        "regionList": "",
+        "regionListType": "json",
+        "x": 680,
+        "y": 200,
+        "wires": [
+            [
+                "30cb89da.c35546",
+                "32e655ab0ab8203e",
+                "78510204a5d13c32"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "e4699284.081c7",
+        "type": "inject",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 260,
+        "y": 100,
+        "wires": [
+            [
+                "9e2c9295.7f9a9"
+            ]
+        ]
+    },
+    {
+        "id": "30cb89da.c35546",
+        "type": "debug",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 850,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "9e2c9295.7f9a9",
+        "type": "http request",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "method": "GET",
+        "ret": "bin",
+        "paytoqs": "ignore",
+        "url": "http://192.168.127.108/capture",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 480,
+        "y": 200,
+        "wires": [
+            [
+                "38586517.a5bf9a"
+            ]
+        ]
+    },
+    {
+        "id": "43f5dfb756fc0bb8",
+        "type": "comment",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "camera IP here!",
+        "info": "",
+        "x": 480,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "2fcd648f92f4e86d",
+        "type": "json",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 410,
+        "y": 460,
+        "wires": [
+            [
+                "70494a6e16de534c"
+            ]
+        ]
+    },
+    {
+        "id": "0e18f4cb80821ffe",
+        "type": "mqtt in",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "topic": "II7/ESP32/config",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "7324406cf4d4e550",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 620,
+        "y": 520,
+        "wires": [
+            [
+                "c12d30d2e9e56d88"
+            ]
+        ]
+    },
+    {
+        "id": "70494a6e16de534c",
+        "type": "mqtt out",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "topic": "II7/Entrada/config",
+        "qos": "",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7324406cf4d4e550",
+        "x": 630,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "81e0a3a4d3ad4689",
+        "type": "inject",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "FOTA actualization freq",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"frec_FOTA\": 1000000}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 460,
+        "wires": [
+            [
+                "2fcd648f92f4e86d"
+            ]
+        ]
+    },
+    {
+        "id": "c12d30d2e9e56d88",
+        "type": "debug",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "d49e62cd827958c0",
+        "type": "mqtt in",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "topic": "II7/ESP32/conexion",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "7324406cf4d4e550",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 190,
+        "y": 320,
+        "wires": [
+            [
+                "5596cfa379caa9c4"
+            ]
+        ]
+    },
+    {
+        "id": "1c7cd19dfaae4ae9",
+        "type": "debug",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "5596cfa379caa9c4",
+        "type": "json",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 430,
+        "y": 320,
+        "wires": [
+            [
+                "1c7cd19dfaae4ae9"
+            ]
+        ]
+    },
+    {
+        "id": "744c703b6c123108",
+        "type": "mqtt in",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "topic": "II7/Entrada/Pulsador",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "7324406cf4d4e550",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 190,
+        "y": 200,
+        "wires": [
+            [
+                "9e2c9295.7f9a9"
+            ]
+        ]
+    },
+    {
+        "id": "dd02bf931458724c",
+        "type": "mqtt out",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "topic": "II7/Entrada/BarreraCMD",
+        "qos": "",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7324406cf4d4e550",
+        "x": 2090,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "a60afade8a8ca88b",
+        "type": "delay",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "x": 1620,
+        "y": 280,
+        "wires": [
+            [
+                "230095c7e2a75ebe"
+            ]
+        ]
+    },
+    {
+        "id": "0ac25d728eb5f3cf",
+        "type": "mongodb in",
+        "z": "aa2bc7e70c7b1ca2",
+        "mongodb": "17e1c16e7a1086e9",
+        "name": "",
+        "collection": "registro_matriculas_entrada",
+        "operation": "find",
+        "x": 360,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2d7af9d3e46450c0",
+        "type": "mongodb out",
+        "z": "aa2bc7e70c7b1ca2",
+        "mongodb": "17e1c16e7a1086e9",
+        "name": "",
+        "collection": "registro_matriculas_entrada",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 560,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "eaef6a2d7043ed0e",
+        "type": "function",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "+ fecha",
+        "func": "msg.payload.date = new Date();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 720,
+        "wires": [
+            [
+                "2d7af9d3e46450c0"
+            ]
+        ]
+    },
+    {
+        "id": "32e655ab0ab8203e",
+        "type": "function",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "func": "matricula = msg.payload.results[0].plate\nmsg.payload = {}\nmsg.payload.matricula = matricula\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 160,
+        "wires": [
+            [
+                "270c9188cb95c6a9"
+            ]
+        ]
+    },
+    {
+        "id": "270c9188cb95c6a9",
+        "type": "function",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "+ fecha",
+        "func": "msg.payload.date = new Date();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 120,
+        "wires": [
+            [
+                "c69829b30cd61e01",
+                "f01b7f26b67f4e12"
+            ]
+        ]
+    },
+    {
+        "id": "c69829b30cd61e01",
+        "type": "mongodb out",
+        "z": "aa2bc7e70c7b1ca2",
+        "mongodb": "17e1c16e7a1086e9",
+        "name": "",
+        "collection": "registro_matriculas_entrada",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 1740,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "f01b7f26b67f4e12",
+        "type": "debug",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1540,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "78510204a5d13c32",
+        "type": "function",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "func": "msg.payload = {}\nmsg.payload.comando = \"subir\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1400,
+        "y": 220,
+        "wires": [
+            [
+                "dd02bf931458724c",
+                "a60afade8a8ca88b"
+            ]
+        ]
+    },
+    {
+        "id": "230095c7e2a75ebe",
+        "type": "function",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "func": "msg.payload.comando = \"bajar\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1840,
+        "y": 280,
+        "wires": [
+            [
+                "dd02bf931458724c"
+            ]
+        ]
+    },
+    {
+        "id": "9af6af31d07253e1",
+        "type": "mqtt in",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "topic": "II7/Entrada/BarreraEstado",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "7324406cf4d4e550",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 1170,
+        "y": 600,
+        "wires": [
+            [
+                "89767a5cdf3ee7cf"
+            ]
+        ]
+    },
+    {
+        "id": "60b30a7d2f78c725",
+        "type": "debug",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1590,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "89767a5cdf3ee7cf",
+        "type": "json",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1400,
+        "y": 600,
+        "wires": [
+            [
+                "60b30a7d2f78c725"
+            ]
+        ]
+    },
+    {
+        "id": "7324406cf4d4e550",
+        "type": "mqtt-broker",
+        "name": "proyecto (iot.ac.uma.es)",
+        "broker": "iot.ac.uma.es",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "17e1c16e7a1086e9",
+        "type": "mongodb",
+        "hostname": "iot.ac.uma.es",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "II7",
+        "name": "Base de datos proyecto"
+    }
+]
