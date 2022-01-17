@@ -1,7 +1,7 @@
-#include <WiFi.h>
+#include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
-//#include "actualiza_dual.h"
+#include "actualiza_dual.h"
 #include <Servo.h>
 #include "pulsador_int.h"
 // -------------------  Configuración WiFi  ------------------- //
@@ -51,37 +51,60 @@ char mensaje[128];  // cadena de 128 caracteres
 
 // ------- Función callback ------ //
 
-//void callback(char* topic, byte* payload, unsigned int length) {
-//  Serial.print("Message arrived [");
-//  Serial.print(topic);
-//  Serial.print("] ");
-//  for (int i = 0; i < length; i++) {
-//    Serial.print((char)payload[i]);
-//  }
-//  Serial.println();
-//
-//  if ((String)topic=="II7/Entrada/FOTA"){
-//    // instrucción de actualización independientemente del payload
-//    setup_OTA();
-//    lastFOTA = millis();
-//  } else if ((String)topic=="II7/Entrada/config"){
-//    // Parámetros configurables:
-//    // frec_actualiza_FOTA
-//
-//      // String input;
-//      StaticJsonDocument<48> docFrecFOTA;
-//      DeserializationError error = deserializeJson(docFrecFOTA, payload);
-//      if (error) {
-//        Serial.print("deserializeJson() failed: ");
-//        Serial.println(error.c_str());
-//        return;
-//      }
-//      frec_actualiza_FOTA = docFrecFOTA["frec_FOTA"];
-//      Serial.print("Frecuencia de actualizacion FOTA cambiada a: ");
-//      Serial.print(frec_actualiza_FOTA);
-//      Serial.println(" milisegundos");
-//  }
-//}
+void callback(char* topic, byte* payload, unsigned int length) {
+  Serial.print("Message arrived [");
+  Serial.print(topic);
+  Serial.print("] ");
+  for (int i = 0; i < length; i++) {
+    Serial.print((char)payload[i]);
+  }
+  Serial.println();
+
+  if ((String)topic=="II7/Entrada/FOTA"){
+    // instrucción de actualización independientemente del payload
+    setup_OTA();
+    lastFOTA = millis();
+  } else if ((String)topic=="II7/Entrada/config"){
+    // Parámetros configurables:
+    // frec_actualiza_FOTA
+
+      // String input;
+      StaticJsonDocument<48> docFrecFOTA;
+      DeserializationError error = deserializeJson(docFrecFOTA, payload);
+      if (error) {
+        Serial.print("deserializeJson() failed: ");
+        Serial.println(error.c_str());
+        return;
+      }
+      frec_actualiza_FOTA = docFrecFOTA["frec_FOTA"];
+      Serial.print("Frecuencia de actualizacion FOTA cambiada a: ");
+      Serial.print(frec_actualiza_FOTA);
+      Serial.println(" milisegundos");
+  }
+  else if ((String)topic=="II7/Entrada/BarreraCMD"){
+    StaticJsonDocument<48> docBarrera;
+    DeserializationError error = deserializeJson(docBarrera, payload);
+    if (error) {
+      Serial.print("deserializeJson() failed: ");
+      Serial.println(error.c_str());
+      return;
+    }
+    String comando = docBarrera["comando"];
+    
+    if (comando=="subir"){
+      servo_in.write(90);
+      client.publish("II7/Entrada/BarreraEstado","{\"estado\":\"subido\"}",true);
+    }
+    
+    else if (comando=="bajar"){
+      for(angle_in=90;angle_in>=0;angle_in=angle_in-10){
+      servo_in.write(angle_in);
+      delay(500);
+      }
+      client.publish("II7/Entrada/BarreraEstado","{\"estado\":\"bajado\"}",true);
+    }
+  }
+}
 
 // ------- Función reconexión ------- //
 
@@ -115,6 +138,7 @@ void reconnect() {
       // ... and resubscribe to topics
       client.subscribe("II7/Entrada/FOTA",1);
       client.subscribe("II7/Entrada/config",1);
+      client.subscribe("II7/Entrada/BarreraCMD",1);
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
@@ -130,7 +154,7 @@ void reconnect() {
 void setup_MQTT()
 {
   client.setServer(mqtt_server, 1883);
-//  client.setCallback(callback);
+  client.setCallback(callback);
 }
 
 // -------------------------------------------------------//
@@ -142,15 +166,15 @@ void setup() {
   Serial.println();
   WiFi.begin(ssid, password);
 
-//  while (WiFi.status() != WL_CONNECTED) {
-//    delay(500);
-//    Serial.print(".");
-//  }
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
   Serial.println("");
   Serial.println("WiFi connected");
 
-//  setup_OTA();
-//  lastFOTA = millis();
+  setup_OTA();
+  lastFOTA = millis();
   setup_MQTT();
 
   Serial.print("sin actualizar");
@@ -164,10 +188,6 @@ void setup() {
   setup_pulsador_int();             
 }
 
-void nuevo_vehiculo(){
-  
-}
-
 void loop() {
   if (!client.connected()) {
     reconnect();
@@ -176,11 +196,11 @@ void loop() {
 
   unsigned long now = millis();
   
-//  if ((now - lastFOTA) > (frec_actualiza_FOTA)){
-//    setup_OTA();
-//    lastFOTA = now;
-//    Serial.println("Actualizado!!!!");
-//  }
+  if ((now - lastFOTA) > (frec_actualiza_FOTA)){
+    setup_OTA();
+    lastFOTA = now;
+    Serial.println("Actualizado!!!!");
+  }
 
   if(pulsador_evento==HIGH)
   {
@@ -193,12 +213,11 @@ void loop() {
     {
       Serial.printf("Termino la pulsacion, duracion de %d ms\n", pulsador_ultima_int-pulsador_btn_baja);
       if ((pulsador_ultima_int-pulsador_btn_baja)>3000){
-//        setup_OTA();
-//        lastFOTA = now;
-        Serial.println("Actualizado!!!!");
+        setup_OTA();
+        lastFOTA = now;
+        //Serial.println("Actualizado!!!!");
       }
       else{
-        nuevo_vehiculo();
         Serial.println("Nuevo vehículo detectado"); 
         
 //        DynamicJsonDocument doc(1024);
@@ -209,13 +228,6 @@ void loop() {
 //        
 //        serializeJson(doc, Serial);
         client.publish("II7/Entrada/Pulsador", "1");
-        delay(5000);
-        servo_in.write(90);
-        delay(5000);
-        for(angle_in=90;angle_in>=0;angle_in=angle_in-10){
-          servo_in.write(angle_in);
-          delay(500);
-        }
       }
     }
   }
