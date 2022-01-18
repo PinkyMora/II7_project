@@ -11,9 +11,10 @@ extern "C" {                          // Utiliza librerias definidas en C, por l
 }
 
 //-------- Customise the above values --------
-#define SENSORTOPIC "II7/sensoresPlaza"
-#define CONEXIONTOPIC "II7/sensoresPlaza/conexion"
-#define CONFIGTOPIC "II7/sensoresPlaza/config"
+#define SENSORTOPIC "II7/sensoresPlaza/EstadoPlazas"
+#define CONEXIONTOPIC "II7/sensoresPlazas/conexion"
+#define CONFIGTOPIC "II7/sensoresPlazas/config"
+#define FOTATOPIC "II7/sensoresPlazas/FOTA"
 
 uint8_t mac[] = {0x48, 0x3F, 0xDA, 0x0C, 0xB7, 0xCF};// your MACMORA--> 48:3F:DA:0C:B7:CF     MACDAVID--> 48:3F:DA:77:1F:67
 void initVariant() {
@@ -24,11 +25,11 @@ void initVariant() {
 char *ssid      =  "vodafoneAAXFSN";  // "sagemcom1928";    // "infind";               // Set you WiFi SSID
 char *password  =  "AfG7CZqGYRMJYRG3"; // "UMMZUJNLTY3EMN";  //"1518wifi";               // Set you WiFi password
 
-const char* mqtt_server = "iot.ac.uma.es";  //"iot.ac.uma.es";
+const char* mqtt_server = "iot.ac.uma.es"; 
 const char* mqtt_user = "II7";
 const char* mqtt_pass = "18K7ok1q";
 
-//IPAddress server(192, 168, 1, 210);   //your MQTT Broker address
+//IPAddress server(192, 168, 1, 210);   //MQTT Broker address
 
 const char deviceTopic[] = "ESPNOW/";
 
@@ -67,7 +68,7 @@ void setup() {
 
   setup_pulsador_int(); // SETUP DE LA PULSACION DEL BOTON 
 
-  WiFi.mode(WIFI_AP);
+  WiFi.mode(WIFI_AP);   // MODO WIFI-- ACCESS POINT PARA ESPNOW
   Serial.print("This node AP mac: "); Serial.println(WiFi.softAPmacAddress());
   WiFi.disconnect();
   Serial.print("This node mac: "); Serial.println(WiFi.macAddress());
@@ -99,7 +100,9 @@ void initEspNow() {
     Serial.print("Message received from device: "); 
     Serial.println(deviceMac);
     Serial.printf(" Plaza=%f, Status=%f\n", 
-       sensorData.ocupado, sensorData.ok);    
+       sensorData.ocupado, sensorData.ok);  
+    Serial.println(sensorData.chipID);
+    Serial.println("-------------------------");  
 
     haveReading = true;
   });
@@ -111,22 +114,7 @@ void loop()
       Serial.println("Waiting for ESP-NOW messages...");
       heartBeat = millis();
     }
-    if(pulsador_evento==HIGH)
-    {
-      pulsador_evento = LOW;
-      if (pulsador_estado_int == LOW)
-      {
-        Serial.printf("Se detecto una pulsacion en %d ms, \n", pulsador_btn_baja);
-      }
-      else
-      {
-        Serial.printf("Termino la pulsacion, duracion de %d ms\n", pulsador_ultima_int-pulsador_btn_baja);
-        if (pulsador_ultima_int-pulsador_btn_baja > 1500) // PULSACION LARGA --> ACTUALIZAMOS FOTA
-        {
-          
-        }
-      }
-    }
+
     
     if (haveReading) {
       
@@ -136,11 +124,31 @@ void loop()
       reconnectMQTT();
       client.setCallback(callback);
       
+      
       sendToBroker(); //  SI VAMOS A RECIBIR DATOS POR MQTT DE ACTUS O ALGO DEBERÍA ENTRAR AQUI Y LLAMAR AL 
                       // CALLBACK ADEMÁS DE SUBSCRIBIRNOS AL TOPIC PERTINENTE
       heartBeat1 = millis();
       while (millis()-heartBeat1 < tiempo_Escucha){
-        client.loop();
+            client.loop();
+            if(pulsador_evento==HIGH)
+            {
+              pulsador_evento = LOW;
+              if (pulsador_estado_int == LOW)
+              {
+                Serial.printf("Se detecto una pulsacion en %d ms, \n", pulsador_btn_baja);
+              }
+              else
+              {
+                Serial.printf("Termino la pulsacion, duracion de %d ms\n", pulsador_ultima_int-pulsador_btn_baja);
+                if (pulsador_ultima_int-pulsador_btn_baja > 1500) // PULSACION LARGA --> ACTUALIZAMOS FOTA
+                {
+                    Serial.println("Actualización FOTA por pulsación");
+                    setup_OTA();
+                    lastFOTA = millis();
+                    
+                }
+              }
+            }
       }
       Serial.print("SALGO BUCLE");
       heartBeat = millis();
@@ -168,17 +176,30 @@ void reconnectMQTT() {
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
     // Create a random client ID
-    String clientId = "ESP-NOWClient-";
-    clientId += String(random(0xffff), HEX);
+    String clientId = "ESP8266-";
+    clientId += String(ESP.getChipId());
     // Attempt to connect
     
-      if (client.connect(clientId.c_str(),mqtt_user,mqtt_pass)) {
+    String output = "";
+    StaticJsonDocument<64> docFalse;
+    docFalse["CHIPID"] = "PSensores";
+    docFalse["online"] = "false";
+    serializeJson(docFalse, output);
+    
+      if (client.connect(clientId.c_str(),mqtt_user,mqtt_pass,CONEXIONTOPIC,1,true,output.c_str())) {
       Serial.println("connected");
       // Once connected, publish an announcement...
-      client.publish("II7/ESP8266/conexion", "I am live");
+      
+      // Construcción del mensaje de estatus
+      String output = "";
+      StaticJsonDocument<64> docTrue;
+      docTrue["CHIPID"] = "PSensores";
+      docTrue["online"] = "true";
+      serializeJson(docTrue, output);
+      client.publish(CONEXIONTOPIC, output.c_str(),true);
       // ... and resubscribe
-      client.subscribe("II7/ESP8266/config");
-      //client.subscribe("II7/ESP8266/FOTA");
+      client.subscribe(CONFIGTOPIC);
+      client.subscribe(FOTATOPIC);
       
     } else {
       Serial.print("failed, rc = ");
@@ -192,7 +213,7 @@ void reconnectMQTT() {
 void sendToBroker() {
 
   String espnow;
-  StaticJsonDocument<192> doc;
+  StaticJsonDocument<128> doc;
   
   doc["chipID"] = sensorData.chipID;
   doc["NumPlaza"] = sensorData.numPlaza;
@@ -226,7 +247,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
   Serial.println();
 
-  if ((String)topic=="II7/sensoresPlaza/FOTA"){
+  if ((String)topic==FOTATOPIC){
     // instrucción de actualización independientemente del payload
     setup_OTA();
     lastFOTA = millis();
@@ -235,7 +256,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
     // frec_actualiza_FOTA
 
       // String input;
-      StaticJsonDocument<48> docConfig;
+      StaticJsonDocument<96> docConfig;
       DeserializationError error = deserializeJson(docConfig, payload);
       if (error) {
         Serial.print("deserializeJson() failed: ");

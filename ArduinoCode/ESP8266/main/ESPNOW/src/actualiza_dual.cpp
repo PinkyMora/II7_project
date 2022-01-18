@@ -69,7 +69,8 @@ void setup_OTA() {
   ESPhttpUpdate.onError(error_OTA);
   ESPhttpUpdate.onProgress(progreso_OTA);
   ESPhttpUpdate.onEnd(final_OTA);
-  WiFiClient wifiClient;
+  WiFiClientSecure wifiClient;
+  wifiClient.setInsecure();
   switch(ESPhttpUpdate.update(wifiClient,HTTP_OTA_ADDRESS, HTTP_OTA_PORT, HTTP_OTA_PATH, HTTP_OTA_VERSION)) {
     case HTTP_UPDATE_FAILED:
       Serial.printf(" HTTP update failed: Error (%d): %s\n", ESPhttpUpdate.getLastError(), ESPhttpUpdate.getLastErrorString().c_str());
