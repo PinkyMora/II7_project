@@ -173,8 +173,6 @@ void setup() {
   lastFOTA = millis();                // Se registra el momento en el que fue intentado por última vez
   setup_MQTT();                       // Se procede con el intento de conexión al broker MQTT
 
-  Serial.print("sin actualizar");
-
   servo.attach(pin_servo,380,2180);   // Asigna al objeto servo el pin y los valores de los pulsos en microsegundos para 0 y 180º
   servo.write(angle);                 // Inicializa el servo al valor inicial de angulo (90º)
   
@@ -183,7 +181,7 @@ void setup() {
 
 void loop() {
   if (!client.connected()) {
-    reconnect();                      // Si la placa no se ha conectado a la red WiFi, vuelve a intentarlo
+    reconnect();                      // Si la placa no se ha conectado al servidor MQTT, vuelve a intentarlo
   }
   client.loop();
 
