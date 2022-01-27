@@ -1,4 +1,6 @@
+// Grupo II7 - INFIND - GIERM - UMA
 
+// Librerias utilizadas 
 #include <ESP8266WiFi.h>
 #include "PubSubClient.h"
 #include <ArduinoJson.h>
@@ -10,18 +12,15 @@ extern "C" {                          // Utiliza librerias definidas en C, por l
   #include <espnow.h>
 }
 
-//-------- Customise the above values --------
-#define SENSORTOPIC "II7/sensoresPlaza/EstadoPlazas"
+//-------- Definimos los topics que se utilizan el programa --------
+#define SENSORTOPIC "II7/sensoresPlaza/EstadoPlazas" 
 #define CONEXIONTOPIC "II7/sensoresPlazas/conexion"
 #define CONFIGTOPIC "II7/sensoresPlazas/config"
 #define FOTATOPIC "II7/sensoresPlazas/FOTA"
 
-uint8_t mac[] = {0x48, 0x3F, 0xDA, 0x0C, 0xB7, 0xCF};// your MACMORA--> 48:3F:DA:0C:B7:CF     MACDAVID--> 48:3F:DA:77:1F:67
-void initVariant() {
-  //wifi_set_macaddr(SOFTAP_IF, &mac[0]);
-}
+uint8_t mac[] = {0x48, 0x3F, 0xDA, 0x0C, 0xB7, 0xCF};// MACMORA--> 48:3F:DA:0C:B7:CF     MACDAVID--> 48:3F:DA:77:1F:67
 
-
+// Definicion de variables para conexión Wifi
 char *ssid      =  "vodafoneAAXFSN";  // "sagemcom1928";    // "infind";               // Set you WiFi SSID
 char *password  =  "AfG7CZqGYRMJYRG3"; // "UMMZUJNLTY3EMN";  //"1518wifi";               // Set you WiFi password
 
@@ -29,30 +28,33 @@ const char* mqtt_server = "iot.ac.uma.es";
 const char* mqtt_user = "II7";
 const char* mqtt_pass = "18K7ok1q";
 
-//IPAddress server(192, 168, 1, 210);   //MQTT Broker address
-
-const char deviceTopic[] = "ESPNOW/";
-
 WiFiClient wifiClient;
 PubSubClient client(wifiClient);
 
+// Variables actualización FOTA
 unsigned long lastFOTA = 0;
 unsigned long frec_actualiza_FOTA = 2*1000*60; // 2 min
+
+// Mac del dispositivo del que llega el mensaje
 String deviceMac;
 
-// keep in sync with ESP_NOW sensor struct
+// Variable que regula el tiempo que el dispositivo se encuentra escuchando por mqtt tras recibir un mensaje por espnow y enviarlo
+unsigned long tiempo_Escucha = 15000;
+
+// Estructura del mensaje enviado y recibido por ESPNOW, mantenido en sintonía en ambas placas
 struct __attribute__((packed)) SENSOR_DATA { // packed significa que utilizará el menor espacio posible
  String chipID;
  bool ocupado;
  float temp;
  float humedad;
- int numPlaza; //EN CASO DE QUE UNA PLACA CONTROLE MAS DE UN SENSOR DE PROXIMIDAD PARA LAS PLAZAS 
+ int numPlaza; // (ESCALABILIDAD) EN CASO DE QUE UNA PLACA CONTROLE MAS DE UN SENSOR DE PROXIMIDAD PARA LAS PLAZAS 
  bool ok;
 } sensorData;
 
+// Variable de control de llegada de mensaje por espnow
 volatile boolean haveReading = false;
 
-unsigned long tiempo_Escucha = 15000;
+
 
 unsigned long heartBeat;
 unsigned long heartBeat1;
@@ -73,10 +75,11 @@ void setup() {
   WiFi.disconnect();
   Serial.print("This node mac: "); Serial.println(WiFi.macAddress());
 
-  initEspNow();  
+  initEspNow();
   Serial.println("Setup done");
 }
 
+// Funcion que inicia la conexion espnow, definiendo el rol e incluye el callback 
 void initEspNow() {
   if (esp_now_init()!=0) {
     Serial.println("*** ESP_Now init failed");
@@ -95,7 +98,7 @@ void initEspNow() {
     deviceMac += String(mac[4], HEX);
     deviceMac += String(mac[5], HEX);
     
-    memcpy(&sensorData, data, sizeof(sensorData));
+    memcpy(&sensorData, data, sizeof(sensorData)); // Guardamos en el struct el mensaje recibido
 
     Serial.print("Message received from device: "); 
     Serial.println(deviceMac);
@@ -104,7 +107,8 @@ void initEspNow() {
     Serial.println(sensorData.chipID);
     Serial.println("-------------------------");  
 
-    haveReading = true;
+    haveReading = true; // Activamos el booleano que nos permite conocer que ha llegado un mensaje por ESPNOW y 
+                        // así continuar con el proceso para publicar ese mensaje por mqtt
   });
 }
 
@@ -115,19 +119,25 @@ void loop()
       heartBeat = millis();
     }
 
-    
+    // Si se ha recibido un mensaje por espnow se procede a su procesamiento y publicacion
     if (haveReading) {
       
-      haveReading = false;
-      wifiConnect();
+      haveReading = false; // Se baja el flag utilizado
+      // Se realiza la conexión Wifi y MQTT mediante funciones auxiliares
+      wifiConnect();       
       client.setServer(mqtt_server, 1883);
       reconnectMQTT();
       client.setCallback(callback);
-      
-      
-      sendToBroker(); //  SI VAMOS A RECIBIR DATOS POR MQTT DE ACTUS O ALGO DEBERÍA ENTRAR AQUI Y LLAMAR AL 
-                      // CALLBACK ADEMÁS DE SUBSCRIBIRNOS AL TOPIC PERTINENTE
-      heartBeat1 = millis();
+
+      // Se llama a la función que realiza el envío del mensaje por mqtt
+      sendToBroker(); 
+      heartBeat1 = millis();  // Se actualiza la variable que define el tiempo que se escucha por mqtt
+
+      // Mientras nos encontremos en el intervalo definido por el parametro tiempo_Escucha, el cual puede ser controlado por
+      // el topic CONFIGTOPIC "II7/sensoresPlazas/config" se realiza un bucle de escucha ademas de 
+      // comprobar el pulsado del boton por si hiciera falta hacer una actualizacion FOTA
+      // Se realiza en este momento ya que el wifi se encuentra activado durante el tiemp definido y es el 
+      // único momento en el que no se producen actividades paralelas y el programa se encuentra "standby".
       while (millis()-heartBeat1 < tiempo_Escucha){
             client.loop();
             if(pulsador_evento==HIGH)
@@ -143,22 +153,24 @@ void loop()
                 if (pulsador_ultima_int-pulsador_btn_baja > 1500) // PULSACION LARGA --> ACTUALIZAMOS FOTA
                 {
                     Serial.println("Actualización FOTA por pulsación");
-                    setup_OTA();
+                    setup_OTA(); // Funcion que realiza la actualizacion FOTA
                     lastFOTA = millis();
                     
                 }
               }
             }
       }
-      Serial.print("SALGO BUCLE");
+      Serial.print("ACABADO TIEMPO DE ESCUCHA");
       heartBeat = millis();
-      client.disconnect();
+      
+      // Desconectamos wifi y reiniciamos la placa para volver a realizar todo el proceso
+      client.disconnect(); 
       delay(200);
       ESP.restart(); // <----- Reboots to re-enable ESP-NOW
     }
 }
 
-
+// Funcion que realiza la conexion wifi
 void wifiConnect() {
   WiFi.mode(WIFI_STA);
   Serial.println();
@@ -170,6 +182,7 @@ void wifiConnect() {
   }  
   Serial.print("\nWiFi connected, IP address: "); Serial.println(WiFi.localIP());
 }
+
 
 void reconnectMQTT() {
   Serial.println(" Loop until we're reconnected");
@@ -210,8 +223,12 @@ void reconnectMQTT() {
     }
   }
 }
+
+
+// Funcion que prepara el mensaje y publica por mqtt
 void sendToBroker() {
 
+  // Montaje mensaje a publicar mediante serializacion a JSON con ayuda de la libreria
   String espnow;
   StaticJsonDocument<128> doc;
   
@@ -225,9 +242,12 @@ void sendToBroker() {
   
   serializeJson(doc, espnow);
   Serial.println(espnow);
+  
+  // Publicación del mensaje mediante función auxiliar
   publishMQTT(SENSORTOPIC,espnow);
 }
 
+// Funcion que se encarga de publicar el mensaje recibido
 void publishMQTT(String topic, String message) {
   Serial.println("Publish");
   if (!client.connected()) {
@@ -254,8 +274,9 @@ void callback(char* topic, byte* payload, unsigned int length) {
   } else if ((String)topic==CONFIGTOPIC){
     // Parámetros configurables:
     // frec_actualiza_FOTA
+    // tiempo_Escucha
 
-      // String input;
+      // Deserializamos el mensaje recibido, con ayuda de la librería ArduinoJSON, por el topic de configuración para su uso
       StaticJsonDocument<96> docConfig;
       DeserializationError error = deserializeJson(docConfig, payload);
       if (error) {
@@ -263,6 +284,8 @@ void callback(char* topic, byte* payload, unsigned int length) {
         Serial.println(error.c_str());
         return;
       }
+      // Actualizamos variables configurables 
+      
       frec_actualiza_FOTA = docConfig["frec_FOTA"];
       tiempo_Escucha = docConfig["tiempo_Escucha"];
       Serial.print("Frecuencia de actualizacion FOTA cambiada a: ");
