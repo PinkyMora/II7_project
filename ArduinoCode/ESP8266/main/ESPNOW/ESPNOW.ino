@@ -139,7 +139,7 @@ void loop()
       // Se realiza en este momento ya que el wifi se encuentra activado durante el tiemp definido y es el 
       // único momento en el que no se producen actividades paralelas y el programa se encuentra "standby".
       while (millis()-heartBeat1 < tiempo_Escucha){
-            client.loop();
+            
             if(pulsador_evento==HIGH)
             {
               pulsador_evento = LOW;
