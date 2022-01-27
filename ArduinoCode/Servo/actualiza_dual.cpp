@@ -38,12 +38,9 @@ void setup_wifi(const char* ssid, const char* password) {
 }
 
 void setup_OTA() {
-  // Serial.begin(115200); // esto en el setup()
-  
-  // tienes led en tu placa ESP32??
   pinMode(LED_BUILTIN, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
   digitalWrite(LED_BUILTIN, LOW);   // LED on
-  // setup_wifi(); // se llama a la funcion en CameraWebServer.ino
+  // setup_wifi();
   Serial.println( "--------------------------" );  
   Serial.println( "Comprobando actualización:" );
   Serial.print(HTTP_OTA_ADDRESS);Serial.print(":");Serial.print(HTTP_OTA_PORT);Serial.println(HTTP_OTA_PATH);

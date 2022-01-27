@@ -8,7 +8,7 @@ int boton_flash=0;       // GPIO0 = boton flash
 
 
 volatile int pulsador_estado_int = HIGH;     // por defecto HIGH (PULLUP). Cuando se pulsa se pone a LOW
-volatile int pulsador_evento = LOW;        // se activa cuando sucede una interrupcion
+volatile int pulsador_evento = LOW;          // se activa cuando sucede una interrupcion
 
 
 volatile unsigned long pulsador_ultima_int = 0;
