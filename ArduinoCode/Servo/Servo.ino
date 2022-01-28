@@ -93,10 +93,11 @@ void callback(char* topic, byte* payload, unsigned int length) {
     }
     
     else if (comando=="bajar"){                                                     // Instrucción "bajar" obtenida
-      for(angle=90;angle>=0;angle=angle-10){                                        // Barrera baja lentamente hasta 0º, para evitar accidentes
+      for(angle=servo.read();angle>=0;angle=angle-10){                              // Barrera baja lentamente hasta 0º, para evitar accidentes
       servo.write(angle);                                                     
       delay(500);
       }
+      servo.write(0);                                                               // En caso de cualquier error, asegura que la barrera baja completamente
       client.publish("II7/Entrada/BarreraEstado","{\"estado\":\"bajado\"}",true);   // Publica en el topic "II7/Entrada/BarreraEstado" que su estado es "bajado"
     }
   }
