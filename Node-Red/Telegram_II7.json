@@ -70,7 +70,8 @@
         "y": 360,
         "wires": [
             [
-                "98ea08c40147b07e"
+                "98ea08c40147b07e",
+                "151ce85b831cc28c"
             ]
         ]
     },
@@ -79,7 +80,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "mensaje respuesta",
-        "func": "var matri=msg.payload[0].matricula;\nvar fecha=msg.payload[0].date;\n\nmsg.payload=msg.mensaje;\n\nmsg.payload.content=\"La matrícula del último vehículo es: \"+matri+\"\\n\";\nmsg.payload.content+=\"Hora de llegada: \"+fecha.toLocaleString('es-ES', { timeZone: 'Europe/Madrid', hour12: false });\n\n\nreturn msg;",
+        "func": "var matri=msg.payload[0].payload.matricula;\nvar fecha=msg.payload[0].payload.date;\nmsg.payload = {};\nmsg.payload.chatId=msg.originalMessage.from.id;\nmsg.payload.type = \"message\";\nmsg.payload.content=\"La matrícula del último vehículo es: \"+matri+\".\\n\";\nmsg.payload.content+=\"Hora de llegada: \"+fecha.toLocaleString('es-ES', { timeZone: 'Europe/Madrid', hour12: false });\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -146,10 +147,11 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1290,
+        "x": 1270,
         "y": 420,
         "wires": []
     },
@@ -467,11 +469,12 @@
         "name": "",
         "collection": "matriculas_validas",
         "operation": "find",
-        "x": 730,
+        "x": 670,
         "y": 1320,
         "wires": [
             [
-                "24cda073c3bea387"
+                "24cda073c3bea387",
+                "d9e3ecd647cd90da"
             ]
         ]
     },
@@ -676,7 +679,8 @@
             "14392bcb51d7c878",
             "1515d2fc60388ae0",
             "d6fdd4c89c729d11",
-            "f89b61b25314a7d1"
+            "f89b61b25314a7d1",
+            "fe9b65c8780855a3"
         ],
         "x": 1835,
         "y": 540,
@@ -727,7 +731,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "Creamos mensaje",
-        "func": "// SACAR TODAS LAS MATRICULAS ARCHIVADAS\nreturn msg;",
+        "func": "// SACAR TODAS LAS MATRICULAS ARCHIVADAS\n// BUCLE FOR EN EL QUE SAQUEMOS TODAS LAS MATRICULAS ARCHIVADAS \n// INDICE I PARA RECORRER EL ARRAY DE LOS PAYLOADS\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -859,8 +863,8 @@
         "z": "33676dab1b5dbc95",
         "name": "Mandamos al flow del dashboard para que publique en el topic  II7/+/config",
         "info": "",
-        "x": 660,
-        "y": 1000,
+        "x": 640,
+        "y": 980,
         "wires": []
     },
     {
@@ -889,11 +893,14 @@
         "mongodb": "17e1c16e7a1086e9",
         "name": "",
         "collection": "registro_estado_plazas",
-        "operation": "aggregate",
+        "operation": "find",
         "x": 680,
         "y": 440,
         "wires": [
-            []
+            [
+                "449896a5887532e2",
+                "c953969a14acd4fb"
+            ]
         ]
     },
     {
@@ -1122,6 +1129,98 @@
         ],
         "x": 795,
         "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "151ce85b831cc28c",
+        "type": "debug",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "449896a5887532e2",
+        "type": "debug",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "c953969a14acd4fb",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "mensaje respuesta",
+        "func": "var Plaza=msg.payload[0].NumPlaza;\nvar Ocupado=msg.payload[0].Ocupado;\nvar temp = msg.payload[0].DHT11.Temperatura;\nvar hum = msg.payload[0].DHT11.Humedad;\nvar fecha = msg.payload[0].date;\nmsg.payload = {};\nmsg.payload.chatId = msg.originalMessage.from.id;\nmsg.payload.type = \"message\";\nmsg.payload.content=\"Último registro del sensor de la plaza número:(\"+Plaza+\").\\n¿Esta plaza se encuentra ocupada? (\"+Ocupado+\").\\nLa temperatura recogida es de (\"+temp+\"ºC) y la humedad relativa es de (\"+hum+\"%).\\n\";\nmsg.payload.content+=\"Hora del registro: \"+fecha.toLocaleString('es-ES', { timeZone: 'Europe/Madrid', hour12: false });\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 440,
+        "wires": [
+            [
+                "fe9b65c8780855a3"
+            ]
+        ]
+    },
+    {
+        "id": "fe9b65c8780855a3",
+        "type": "link out",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "f8ea4540fa0aeffe"
+        ],
+        "x": 1195,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "bcda4627a40588bf",
+        "type": "comment",
+        "z": "33676dab1b5dbc95",
+        "name": "ULTIMA PHOTO GUARDARLA COMO GLOBAL Y ASI PODER METERLA TAMBIEN EN EL COMANDO DE ULTIMA ENTRADA",
+        "info": "",
+        "x": 690,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "d9e3ecd647cd90da",
+        "type": "debug",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 1420,
         "wires": []
     },
     {
