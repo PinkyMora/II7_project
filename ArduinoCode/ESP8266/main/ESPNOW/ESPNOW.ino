@@ -13,10 +13,10 @@ extern "C" {                          // Utiliza librerias definidas en C, por l
 }
 
 //-------- Definimos los topics que se utilizan el programa --------
-#define SENSORTOPIC "II7/sensoresPlaza/EstadoPlazas" 
-#define CONEXIONTOPIC "II7/sensoresPlazas/conexion"
-#define CONFIGTOPIC "II7/sensoresPlazas/config"
-#define FOTATOPIC "II7/sensoresPlazas/FOTA"
+#define SENSORTOPIC "II7/SensoresPlazas/EstadoPlazas" 
+#define CONEXIONTOPIC "II7/SensoresPlazas/conexion"
+#define CONFIGTOPIC "II7/SensoresPlazas/config"
+#define FOTATOPIC "II7/SensoresPlazas/FOTA"
 
 uint8_t mac[] = {0x48, 0x3F, 0xDA, 0x0C, 0xB7, 0xCF};// MACMORA--> 48:3F:DA:0C:B7:CF     MACDAVID--> 48:3F:DA:77:1F:67
 
@@ -139,7 +139,7 @@ void loop()
       // Se realiza en este momento ya que el wifi se encuentra activado durante el tiemp definido y es el 
       // único momento en el que no se producen actividades paralelas y el programa se encuentra "standby".
       while (millis()-heartBeat1 < tiempo_Escucha){
-            
+            client.loop();
             if(pulsador_evento==HIGH)
             {
               pulsador_evento = LOW;
@@ -249,11 +249,12 @@ void sendToBroker() {
 
 // Funcion que se encarga de publicar el mensaje recibido
 void publishMQTT(String topic, String message) {
-  Serial.println("Publish");
+  
   if (!client.connected()) {
     reconnectMQTT();
   }
-  client.publish(SENSORTOPIC, message.c_str());
+  client.publish("II7/SensoresPlazas/EstadoPlazas", message.c_str());
+  Serial.println("Publish");
 }
 
 // ------- Función callback ------ //

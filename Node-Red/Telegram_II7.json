@@ -62,11 +62,11 @@
         "id": "a4dd2d28c0e3ed42",
         "type": "mongodb in",
         "z": "33676dab1b5dbc95",
-        "mongodb": "f605fa69.8f5008",
+        "mongodb": "17e1c16e7a1086e9",
         "name": "",
         "collection": "registro_matriculas_entrada",
         "operation": "find",
-        "x": 680,
+        "x": 700,
         "y": 360,
         "wires": [
             [
@@ -391,11 +391,11 @@
         "id": "ad587c3d99ca0122",
         "type": "mongodb in",
         "z": "33676dab1b5dbc95",
-        "mongodb": "f605fa69.8f5008",
+        "mongodb": "17e1c16e7a1086e9",
         "name": "",
         "collection": "registro_estado_plazas",
         "operation": "aggregate",
-        "x": 680,
+        "x": 700,
         "y": 660,
         "wires": [
             [
@@ -463,11 +463,11 @@
         "id": "30d3758ff71348bd",
         "type": "mongodb in",
         "z": "33676dab1b5dbc95",
-        "mongodb": "f605fa69.8f5008",
+        "mongodb": "17e1c16e7a1086e9",
         "name": "",
         "collection": "matriculas_validas",
         "operation": "find",
-        "x": 710,
+        "x": 730,
         "y": 1320,
         "wires": [
             [
@@ -498,15 +498,16 @@
         "id": "5c92d13ec9797d94",
         "type": "mongodb in",
         "z": "33676dab1b5dbc95",
-        "mongodb": "f605fa69.8f5008",
+        "mongodb": "17e1c16e7a1086e9",
         "name": "",
         "collection": "registro_estado_plazas",
         "operation": "aggregate",
-        "x": 680,
+        "x": 700,
         "y": 720,
         "wires": [
             [
-                "e81c930c2639f57a"
+                "e81c930c2639f57a",
+                "ba6e1bccc2e81604"
             ]
         ]
     },
@@ -515,7 +516,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "Ocupado == TRUE",
-        "func": "//msg.payload={\"payload.ocupado\":\"true\"}; // ocupado:\"true\"\n//{ \"$match\": { \"$and\": [ { \"payload.date\": { \"$lt\": ahora, \"$gt\": fiveminsago } }, { \"payload.ocupado\": \"true\" } ] } }\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.payload=\n[\n    { \"$match\": { \"$and\": [ { \"payload.date\": {\"$gt\" : fiveminsago} }, { \"payload.ocupado\": \"true\" } ] } },\n    { \"$group\": {\n        \"_id\": 0,\n        \"numPlazasOcupadas\": {\"$sum\":1}\n    }}\n];\nreturn msg;\n//msg.payload=[\n//    {\"$match\": { \"temperatura\": 19}},\n//    { \"$group\": {\n//        \"_id\": 0,\n//        \"NumPlazasOcupadas\": {\"$sum\":1}\n//    }}\n//];",
+        "func": "//msg.payload={\"payload.ocupado\":\"true\"}; // ocupado:\"true\"\n//{ \"$match\": { \"$and\": [ { \"payload.date\": { \"$lt\": ahora, \"$gt\": fiveminsago } }, { \"payload.ocupado\": \"true\" } ] } }\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.payload=\n[\n    { \"$match\": { \"$and\": [ { \"date\": {\"$gt\" : fiveminsago} }, { \"Ocupado\": true } ] } },\n    { \"$group\": {\n        \"_id\": 0,\n        \"numPlazasOcupadas\": {\"$sum\":1}\n    }}\n];\nreturn msg;\n//msg.payload=[\n//    {\"$match\": { \"temperatura\": 19}},\n//    { \"$group\": {\n//        \"_id\": 0,\n//        \"NumPlazasOcupadas\": {\"$sum\":1}\n//    }}\n//];",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -534,7 +535,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "Ocupado == FALSE",
-        "func": "//msg.payload={\"ocupado\":\"false\"}; //ocupado:\"false\" TAMBIEN SACAR EL NUMERO DE CADA PLAZA LIBRE AKA numPlaza\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.payload=\n[\n    { \"$match\": { \"$and\": [ { \"payload.date\": {\"$gt\" : fiveminsago} }, { \"payload.ocupado\": \"false\" } ] } },\n    { \"$group\": {\n        \"_id\": 1,\n        \"numPlazasLibres\": {\"$sum\":1}\n    }}\n];\nreturn msg;",
+        "func": "//msg.payload={\"ocupado\":\"false\"}; //ocupado:\"false\" TAMBIEN SACAR EL NUMERO DE CADA PLAZA LIBRE AKA numPlaza\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.payload=\n[\n    { \"$match\": { \"$and\": [ { \"date\": {\"$gt\" : fiveminsago} }, { \"Ocupado\": false } ] } },\n    { \"$group\": {\n        \"_id\": 0,\n        \"numPlazasLibres\": {\"$sum\":1}\n    }}\n];\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -553,7 +554,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "TEMP",
-        "func": "//sacamos temperatura y humedad de todas las plazas y podemos hacer una media incluso\n\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.payload=\n[\n    { \"$match\": { \"$and\": [ { \"payload.date\": {\"$gt\" : fiveminsago} }, { \"payload.ocupado\": \"false\" } ] } },\n    { \"$project\": {\n        \"temperatura\": \"$payload.temperatura\",\n        \"humedad\":\"$payload.humedad\"\n        }\n    },\n    { \"$group\": {\n        \"_id\": 1,\n        \"TempMedia\": {\"$avg\":\"$temperatura\"}, // HUMEDAD Y TEMPERATURA DEL PARKING AKA MEDIA DE TODAS LAS ULTIMAS MUESTRAS A 5 MIN ATRAS\n        \"HumMedia\": {\"$avg\":\"$humedad\"}, \n        \"datos\": {\"$sum\":1}\n    }}\n];\nreturn msg;",
+        "func": "//sacamos temperatura y humedad de todas las plazas y podemos hacer una media incluso\n\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.payload=\n[\n    { \"$match\": { \"date\": {\"$gt\" : fiveminsago} } },\n    { \"$project\": {\n        \"temperatura\": \"$DHT11.Temperatura\", \n        \"humedad\":\"$DHT11.Humedad\"\n        }\n    },\n    { \"$group\": {\n        \"_id\": 1,\n        \"TempMedia\": {\"$avg\":\"$temperatura\"}, // SE HA INTENTADO REDONDEAR PERO LA OPERACION ROUND SE INTRODUJO EN VERSIONES POSTERIORES DE MONGODB PARA AGREGACIONES\n        \"HumMedia\": {\"$avg\":\"$humedad\"}, \n        \"datos\": {\"$sum\":1}\n    }}\n];\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -571,16 +572,15 @@
         "id": "a74cc0d466f9e60e",
         "type": "mongodb in",
         "z": "33676dab1b5dbc95",
-        "mongodb": "f605fa69.8f5008",
+        "mongodb": "17e1c16e7a1086e9",
         "name": "",
         "collection": "registro_estado_plazas",
         "operation": "aggregate",
-        "x": 660,
+        "x": 680,
         "y": 800,
         "wires": [
             [
-                "d5c108b6c3589205",
-                "ba6e1bccc2e81604"
+                "d5c108b6c3589205"
             ]
         ]
     },
@@ -746,7 +746,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "Creamos mensaje",
-        "func": "var plazas = msg.payload[0].numPlazasOcupadas;\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"El número de Plazas Ocupadas en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\"\nreturn msg;",
+        "func": "var plazas = msg.payload[0].numPlazasOcupadas;\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"El número de Plazas Ocupadas en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -765,7 +765,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "Creamos mensaje",
-        "func": "var plazas = msg.payload[0].numPlazasLibres;\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"El número de Plazas Libres en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\"\nreturn msg;",
+        "func": "var plazas = msg.payload[0].numPlazasLibres;\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"El número de Plazas Libres en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -784,7 +784,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "Creamos mensaje",
-        "func": "var temp = msg.payload[0].TempMedia;\nvar hum = msg.payload[0].HumMedia;\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"La temperatura media en el Parking es de  (\"+temp+\"ºC) y una humedad relativa del (\"+hum+\"%) .\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\"\nreturn msg;",
+        "func": "var temp = msg.payload[0].TempMedia;\nvar hum = msg.payload[0].HumMedia;\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"La temperatura media en el Parking es de  (\"+temp+\"ºC) y una humedad relativa del (\"+hum+\"%) .\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -886,11 +886,11 @@
         "id": "7e522488dc2605fc",
         "type": "mongodb in",
         "z": "33676dab1b5dbc95",
-        "mongodb": "f605fa69.8f5008",
+        "mongodb": "17e1c16e7a1086e9",
         "name": "",
         "collection": "registro_estado_plazas",
         "operation": "aggregate",
-        "x": 660,
+        "x": 680,
         "y": 440,
         "wires": [
             []
@@ -1125,13 +1125,14 @@
         "wires": []
     },
     {
-        "id": "f605fa69.8f5008",
+        "id": "17e1c16e7a1086e9",
         "type": "mongodb",
         "hostname": "iot.ac.uma.es",
+        "topology": "direct",
         "connectOptions": "",
         "port": "27017",
         "db": "II7",
-        "name": ""
+        "name": "Base de datos proyecto"
     },
     {
         "id": "aa0e08fb665711b4",
