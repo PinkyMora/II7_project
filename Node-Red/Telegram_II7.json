@@ -16,8 +16,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 570,
-        "y": 180,
+        "x": 550,
+        "y": 100,
         "wires": []
     },
     {
@@ -25,14 +25,14 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "mensaje bienvenida",
-        "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"Hola soy el bot del grupo 7 de Informática Industrial. Puedo responderte a estos comandos:\\n/start\\n/ultregsensores\\n/ultentrada\\n/subirbarrera\\n/bajarbarrera\\n/regmatriculas\\n/plazasOcupadas\\n/plazasLibres\\n/temp_hum_Parking\\n/camara_ahora\";\n return msg;\n}",
+        "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"Hola soy el bot del grupo 7 de Informática Industrial. Puedo responderte a estos comandos:\\n/start\\n/ultregsensores\\n/ultentrada\\n/subirbarrera\\n/bajarbarrera\\n/regmatriculas\\n/plazasOcupadas\\n/plazasLibres\\n/temp_hum_Parking\\n/frecFOTA\\n/camara_ahora\";\n return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 600,
-        "y": 240,
+        "x": 580,
+        "y": 160,
         "wires": [
             [
                 "d520dfcb2a99a0fe"
@@ -50,8 +50,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
-        "y": 360,
+        "x": 340,
+        "y": 280,
         "wires": [
             [
                 "a4dd2d28c0e3ed42"
@@ -66,8 +66,8 @@
         "name": "",
         "collection": "registro_matriculas_entrada",
         "operation": "find",
-        "x": 700,
-        "y": 360,
+        "x": 680,
+        "y": 280,
         "wires": [
             [
                 "98ea08c40147b07e",
@@ -86,8 +86,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1050,
-        "y": 360,
+        "x": 1030,
+        "y": 280,
         "wires": [
             [
                 "e31ac1db62f9f450",
@@ -111,8 +111,8 @@
         "useregex": false,
         "removeregexcommand": false,
         "outputs": 2,
-        "x": 100,
-        "y": 360,
+        "x": 80,
+        "y": 280,
         "wires": [
             [
                 "b9cd46ba811ccbcf"
@@ -128,8 +128,8 @@
         "bot": "aa0e08fb665711b4",
         "saveDataDir": "",
         "filterCommands": true,
-        "x": 250,
-        "y": 180,
+        "x": 230,
+        "y": 100,
         "wires": [
             [
                 "2d65b3c82c043d5e",
@@ -151,8 +151,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1270,
-        "y": 420,
+        "x": 1250,
+        "y": 340,
         "wires": []
     },
     {
@@ -185,8 +185,8 @@
         "useregex": false,
         "removeregexcommand": false,
         "outputs": 2,
-        "x": 210,
-        "y": 240,
+        "x": 190,
+        "y": 160,
         "wires": [
             [
                 "f6b3805ec493b8d4"
@@ -211,7 +211,7 @@
         "removeregexcommand": false,
         "outputs": 2,
         "x": 110,
-        "y": 500,
+        "y": 460,
         "wires": [
             [
                 "8dd3b913771a2853"
@@ -236,7 +236,7 @@
         "removeregexcommand": false,
         "outputs": 2,
         "x": 110,
-        "y": 560,
+        "y": 520,
         "wires": [
             [
                 "1a5277f3749ad485"
@@ -380,8 +380,8 @@
         "useregex": false,
         "removeregexcommand": false,
         "outputs": 2,
-        "x": 120,
-        "y": 440,
+        "x": 100,
+        "y": 360,
         "wires": [
             [
                 "e8d4b3737159d109"
@@ -419,8 +419,8 @@
         "correl": "",
         "expiry": "",
         "broker": "dbdec0508173add5",
-        "x": 610,
-        "y": 520,
+        "x": 650,
+        "y": 480,
         "wires": []
     },
     {
@@ -435,10 +435,11 @@
         "finalize": "",
         "libs": [],
         "x": 310,
-        "y": 500,
+        "y": 460,
         "wires": [
             [
-                "6fd0b05180b10680"
+                "6fd0b05180b10680",
+                "459ef2b3b67f81f9"
             ]
         ]
     },
@@ -454,10 +455,11 @@
         "finalize": "",
         "libs": [],
         "x": 320,
-        "y": 560,
+        "y": 520,
         "wires": [
             [
-                "6fd0b05180b10680"
+                "6fd0b05180b10680",
+                "e7562e62052dfa40"
             ]
         ]
     },
@@ -619,7 +621,8 @@
         "wires": [
             [
                 "3ef8e49b919bf436",
-                "60dc8372e00bda1b"
+                "60dc8372e00bda1b",
+                "0a33b65408b06891"
             ]
         ]
     },
@@ -680,7 +683,10 @@
             "1515d2fc60388ae0",
             "d6fdd4c89c729d11",
             "f89b61b25314a7d1",
-            "fe9b65c8780855a3"
+            "fe9b65c8780855a3",
+            "38283175e42822a0",
+            "86799f5915a07852",
+            "825ad4fab3e96185"
         ],
         "x": 1835,
         "y": 540,
@@ -698,8 +704,8 @@
         "links": [
             "f8ea4540fa0aeffe"
         ],
-        "x": 815,
-        "y": 240,
+        "x": 795,
+        "y": 160,
         "wires": []
     },
     {
@@ -708,10 +714,11 @@
         "z": "33676dab1b5dbc95",
         "name": "",
         "links": [
-            "f8ea4540fa0aeffe"
+            "f8ea4540fa0aeffe",
+            "1863d931dacb1b5e"
         ],
-        "x": 1235,
-        "y": 280,
+        "x": 1215,
+        "y": 200,
         "wires": []
     },
     {
@@ -750,7 +757,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "Creamos mensaje",
-        "func": "var plazas = msg.payload[0].numPlazasOcupadas;\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"El número de Plazas Ocupadas en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "func": "var plazas = msg.payload[0].numPlazasOcupadas;\nmsg.payload={};\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"El número de Plazas Ocupadas en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -769,7 +776,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "Creamos mensaje",
-        "func": "var plazas = msg.payload[0].numPlazasLibres;\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"El número de Plazas Libres en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "func": "var plazas = msg.payload[0].numPlazasLibres;\nmsg.payload={};\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"El número de Plazas Libres en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -788,7 +795,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "Creamos mensaje",
-        "func": "var temp = msg.payload[0].TempMedia;\nvar hum = msg.payload[0].HumMedia;\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"La temperatura media en el Parking es de  (\"+temp+\"ºC) y una humedad relativa del (\"+hum+\"%) .\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "func": "var temp = msg.payload[0].TempMedia;\nvar hum = msg.payload[0].HumMedia;\nmsg.payload={};\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"La temperatura media en el Parking es de  (\"+temp+\"ºC) y una humedad relativa del (\"+hum+\"%) .\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -834,7 +841,8 @@
         "z": "33676dab1b5dbc95",
         "name": "",
         "links": [
-            "f8ea4540fa0aeffe"
+            "f8ea4540fa0aeffe",
+            "1863d931dacb1b5e"
         ],
         "x": 1215,
         "y": 800,
@@ -863,8 +871,8 @@
         "z": "33676dab1b5dbc95",
         "name": "Mandamos al flow del dashboard para que publique en el topic  II7/+/config",
         "info": "",
-        "x": 640,
-        "y": 980,
+        "x": 400,
+        "y": 1040,
         "wires": []
     },
     {
@@ -878,8 +886,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
-        "y": 440,
+        "x": 340,
+        "y": 360,
         "wires": [
             [
                 "7e522488dc2605fc"
@@ -894,31 +902,12 @@
         "name": "",
         "collection": "registro_estado_plazas",
         "operation": "find",
-        "x": 680,
-        "y": 440,
+        "x": 660,
+        "y": 360,
         "wires": [
             [
                 "449896a5887532e2",
                 "c953969a14acd4fb"
-            ]
-        ]
-    },
-    {
-        "id": "7866f0c7c0a27f5e",
-        "type": "function",
-        "z": "33676dab1b5dbc95",
-        "name": "Cambio ChatID para difusión por el canal",
-        "func": "msg.payload.chatId=-1001612621169;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1720,
-        "y": 640,
-        "wires": [
-            [
-                "cc844b9c806fd32e"
             ]
         ]
     },
@@ -931,13 +920,18 @@
             "8be7614c8989949f",
             "55ab5e40de9ef43c",
             "f89b61b25314a7d1",
-            "945f23299531eb2f"
+            "945f23299531eb2f",
+            "14392bcb51d7c878",
+            "7c695195afe7c280",
+            "38283175e42822a0",
+            "86799f5915a07852",
+            "825ad4fab3e96185"
         ],
         "x": 1495,
         "y": 640,
         "wires": [
             [
-                "7866f0c7c0a27f5e"
+                "60b5a49f7ce0ef93"
             ]
         ]
     },
@@ -958,8 +952,10 @@
         "type": "link out",
         "z": "33676dab1b5dbc95",
         "name": "",
-        "links": [],
-        "x": 355,
+        "links": [
+            "02bcf209c3cc3db9"
+        ],
+        "x": 435,
         "y": 1000,
         "wires": []
     },
@@ -991,17 +987,16 @@
         "method": "GET",
         "ret": "bin",
         "paytoqs": "ignore",
-        "url": "http://192.168.127.108/capture",
+        "url": "https://cdn-images.motor.es/image/m/694w/fotos-noticias/2020/04/como-saber-quien-es-coche-matricula-202066817-1587647861_1.jpg",
         "tls": "",
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 660,
+        "x": 690,
         "y": 1080,
         "wires": [
             [
-                "8b8dba1ad38ef644",
-                "0a939f53a8405d73"
+                "8b8dba1ad38ef644"
             ]
         ]
     },
@@ -1010,7 +1005,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "",
-        "func": "var pl = {\n  content: msg.payload,\n  caption: \"Foto tomada en la ultima entrada de vehículo\",\n  type : 'photo',\n  chatId: msg.originalMessage.chat.id,\n  chat: msg.originalMessage.chat,\n  from: msg.originalMessage.from,\n  message_id : msg.originalMessage.message_id\n}\n\nmsg.payload = pl;\nreturn msg;",
+        "func": "var pl = {\n  content: msg.payload,\n  caption: \"Foto tomada de la entrada de vehículos\",\n  type : 'photo',\n  chatId: msg.originalMessage.chat.id,\n  chat: msg.originalMessage.chat,\n  from: msg.originalMessage.from,\n  message_id : msg.originalMessage.message_id\n}\n\nmsg.payload = pl;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1068,10 +1063,11 @@
         "z": "33676dab1b5dbc95",
         "name": "",
         "links": [
-            "0a939f53a8405d73"
+            "0a939f53a8405d73",
+            "78593d4ea5cef43e"
         ],
         "x": 1475,
-        "y": 780,
+        "y": 800,
         "wires": [
             [
                 "f9a37976ecf9585e"
@@ -1082,9 +1078,9 @@
         "id": "a52a67aa05202ab0",
         "type": "comment",
         "z": "33676dab1b5dbc95",
-        "name": "ESTE LINK PROVIENE JUSTO DESPUES DEL NODO HTTP REQUEST DE LA CAMARA Y ENVÍA LA FOTO POR TELEGRAM CADA VEZ QUE LLEGA UN VEHÍCULO",
+        "name": "ESTE LINK PROVIENE JUSTO DESPUES DEL NODO HTTP REQUEST DE LA CAMARA Y ENVÍA LA FOTO POR TELEGRAM AL CANAL DE DIFUSION CADA VEZ QUE LLEGA UN VEHÍCULO",
         "info": "",
-        "x": 1900,
+        "x": 1980,
         "y": 860,
         "wires": []
     },
@@ -1092,15 +1088,15 @@
         "id": "f9a37976ecf9585e",
         "type": "function",
         "z": "33676dab1b5dbc95",
-        "name": "",
-        "func": "var photo = msg.payload;\n\nmsg.payload = {};\nmsg.payload.content = photo;\nmsg.payload.type = \"photo\";\nmsg.payload.caption = \"Llegada de vehículo a la hora (METER FECHA).\\nMatrícula: (METER MATRICULA)\";\nreturn msg;",
+        "name": "FOTO",
+        "func": "var photo = msg.payload;\nvar matri = flow.get(\"Matricula\");\nvar fecha = flow.get(\"FechaEntrada\")\nmsg.payload = {};\nmsg.payload.content = photo;\nmsg.payload.type = \"photo\";\nmsg.payload.caption = \"Llegada de vehículo a la hora (\"+fecha+\").\\nMatrícula: (\"+matri+\").\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1600,
-        "y": 780,
+        "x": 1590,
+        "y": 800,
         "wires": [
             [
                 "945f23299531eb2f"
@@ -1116,19 +1112,7 @@
             "1863d931dacb1b5e"
         ],
         "x": 1735,
-        "y": 780,
-        "wires": []
-    },
-    {
-        "id": "0a939f53a8405d73",
-        "type": "link out",
-        "z": "33676dab1b5dbc95",
-        "name": "",
-        "links": [
-            "51397c01a1fccf20"
-        ],
-        "x": 795,
-        "y": 1040,
+        "y": 800,
         "wires": []
     },
     {
@@ -1144,8 +1128,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1050,
-        "y": 260,
+        "x": 1030,
+        "y": 160,
         "wires": []
     },
     {
@@ -1161,8 +1145,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 930,
-        "y": 520,
+        "x": 1010,
+        "y": 420,
         "wires": []
     },
     {
@@ -1176,8 +1160,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1030,
-        "y": 440,
+        "x": 1010,
+        "y": 360,
         "wires": [
             [
                 "fe9b65c8780855a3"
@@ -1192,8 +1176,8 @@
         "links": [
             "f8ea4540fa0aeffe"
         ],
-        "x": 1195,
-        "y": 460,
+        "x": 1175,
+        "y": 380,
         "wires": []
     },
     {
@@ -1202,8 +1186,8 @@
         "z": "33676dab1b5dbc95",
         "name": "ULTIMA PHOTO GUARDARLA COMO GLOBAL Y ASI PODER METERLA TAMBIEN EN EL COMANDO DE ULTIMA ENTRADA",
         "info": "",
-        "x": 690,
-        "y": 300,
+        "x": 670,
+        "y": 220,
         "wires": []
     },
     {
@@ -1222,6 +1206,157 @@
         "x": 960,
         "y": 1420,
         "wires": []
+    },
+    {
+        "id": "60b5a49f7ce0ef93",
+        "type": "change",
+        "z": "33676dab1b5dbc95",
+        "name": "Cambio ChatID para difusión por el canal",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.chatId",
+                "pt": "msg",
+                "to": "-1001612621169",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1720,
+        "y": 640,
+        "wires": [
+            [
+                "cc844b9c806fd32e"
+            ]
+        ]
+    },
+    {
+        "id": "0a33b65408b06891",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "func": "var frec = msg.payload.content;\nvar user = msg.payload.from.username;\nmsg.payload={};\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"Frecuencia FOTA Actualizada a  (\"+frec+\") por el usuario (\"+user+\").\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 960,
+        "wires": [
+            [
+                "38283175e42822a0"
+            ]
+        ]
+    },
+    {
+        "id": "38283175e42822a0",
+        "type": "link out",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "1863d931dacb1b5e",
+            "f8ea4540fa0aeffe"
+        ],
+        "x": 635,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "459ef2b3b67f81f9",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "SUBIDO",
+        "func": "msg.payload={};\nmsg.payload.content = \"La barrera se ha subido.\";\nmsg.payload.chatId=589861369;\nmsg.payload.type = \"message\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 420,
+        "wires": [
+            [
+                "86799f5915a07852"
+            ]
+        ]
+    },
+    {
+        "id": "e7562e62052dfa40",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "BAJADO",
+        "func": "msg.payload={};\nmsg.payload.content = \"La barrera se ha bajado.\";\nmsg.payload.chatId=589861369;\nmsg.payload.type = \"message\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 540,
+        "wires": [
+            [
+                "86799f5915a07852"
+            ]
+        ]
+    },
+    {
+        "id": "86799f5915a07852",
+        "type": "link out",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "1863d931dacb1b5e",
+            "f8ea4540fa0aeffe"
+        ],
+        "x": 875,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "47bd5270819e5eba",
+        "type": "link in",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [],
+        "x": 1655,
+        "y": 940,
+        "wires": [
+            [
+                "117424b7d4604041"
+            ]
+        ]
+    },
+    {
+        "id": "12968f2c0b74a0d7",
+        "type": "comment",
+        "z": "33676dab1b5dbc95",
+        "name": "DEFINIMOS COMO GLOBALES LAS VARIABLES DE MATRICULA Y FECHA DE LA ENTRADA QUE SE ACABA DE DAR  PARA MEJORAR SU PROCESAMIENTO Y VISUALIZACION",
+        "info": "",
+        "x": 1780,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "117424b7d4604041",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "func": "var matric = msg.payload.results[0].plate;\nvar fecha = new Date();\nflow.set(\"Matricula\",matric);\nflow.set(\"FechaEntrada\",fecha);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1780,
+        "y": 940,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "17e1c16e7a1086e9",
