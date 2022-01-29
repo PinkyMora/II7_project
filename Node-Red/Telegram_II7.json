@@ -1070,7 +1070,7 @@
         "y": 800,
         "wires": [
             [
-                "f9a37976ecf9585e"
+                "f98a21238a194242"
             ]
         ]
     },
@@ -1089,13 +1089,13 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "FOTO",
-        "func": "var photo = msg.payload;\nvar matri = flow.get(\"Matricula\");\nvar fecha = flow.get(\"FechaEntrada\")\nmsg.payload = {};\nmsg.payload.content = photo;\nmsg.payload.type = \"photo\";\nmsg.payload.caption = \"Llegada de vehículo a la hora (\"+fecha+\").\\nMatrícula: (\"+matri+\").\";\nreturn msg;",
+        "func": "var photo = msg.payload;\nvar matri = global.get(\"Matricula\");\nvar fecha = global.get(\"FechaEntrada\")\nmsg.payload = {};\nmsg.payload.content = photo;\nmsg.payload.type = \"photo\";\nmsg.payload.caption = \"Llegada de vehículo a la hora (\"+fecha+\").\\nMatrícula: (\"+matri+\").\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1590,
+        "x": 1710,
         "y": 800,
         "wires": [
             [
@@ -1111,7 +1111,7 @@
         "links": [
             "1863d931dacb1b5e"
         ],
-        "x": 1735,
+        "x": 1855,
         "y": 800,
         "wires": []
     },
@@ -1322,8 +1322,10 @@
         "type": "link in",
         "z": "33676dab1b5dbc95",
         "name": "",
-        "links": [],
-        "x": 1655,
+        "links": [
+            "b2daf31ec1de6021"
+        ],
+        "x": 1455,
         "y": 940,
         "wires": [
             [
@@ -1346,16 +1348,40 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "",
-        "func": "var matric = msg.payload.results[0].plate;\nvar fecha = new Date();\nflow.set(\"Matricula\",matric);\nflow.set(\"FechaEntrada\",fecha);\nreturn msg;",
+        "func": "var matric = msg.payload.results[0].plate;\nvar fecha = new Date();\nglobal.set(\"Matricula\",matric);\nglobal.set(\"FechaEntrada\",fecha);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1780,
+        "x": 1600,
         "y": 940,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "f98a21238a194242",
+        "type": "delay",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "x": 1570,
+        "y": 800,
+        "wires": [
+            [
+                "f9a37976ecf9585e"
+            ]
         ]
     },
     {
