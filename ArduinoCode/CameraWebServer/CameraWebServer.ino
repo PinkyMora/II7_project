@@ -74,7 +74,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
   if ((String)topic=="II7/ESP32/FOTA"){
     // instrucción de actualización independientemente del payload
-    setup_OTA();
+    setup_OTA();          // llama la funcion de actualizacion FOTA
     lastFOTA = millis();
   } else if ((String)topic=="II7/ESP32/config"){
     // Parámetros configurables:
@@ -106,14 +106,14 @@ void reconnect() {
     //clientId += String(ESP.getChipId());  // .getChipId() no funciona con ESP32
     // Attempt to connect
 
-    // Construcción dell mensaje de estatus
+    // Construcción dell mensaje de estatus de conexion
     String output = "";
     StaticJsonDocument<64> docFalse;
     docFalse["CHIPID"] = "ESP32";
     docFalse["online"] = "false";
     serializeJson(docFalse, output);
     
-    if (client.connect(clientId.c_str(),mqtt_user,mqtt_pass,"II7/ESP32/conexion",1,true,output.c_str())) { // Definición de LWM en modo retenido
+    if (client.connect(clientId.c_str(),mqtt_user,mqtt_pass,"II7/ESP32/conexion",1,true,output.c_str())) { // Definición de LWM en modo retenido, desconexion
       Serial.println("connected");
       // Once connected, publish an announcement...
       // Construcción dell mensaje de estatus
@@ -237,6 +237,8 @@ void setup() {
 
   //setup_wifi(ssid,password); // tiene que hacerse con el código del ejemplo para
                                // montar el servidor http de la cámara
+
+  // Inicializacion de FOTA y servidor MQTT
   setup_OTA();
   lastFOTA = millis();
   setup_MQTT();
@@ -245,13 +247,14 @@ void setup() {
 }
 
 void loop() {
+  // Asegura la conexion MQTT llamando a la funcion reconnect()
   if (!client.connected()) {
     reconnect();
   }
   client.loop();
 
   unsigned long now = millis();
-  
+    // Periodicamente comprueba si hay actualizaciones FOTA disponibles
     if ((now - lastFOTA) > (frec_actualiza_FOTA)){
       setup_OTA();
       lastFOTA = now;

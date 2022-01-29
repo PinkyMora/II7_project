@@ -37,6 +37,7 @@ void setup_wifi(const char* ssid, const char* password) {
 }
 
 void setup_OTA() {
+  // Esta es la funcion que hay que llamar para comprobar si hay actualizaciones, tanto en ESP32 como ESP8266
   // Serial.begin(115200); // esto en el setup()
   
   // tienes led en tu placa ESP32??
@@ -48,6 +49,7 @@ void setup_OTA() {
   Serial.print(HTTP_OTA_ADDRESS);Serial.print(":");Serial.print(HTTP_OTA_PORT);Serial.println(HTTP_OTA_PATH);
   Serial.println( "--------------------------" );  
   #ifdef ESP32
+  // Importante para nuestro servidor!! ->
   WiFiClientSecure client;
   client.setInsecure();
   switch(httpUpdate.update(client,HTTP_OTA_ADDRESS, HTTP_OTA_PORT, HTTP_OTA_PATH,HTTP_OTA_VERSION)) {
