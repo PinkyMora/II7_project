@@ -732,7 +732,8 @@
         "y": 740,
         "wires": [
             [
-                "2db1469e97a9ceec"
+                "2db1469e97a9ceec",
+                "59274a9ad45fbe96"
             ]
         ]
     },
@@ -741,7 +742,7 @@
         "type": "function",
         "z": "b49183a3c7a702d0",
         "name": "filtrado 24h",
-        "func": "var ms_per_horas = 3600000;\n// obtiene el timestamp actual\nvar now_ms = new Date().getTime();\n// crear objeto fecha con la hora de hace un dia\nvar dayago = new Date(now_ms-24*ms_per_horas);\n\n\n// seleccionar con fecha posterior o igual a hace un día\nmsg.payload = {\"date\": {\"$gte\": dayago}};\nmsg.sort = {\"date\":1}; // ordenar por fecha\n\nreturn msg;",
+        "func": "var ms_per_horas = 3600000; \n// obtiene el timestamp actual\nvar now_ms = new Date().getTime();\n// crear objeto fecha con la hora de hace un dia\nvar dayago = new Date(now_ms-24*ms_per_horas);\n\n\n// seleccionar con fecha posterior o igual a hace un día\nmsg.payload = {\"date\": {\"$gte\": dayago}};\nmsg.sort = {\"date\":1}; // ordenar por fecha\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -751,7 +752,8 @@
         "y": 680,
         "wires": [
             [
-                "73518e384e3229cf"
+                "73518e384e3229cf",
+                "e201baec1523f020"
             ]
         ]
     },
@@ -800,7 +802,7 @@
         "type": "function",
         "z": "b49183a3c7a702d0",
         "name": "filtrado Semana",
-        "func": "var ms_per_horas = 3600000;\n// obtiene el timestamp actual\nvar now_ms = new Date().getTime();\n// crear objeto fecha con la hora de hace un dia\nvar dayago = new Date(now_ms-24*ms_per_horas);\n// crea objeto fecha con la hora de hace una semana\nvar weekago = new Date(now_ms-7*dayago);\n\n// seleccionar con fecha posterior o igual a hace una semana\nmsg.payload = {\"date\": {\"$gte\": weekago}};\nmsg.sort = {\"date\":1}; // ordenar por fecha\n\nreturn msg;",
+        "func": "var ms_per_week = 604800000;\n// obtiene el timestamp actual\nvar now_ms = new Date().getTime();\n// crea objeto fecha con la hora de hace una semana\nvar weekago = new Date(now_ms-ms_per_week);\n\n// seleccionar con fecha posterior o igual a hace una semana\nmsg.payload = {\"date\": {\"$gte\": weekago}};\nmsg.sort = {\"date\":1}; // ordenar por fecha\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -810,7 +812,8 @@
         "y": 740,
         "wires": [
             [
-                "73518e384e3229cf"
+                "73518e384e3229cf",
+                "3bef7f82e660e29b"
             ]
         ]
     },
@@ -819,7 +822,7 @@
         "type": "function",
         "z": "b49183a3c7a702d0",
         "name": "filtrado Mes",
-        "func": "var ms_per_horas = 3600000;\n// obtiene el timestamp actual\nvar now_ms = new Date().getTime();\n// crear objeto fecha con la hora de hace un dia\nvar dayago = new Date(now_ms-24*ms_per_horas);\n// crea objeto fecha con la hora de hace una semana\nvar weekago = new Date(now_ms-7*dayago);\n// crea objeto fecha con la hora de hace un mes\nvar monthago = new Date(now_ms-4*weekago);\n\n// seleccionar con fecha posterior o igual a hace un mes\nmsg.payload = {\"date\": {\"$gte\": monthago}};\nmsg.sort = {\"date\":1}; // ordenar por fecha\n\nreturn msg;",
+        "func": "var ms_per_month = 2629750000;\n// obtiene el timestamp actual\nvar now_ms = new Date().getTime();\n// crea objeto fecha con la hora de hace un mes\nvar monthago = new Date(now_ms-ms_per_month);\n\n// seleccionar con fecha posterior o igual a hace un mes\nmsg.payload = {\"date\": {\"$gte\": monthago}};\nmsg.sort = {\"date\":1}; // ordenar por fecha\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -829,7 +832,8 @@
         "y": 800,
         "wires": [
             [
-                "73518e384e3229cf"
+                "73518e384e3229cf",
+                "53efec6f8133555b"
             ]
         ]
     },
@@ -1017,22 +1021,6 @@
                 "27aa69c7b99d7044"
             ]
         ]
-    },
-    {
-        "id": "4633769af2fb6b01",
-        "type": "debug",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1750,
-        "y": 660,
-        "wires": []
     },
     {
         "id": "73c12bf466c2664b",
@@ -1574,8 +1562,8 @@
         "z": "b49183a3c7a702d0",
         "name": "",
         "events": "change",
-        "x": 1980,
-        "y": 980,
+        "x": 2300,
+        "y": 1060,
         "wires": [
             []
         ]
@@ -1600,8 +1588,8 @@
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 1510,
-        "y": 980,
+        "x": 1830,
+        "y": 1060,
         "wires": [
             [
                 "d4d4efa9f29aaa8f"
@@ -1619,8 +1607,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1760,
-        "y": 980,
+        "x": 2080,
+        "y": 1060,
         "wires": [
             [
                 "939691b393081d99"
@@ -1676,8 +1664,8 @@
         "z": "b49183a3c7a702d0",
         "name": "",
         "events": "change",
-        "x": 1980,
-        "y": 1040,
+        "x": 2300,
+        "y": 1120,
         "wires": [
             []
         ]
@@ -1702,8 +1690,8 @@
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 1500,
-        "y": 1040,
+        "x": 1820,
+        "y": 1120,
         "wires": [
             [
                 "29ac578ac258679f"
@@ -1721,8 +1709,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1760,
-        "y": 1040,
+        "x": 2080,
+        "y": 1120,
         "wires": [
             [
                 "ea88446edb51681c"
@@ -1735,8 +1723,8 @@
         "z": "b49183a3c7a702d0",
         "name": "",
         "events": "change",
-        "x": 1980,
-        "y": 1100,
+        "x": 2300,
+        "y": 1180,
         "wires": [
             []
         ]
@@ -1761,8 +1749,8 @@
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 1510,
-        "y": 1100,
+        "x": 1830,
+        "y": 1180,
         "wires": [
             [
                 "dc22232bc46e4b2e"
@@ -1780,8 +1768,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1760,
-        "y": 1100,
+        "x": 2080,
+        "y": 1180,
         "wires": [
             [
                 "20be3dfc9f1277a9"
@@ -1794,8 +1782,8 @@
         "z": "b49183a3c7a702d0",
         "name": "",
         "events": "change",
-        "x": 1980,
-        "y": 1160,
+        "x": 2300,
+        "y": 1240,
         "wires": [
             []
         ]
@@ -1820,8 +1808,8 @@
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 1530,
-        "y": 1160,
+        "x": 1850,
+        "y": 1240,
         "wires": [
             [
                 "44349448b3d23d9a"
@@ -1839,8 +1827,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1760,
-        "y": 1160,
+        "x": 2080,
+        "y": 1240,
         "wires": [
             [
                 "fc8b3d0b6c028ad0"
@@ -2148,8 +2136,8 @@
         "z": "b49183a3c7a702d0",
         "name": "",
         "events": "change",
-        "x": 2200,
-        "y": 860,
+        "x": 2360,
+        "y": 940,
         "wires": [
             []
         ]
@@ -2174,8 +2162,8 @@
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 1730,
-        "y": 800,
+        "x": 1890,
+        "y": 880,
         "wires": [
             [
                 "b1eb88c1c7e5ab52"
@@ -2193,8 +2181,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1980,
-        "y": 860,
+        "x": 2140,
+        "y": 940,
         "wires": [
             [
                 "65bd491f718c9887"
@@ -2221,8 +2209,8 @@
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 1730,
-        "y": 840,
+        "x": 1890,
+        "y": 920,
         "wires": [
             [
                 "b1eb88c1c7e5ab52"
@@ -2249,8 +2237,8 @@
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 1730,
-        "y": 880,
+        "x": 1890,
+        "y": 960,
         "wires": [
             [
                 "b1eb88c1c7e5ab52"
@@ -2277,13 +2265,81 @@
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 1730,
-        "y": 920,
+        "x": 1890,
+        "y": 1000,
         "wires": [
             [
                 "b1eb88c1c7e5ab52"
             ]
         ]
+    },
+    {
+        "id": "59274a9ad45fbe96",
+        "type": "debug",
+        "z": "b49183a3c7a702d0",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "53efec6f8133555b",
+        "type": "debug",
+        "z": "b49183a3c7a702d0",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "3bef7f82e660e29b",
+        "type": "debug",
+        "z": "b49183a3c7a702d0",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "e201baec1523f020",
+        "type": "debug",
+        "z": "b49183a3c7a702d0",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 640,
+        "wires": []
     },
     {
         "id": "dbdec0508173add5",
