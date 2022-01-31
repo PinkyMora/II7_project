@@ -72,11 +72,11 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
   Serial.println();
 
-  if ((String)topic=="II7/ESP32/FOTA"){
+  if (((String)topic=="II7/ESP32/FOTA") or ((String)topic=="II7/all/FOTA")){
     // instrucción de actualización independientemente del payload
     setup_OTA();          // llama la funcion de actualizacion FOTA
     lastFOTA = millis();
-  } else if ((String)topic=="II7/ESP32/config"){
+  } else if (((String)topic=="II7/ESP32/config") or ((String)topic=="II7/all/config")){
     // Parámetros configurables:
     // frec_actualiza_FOTA
 
