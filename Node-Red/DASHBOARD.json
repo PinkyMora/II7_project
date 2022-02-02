@@ -1,15 +1,15 @@
 [
     {
-        "id": "98c3ce0bb5f2b157",
+        "id": "b49183a3c7a702d0",
         "type": "tab",
         "label": "II7-ESPNOW",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "c6c51f467321d6b4",
+        "id": "980707e1aaddfdc3",
         "type": "mqtt in",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "topic": "II7/SensoresPlazas/EstadoPlazas",
         "qos": "2",
@@ -22,14 +22,32 @@
         "y": 440,
         "wires": [
             [
-                "69d6aded7b158795"
+                "3d5ccaaddbe720ed"
             ]
         ]
     },
     {
-        "id": "e73cb4ed590c082b",
+        "id": "b7c0a0d0a466ed40",
+        "type": "mqtt out",
+        "z": "b49183a3c7a702d0",
+        "name": "",
+        "topic": "II7/SensoresPlazas/config",
+        "qos": "",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "dbdec0508173add5",
+        "x": 1090,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "4e4e9571e4eeee7f",
         "type": "ui_slider",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "label": "Frec_FOTA",
         "tooltip": "",
@@ -49,14 +67,14 @@
         "y": 1960,
         "wires": [
             [
-                "9c3f221a7a571619"
+                "bccc0630b41dcaca"
             ]
         ]
     },
     {
-        "id": "911b5cbac9a8df6d",
+        "id": "c49a4a80d0f261b3",
         "type": "ui_slider",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "label": "Tiempo_Escucha",
         "tooltip": "",
@@ -76,14 +94,14 @@
         "y": 2040,
         "wires": [
             [
-                "ccb188916422ef99"
+                "b8e1e26d0ba66476"
             ]
         ]
     },
     {
-        "id": "7c5fdd4d13025bd0",
+        "id": "9bc8b3e814a10d0e",
         "type": "ui_led",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "order": 2,
         "group": "3cebbf1a9719e92c",
         "width": 0,
@@ -112,9 +130,9 @@
         "wires": []
     },
     {
-        "id": "9a60c853a811fd5e",
+        "id": "b80f987af7d46ce7",
         "type": "ui_gauge",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "group": "9b8b8e9de3adfd24",
         "order": 1,
@@ -139,9 +157,9 @@
         "wires": []
     },
     {
-        "id": "5086af8e09651cd3",
+        "id": "862c42e8f6eb50f0",
         "type": "ui_gauge",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "group": "e4977db5da3f7d79",
         "order": 1,
@@ -166,9 +184,9 @@
         "wires": []
     },
     {
-        "id": "faea4275535b78b7",
+        "id": "ae7539e0e74d5317",
         "type": "ui_chart",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "group": "e4977db5da3f7d79",
         "order": 2,
@@ -210,9 +228,9 @@
         ]
     },
     {
-        "id": "c7ed73fb80b6630b",
+        "id": "732b9f8661d47395",
         "type": "ui_chart",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "group": "9b8b8e9de3adfd24",
         "order": 2,
@@ -254,9 +272,9 @@
         ]
     },
     {
-        "id": "a298879fa46c4e1a",
+        "id": "27aa69c7b99d7044",
         "type": "change",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "Temperatura",
         "rules": [
             {
@@ -283,15 +301,15 @@
         "y": 300,
         "wires": [
             [
-                "5086af8e09651cd3",
-                "faea4275535b78b7"
+                "862c42e8f6eb50f0",
+                "ae7539e0e74d5317"
             ]
         ]
     },
     {
-        "id": "85b7e98b88e03646",
+        "id": "66f402460bb17c40",
         "type": "change",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "Humedad",
         "rules": [
             {
@@ -318,15 +336,15 @@
         "y": 400,
         "wires": [
             [
-                "9a60c853a811fd5e",
-                "c7ed73fb80b6630b"
+                "b80f987af7d46ce7",
+                "732b9f8661d47395"
             ]
         ]
     },
     {
-        "id": "21e15719086f7b8e",
+        "id": "7895c4b576b5b63c",
         "type": "change",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "Ocupado",
         "rules": [
             {
@@ -346,14 +364,14 @@
         "y": 540,
         "wires": [
             [
-                "7c5fdd4d13025bd0"
+                "9bc8b3e814a10d0e"
             ]
         ]
     },
     {
-        "id": "0cf29be6f33fadde",
+        "id": "ff225965034dea19",
         "type": "debug",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "Publicación",
         "active": false,
         "tosidebar": true,
@@ -364,13 +382,13 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1050,
-        "y": 2300,
+        "y": 2100,
         "wires": []
     },
     {
-        "id": "2d08d5ae47be55b2",
+        "id": "0665a9467db9d790",
         "type": "change",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "NumPlaza",
         "rules": [
             {
@@ -390,14 +408,14 @@
         "y": 480,
         "wires": [
             [
-                "487c1eb74aa5579e"
+                "17341739b3ddac32"
             ]
         ]
     },
     {
-        "id": "487c1eb74aa5579e",
+        "id": "17341739b3ddac32",
         "type": "ui_text",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "group": "3cebbf1a9719e92c",
         "order": 1,
         "width": 0,
@@ -412,9 +430,9 @@
         "wires": []
     },
     {
-        "id": "fd592e52d8c4a0eb",
+        "id": "3de44f9c366c826a",
         "type": "json",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "property": "payload",
         "action": "",
@@ -423,17 +441,15 @@
         "y": 2000,
         "wires": [
             [
-                "0cf29be6f33fadde",
-                "a194bb5e9e141603",
-                "d40c4946a844e80e",
-                "66b6f620e0653b61"
+                "b7c0a0d0a466ed40",
+                "ff225965034dea19"
             ]
         ]
     },
     {
-        "id": "ccff96c8b951150d",
+        "id": "26a023072ab68cc5",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "func": "msg.payload = JSON.stringify({Frec_FOTA:  msg.frecFota, Tiempo_Escucha: msg.tEscucha});\nreturn msg;",
         "outputs": 1,
@@ -445,14 +461,14 @@
         "y": 2000,
         "wires": [
             [
-                "fd592e52d8c4a0eb"
+                "3de44f9c366c826a"
             ]
         ]
     },
     {
-        "id": "ccb188916422ef99",
+        "id": "b8e1e26d0ba66476",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "func": "msg.tEscucha = msg.payload;\nreturn msg;",
         "outputs": 1,
@@ -464,14 +480,14 @@
         "y": 2040,
         "wires": [
             [
-                "ccff96c8b951150d"
+                "26a023072ab68cc5"
             ]
         ]
     },
     {
-        "id": "9c3f221a7a571619",
+        "id": "bccc0630b41dcaca",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "func": "msg.frecFota = msg.payload\nreturn msg;",
         "outputs": 1,
@@ -483,14 +499,14 @@
         "y": 1960,
         "wires": [
             [
-                "ccff96c8b951150d"
+                "26a023072ab68cc5"
             ]
         ]
     },
     {
-        "id": "46746dd2d3e75d6f",
+        "id": "61123bb4640c7d55",
         "type": "comment",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "Representación de datos de la plaza en Dashboard",
         "info": "",
         "x": 250,
@@ -498,9 +514,9 @@
         "wires": []
     },
     {
-        "id": "48a6d58d2e4e3cb4",
+        "id": "0efc7f62be0e2e2b",
         "type": "comment",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "Se publican parámetros de la configuración de la placa elegidos por el usuario en el dashboard",
         "info": "",
         "x": 380,
@@ -508,9 +524,9 @@
         "wires": []
     },
     {
-        "id": "751abecbcf84599b",
+        "id": "a119bd67979210a0",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "func": "msg.sort = {\"date\": -1}; // Ordena en orden descendente de más actual a menos\nreturn msg;",
         "outputs": 1,
@@ -522,14 +538,14 @@
         "y": 600,
         "wires": [
             [
-                "c5c7e61056be07e7"
+                "e8372f4bc9bc74c0"
             ]
         ]
     },
     {
-        "id": "9a4f26c4ed058b59",
+        "id": "8769def2a9709714",
         "type": "template",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "Lista en formato html",
         "field": "payload",
         "fieldType": "msg",
@@ -541,14 +557,14 @@
         "y": 600,
         "wires": [
             [
-                "c91825e3991eefe4"
+                "f4d418e1181afb4a"
             ]
         ]
     },
     {
-        "id": "c91825e3991eefe4",
+        "id": "f4d418e1181afb4a",
         "type": "ui_template",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "group": "3a9317165f2347fd",
         "name": "Datos Últimos Registros",
         "order": 1,
@@ -567,9 +583,9 @@
         ]
     },
     {
-        "id": "27caaac5621be831",
+        "id": "fa7ec08623a2d5c5",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "func": "msg.sort = {\"date\": -1}; // Ordena en orden descendente de más actual a menos\nmsg.limit = 1; // Limita la consulta a un objeto\nreturn msg;",
         "outputs": 1,
@@ -581,14 +597,14 @@
         "y": 220,
         "wires": [
             [
-                "b199ec6f76b833c4"
+                "873f32e53f60f338"
             ]
         ]
     },
     {
-        "id": "235ba9ea3a08a7dd",
+        "id": "e5583778efeea97b",
         "type": "template",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "Lista en formato html",
         "field": "payload",
         "fieldType": "msg",
@@ -600,14 +616,14 @@
         "y": 220,
         "wires": [
             [
-                "2012fcfe9ae3fec0"
+                "d3c3d106294cca4e"
             ]
         ]
     },
     {
-        "id": "2012fcfe9ae3fec0",
+        "id": "d3c3d106294cca4e",
         "type": "ui_template",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "group": "3bd19c569817da70",
         "name": "Datos Último Registro",
         "order": 2,
@@ -626,9 +642,9 @@
         ]
     },
     {
-        "id": "c5c7e61056be07e7",
+        "id": "e8372f4bc9bc74c0",
         "type": "mongodb in",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "mongodb": "17e1c16e7a1086e9",
         "name": "",
         "collection": "registro_estado_plazas",
@@ -637,14 +653,14 @@
         "y": 600,
         "wires": [
             [
-                "9a4f26c4ed058b59"
+                "8769def2a9709714"
             ]
         ]
     },
     {
-        "id": "b199ec6f76b833c4",
+        "id": "873f32e53f60f338",
         "type": "mongodb in",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "mongodb": "17e1c16e7a1086e9",
         "name": "",
         "collection": "registro_estado_plazas",
@@ -653,61 +669,61 @@
         "y": 220,
         "wires": [
             [
-                "05553d6a6bc7b23f",
-                "f43219eb43c136df"
+                "09f5192668d2bc20",
+                "73c12bf466c2664b"
             ]
         ]
     },
     {
-        "id": "69d6aded7b158795",
+        "id": "3d5ccaaddbe720ed",
         "type": "link out",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "links": [
             "b088120f683c8f36",
-            "fc9f4f5ffefface2",
-            "6cf261c3842053bb"
+            "3e26a6f8229fa603",
+            "0e0b173f12088eb0"
         ],
         "x": 295,
         "y": 440,
         "wires": []
     },
     {
-        "id": "fc9f4f5ffefface2",
+        "id": "3e26a6f8229fa603",
         "type": "link in",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "links": [
-            "69d6aded7b158795"
+            "3d5ccaaddbe720ed"
         ],
         "x": 355,
         "y": 600,
         "wires": [
             [
-                "751abecbcf84599b"
+                "a119bd67979210a0"
             ]
         ]
     },
     {
-        "id": "6cf261c3842053bb",
+        "id": "0e0b173f12088eb0",
         "type": "link in",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "links": [
-            "69d6aded7b158795"
+            "3d5ccaaddbe720ed"
         ],
         "x": 335,
         "y": 220,
         "wires": [
             [
-                "27caaac5621be831"
+                "fa7ec08623a2d5c5"
             ]
         ]
     },
     {
-        "id": "a8d67c3841580fda",
+        "id": "73518e384e3229cf",
         "type": "mongodb in",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "mongodb": "17e1c16e7a1086e9",
         "name": "",
         "collection": "registro_estado_plazas",
@@ -716,15 +732,15 @@
         "y": 740,
         "wires": [
             [
-                "d3204cea844ac39d",
-                "975086b99d82f5ee"
+                "2db1469e97a9ceec",
+                "59274a9ad45fbe96"
             ]
         ]
     },
     {
-        "id": "a6733bf4740f55ec",
+        "id": "ddc66e882bc26e4c",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "filtrado 24h",
         "func": "var ms_per_horas = 3600000; \n// obtiene el timestamp actual\nvar now_ms = new Date().getTime();\n// crear objeto fecha con la hora de hace un dia\nvar dayago = new Date(now_ms-24*ms_per_horas);\n\n\n// seleccionar con fecha posterior o igual a hace un día\nmsg.payload = {\"date\": {\"$gte\": dayago}};\nmsg.sort = {\"date\":1}; // ordenar por fecha\n\nreturn msg;",
         "outputs": 1,
@@ -736,15 +752,15 @@
         "y": 680,
         "wires": [
             [
-                "a8d67c3841580fda",
-                "0c9c6554f1cade53"
+                "73518e384e3229cf",
+                "e201baec1523f020"
             ]
         ]
     },
     {
-        "id": "fce9be54f223fc90",
+        "id": "bd85db3623bfd227",
         "type": "ui_template",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "group": "8f01ab2d282de717",
         "name": "Datos Registros Filtrados",
         "order": 2,
@@ -763,9 +779,9 @@
         ]
     },
     {
-        "id": "d3204cea844ac39d",
+        "id": "2db1469e97a9ceec",
         "type": "template",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "Lista en formato html",
         "field": "payload",
         "fieldType": "msg",
@@ -777,14 +793,14 @@
         "y": 740,
         "wires": [
             [
-                "fce9be54f223fc90"
+                "bd85db3623bfd227"
             ]
         ]
     },
     {
-        "id": "24bb7ce1f6af0e96",
+        "id": "6bb12ad28a5c4dda",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "filtrado Semana",
         "func": "var ms_per_week = 604800000;\n// obtiene el timestamp actual\nvar now_ms = new Date().getTime();\n// crea objeto fecha con la hora de hace una semana\nvar weekago = new Date(now_ms-ms_per_week);\n\n// seleccionar con fecha posterior o igual a hace una semana\nmsg.payload = {\"date\": {\"$gte\": weekago}};\nmsg.sort = {\"date\":1}; // ordenar por fecha\n\nreturn msg;",
         "outputs": 1,
@@ -796,15 +812,15 @@
         "y": 740,
         "wires": [
             [
-                "a8d67c3841580fda",
-                "161aeea910148522"
+                "73518e384e3229cf",
+                "3bef7f82e660e29b"
             ]
         ]
     },
     {
-        "id": "2f57e83255933efc",
+        "id": "b9d936fc3fa8f251",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "filtrado Mes",
         "func": "var ms_per_month = 2629750000;\n// obtiene el timestamp actual\nvar now_ms = new Date().getTime();\n// crea objeto fecha con la hora de hace un mes\nvar monthago = new Date(now_ms-ms_per_month);\n\n// seleccionar con fecha posterior o igual a hace un mes\nmsg.payload = {\"date\": {\"$gte\": monthago}};\nmsg.sort = {\"date\":1}; // ordenar por fecha\nreturn msg;",
         "outputs": 1,
@@ -816,15 +832,15 @@
         "y": 800,
         "wires": [
             [
-                "a8d67c3841580fda",
-                "1cd387918c34a1f6"
+                "73518e384e3229cf",
+                "53efec6f8133555b"
             ]
         ]
     },
     {
-        "id": "3f481245a33df1a9",
+        "id": "e392647401adfc7f",
         "type": "ui_button",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "group": "8f01ab2d282de717",
         "order": 1,
@@ -845,14 +861,14 @@
         "y": 680,
         "wires": [
             [
-                "a6733bf4740f55ec"
+                "ddc66e882bc26e4c"
             ]
         ]
     },
     {
-        "id": "c6bf81d9b6f0e6fd",
+        "id": "5e01689fbb0323c4",
         "type": "ui_button",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "group": "8f01ab2d282de717",
         "order": 1,
@@ -873,14 +889,14 @@
         "y": 740,
         "wires": [
             [
-                "24bb7ce1f6af0e96"
+                "6bb12ad28a5c4dda"
             ]
         ]
     },
     {
-        "id": "0a41784983cff56f",
+        "id": "2d02f9809c8362c4",
         "type": "ui_button",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "group": "8f01ab2d282de717",
         "order": 1,
@@ -901,115 +917,115 @@
         "y": 800,
         "wires": [
             [
-                "2f57e83255933efc"
+                "b9d936fc3fa8f251"
             ]
         ]
     },
     {
-        "id": "05553d6a6bc7b23f",
+        "id": "09f5192668d2bc20",
         "type": "link out",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "links": [
-            "9d48556ebbac1a85",
-            "05039190f36b47b7",
-            "1f8ce48cbfdfc856",
-            "5850c48dcec9aa7b",
-            "fa87987893ffdd36"
+            "9acbcc26452c5d80",
+            "11a379e22774c132",
+            "20c93f346778867a",
+            "0b5ea0e785a7eb45",
+            "d8ad081582be883f"
         ],
         "x": 995,
         "y": 220,
         "wires": []
     },
     {
-        "id": "9d48556ebbac1a85",
+        "id": "9acbcc26452c5d80",
         "type": "link in",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "links": [
-            "05553d6a6bc7b23f",
+            "09f5192668d2bc20",
             "c5e0bab77efb39be"
         ],
         "x": 1095,
         "y": 220,
         "wires": [
             [
-                "235ba9ea3a08a7dd"
+                "e5583778efeea97b"
             ]
         ]
     },
     {
-        "id": "05039190f36b47b7",
+        "id": "11a379e22774c132",
         "type": "link in",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "links": [
-            "05553d6a6bc7b23f",
+            "09f5192668d2bc20",
             "c5e0bab77efb39be"
         ],
         "x": 1095,
         "y": 540,
         "wires": [
             [
-                "21e15719086f7b8e"
+                "7895c4b576b5b63c"
             ]
         ]
     },
     {
-        "id": "1f8ce48cbfdfc856",
+        "id": "20c93f346778867a",
         "type": "link in",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "links": [
-            "05553d6a6bc7b23f",
+            "09f5192668d2bc20",
             "c5e0bab77efb39be"
         ],
         "x": 1095,
         "y": 480,
         "wires": [
             [
-                "2d08d5ae47be55b2"
+                "0665a9467db9d790"
             ]
         ]
     },
     {
-        "id": "5850c48dcec9aa7b",
+        "id": "0b5ea0e785a7eb45",
         "type": "link in",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "links": [
-            "05553d6a6bc7b23f",
+            "09f5192668d2bc20",
             "c5e0bab77efb39be"
         ],
         "x": 1095,
         "y": 400,
         "wires": [
             [
-                "85b7e98b88e03646"
+                "66f402460bb17c40"
             ]
         ]
     },
     {
-        "id": "fa87987893ffdd36",
+        "id": "d8ad081582be883f",
         "type": "link in",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "links": [
-            "05553d6a6bc7b23f",
+            "09f5192668d2bc20",
             "c5e0bab77efb39be"
         ],
         "x": 1095,
         "y": 300,
         "wires": [
             [
-                "a298879fa46c4e1a"
+                "27aa69c7b99d7044"
             ]
         ]
     },
     {
-        "id": "f43219eb43c136df",
+        "id": "73c12bf466c2664b",
         "type": "debug",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -1018,14 +1034,14 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1080,
-        "y": 80,
+        "x": 1050,
+        "y": 100,
         "wires": []
     },
     {
-        "id": "a5d41b1417084ad5",
+        "id": "2430d0c774689309",
         "type": "inject",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "props": [
             {
@@ -1047,15 +1063,15 @@
         "y": 280,
         "wires": [
             [
-                "27caaac5621be831",
-                "751abecbcf84599b"
+                "fa7ec08623a2d5c5",
+                "a119bd67979210a0"
             ]
         ]
     },
     {
-        "id": "b893dc101ecfdbe3",
+        "id": "5a618bba37e0fbfa",
         "type": "http response",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "statusCode": "",
         "headers": {
@@ -1066,9 +1082,9 @@
         "wires": []
     },
     {
-        "id": "f00a0e2b988b1d7b",
+        "id": "7f6fbdb877ccfb47",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "Unicode y separador",
         "func": "//add Unicode BOM character (byte order mark) to make EXCEL knows this is UTF-8\nif(global.get(\"separador_decimal\")==\"punto\")\n{\n    msg.payload='\\ufeff'+msg.payload;\n\n}\nelse\n{\n    msg.payload='\\ufeff'+(msg.payload).replace(/\\./g,\",\");\n}\nreturn msg;",
         "outputs": 1,
@@ -1080,14 +1096,14 @@
         "y": 1362.9999866485596,
         "wires": [
             [
-                "b893dc101ecfdbe3"
+                "5a618bba37e0fbfa"
             ]
         ]
     },
     {
-        "id": "34562be1ee772511",
+        "id": "39feb47ad79622d8",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "consulta",
         "func": "// fecha por defecto es hoy\nvar ahora = new Date();\n// pillo los globales si los hay, si no la fecha de hoy\nvar desde = new Date(global.get(\"desde\") || ahora);\nvar hasta = new Date(global.get(\"hasta\") || ahora); \n// el día de inicio desde las cero horas\nvar inicio = new Date(desde.getFullYear(),desde.getMonth(),desde.getDate(),0,0,0,0);\n// el día final es hasta final del día\nvar final = new Date(hasta.getFullYear(),hasta.getMonth(),hasta.getDate(),23,59,59,999);\n\nmsg.payload=\n[\n    { \"$match\": { \"date\": { \"$gte\": inicio , \"$lte\": final } } },\n    { \"$project\": {\n        \"_id\": 0,\n        \"date\": 1,\n        \"Temperatura\": \"$DHT11.Temperatura\",\n        \"Humedad\": \"$DHT11.Humedad\",\n        \"NumPlaza\": \"$NumPlaza\",\n        \"Ocupado\" : \"$Ocupado\"\n        }\n    },\n    { \"$sort\": {\"date\": 1} }\n];\n\nreturn msg;",
         "outputs": 1,
@@ -1099,14 +1115,14 @@
         "y": 1360,
         "wires": [
             [
-                "355c8709db28ca45"
+                "da37d470ea584f93"
             ]
         ]
     },
     {
-        "id": "5801e1979c2fc08e",
+        "id": "ca9e70e30e1841a9",
         "type": "http in",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "url": "/registros",
         "method": "get",
@@ -1116,14 +1132,14 @@
         "y": 1362.9999866485596,
         "wires": [
             [
-                "34562be1ee772511"
+                "39feb47ad79622d8"
             ]
         ]
     },
     {
-        "id": "6b35227aee621d42",
+        "id": "aee6d1d0f7fab891",
         "type": "ui_template",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "group": "0e650c3d27546fe5",
         "name": "",
         "order": 3,
@@ -1142,9 +1158,9 @@
         ]
     },
     {
-        "id": "0b9d14e55ff238ca",
+        "id": "7b21f79ae81310bf",
         "type": "csv",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "sep": ";",
         "hdrin": "",
@@ -1160,14 +1176,14 @@
         "y": 1362.999963760376,
         "wires": [
             [
-                "f00a0e2b988b1d7b"
+                "7f6fbdb877ccfb47"
             ]
         ]
     },
     {
-        "id": "f3fa455afff22c3c",
+        "id": "8221d9fed40df804",
         "type": "ui_switch",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "separdor decimal",
         "label": "{{msg.topic}}",
         "tooltip": "",
@@ -1194,14 +1210,14 @@
         "y": 1820,
         "wires": [
             [
-                "5d77f5220c41a693"
+                "d7d910da76d9607e"
             ]
         ]
     },
     {
-        "id": "017afb7d0ae3ea67",
+        "id": "bf84d01359406c7b",
         "type": "inject",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "repeat": "",
         "crontab": "",
@@ -1214,14 +1230,14 @@
         "y": 1730.8889408111572,
         "wires": [
             [
-                "5d77f5220c41a693"
+                "d7d910da76d9607e"
             ]
         ]
     },
     {
-        "id": "5d77f5220c41a693",
+        "id": "d7d910da76d9607e",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "set global separador_decimal",
         "func": "if(msg.payload===true)\n{\n    global.set(\"separador_decimal\",\"coma\");\n    msg.topic=\"separador decimal = coma\";\n}\nelse\n{\n    global.set(\"separador_decimal\",\"punto\");\n    msg.topic=\"separador decimal = punto\";\n}\nreturn msg;",
         "outputs": 1,
@@ -1233,14 +1249,14 @@
         "y": 1731.5963134765625,
         "wires": [
             [
-                "f3fa455afff22c3c"
+                "8221d9fed40df804"
             ]
         ]
     },
     {
-        "id": "d4fb7bdce852478d",
+        "id": "5eb88a9a48fbd650",
         "type": "ui_date_picker",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "label": "Fecha inicio",
         "group": "0e650c3d27546fe5",
@@ -1255,14 +1271,14 @@
         "y": 1558.7330231666565,
         "wires": [
             [
-                "5a8e4ea662b833b8"
+                "8081c9fb17d3905e"
             ]
         ]
     },
     {
-        "id": "ed1e81d21f77d933",
+        "id": "a194a5b5b670a65a",
         "type": "ui_date_picker",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "label": "Fecha final",
         "group": "0e650c3d27546fe5",
@@ -1277,14 +1293,14 @@
         "y": 1607.7272605895996,
         "wires": [
             [
-                "426ddc5d09dcc917"
+                "86e83e5cd6ee7ba0"
             ]
         ]
     },
     {
-        "id": "5a8e4ea662b833b8",
+        "id": "8081c9fb17d3905e",
         "type": "change",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "rules": [
             {
@@ -1307,9 +1323,9 @@
         ]
     },
     {
-        "id": "426ddc5d09dcc917",
+        "id": "86e83e5cd6ee7ba0",
         "type": "change",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "rules": [
             {
@@ -1332,9 +1348,9 @@
         ]
     },
     {
-        "id": "060dd49c96b60f4c",
+        "id": "4a24c4dd72963c99",
         "type": "inject",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "repeat": "",
         "crontab": "",
@@ -1347,15 +1363,15 @@
         "y": 1583.1534633636475,
         "wires": [
             [
-                "d4fb7bdce852478d",
-                "ed1e81d21f77d933"
+                "5eb88a9a48fbd650",
+                "a194a5b5b670a65a"
             ]
         ]
     },
     {
-        "id": "63f6dc42661686fa",
+        "id": "d43ed5c2bf85fea0",
         "type": "comment",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "Controles para seleccionar fechas",
         "info": "",
         "x": 272.7897605895996,
@@ -1363,9 +1379,9 @@
         "wires": []
     },
     {
-        "id": "3310f4bf14536b88",
+        "id": "d80b8c2e863cee5c",
         "type": "comment",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "Botón en HTML para lanzar descarga de fichero",
         "info": "",
         "x": 319.78977966308594,
@@ -1373,9 +1389,9 @@
         "wires": []
     },
     {
-        "id": "071de2c3987a680a",
+        "id": "002c7458b2a3f60d",
         "type": "comment",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "Flujo para descarga de fichero",
         "info": "",
         "x": 262.0142059326172,
@@ -1383,9 +1399,9 @@
         "wires": []
     },
     {
-        "id": "e0628571b5277e1e",
+        "id": "c8c2105ab829e224",
         "type": "comment",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "Selector de separador decimal",
         "info": "",
         "x": 269.0141906738281,
@@ -1393,9 +1409,9 @@
         "wires": []
     },
     {
-        "id": "355c8709db28ca45",
+        "id": "da37d470ea584f93",
         "type": "mongodb in",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "mongodb": "17e1c16e7a1086e9",
         "name": "",
         "collection": "registro_estado_plazas",
@@ -1404,14 +1420,14 @@
         "y": 1360,
         "wires": [
             [
-                "0b9d14e55ff238ca"
+                "7b21f79ae81310bf"
             ]
         ]
     },
     {
-        "id": "92df17115a943e44",
+        "id": "2d227e1abd0dd769",
         "type": "ui_button",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "group": "3065d767bf05f5b5",
         "order": 3,
@@ -1432,14 +1448,14 @@
         "y": 920,
         "wires": [
             [
-                "c862619112658269"
+                "eedd49c769902bb8"
             ]
         ]
     },
     {
-        "id": "976fcee6c496fd8f",
+        "id": "1b9aecd141fbdb12",
         "type": "mqtt out",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "topic": "II7/Entrada/BarreraCMD",
         "qos": "",
@@ -1455,9 +1471,9 @@
         "wires": []
     },
     {
-        "id": "528623dbe371d0e5",
+        "id": "489bcb5a74aa111f",
         "type": "ui_button",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "group": "3065d767bf05f5b5",
         "order": 4,
@@ -1478,14 +1494,14 @@
         "y": 980,
         "wires": [
             [
-                "a5e00d8adebed1bf"
+                "194c7585f0fca29c"
             ]
         ]
     },
     {
-        "id": "c862619112658269",
+        "id": "eedd49c769902bb8",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "SUBIR",
         "func": "msg.payload = {}\nmsg.payload.comando= \"subir\";\nreturn msg;",
         "outputs": 1,
@@ -1497,14 +1513,14 @@
         "y": 920,
         "wires": [
             [
-                "976fcee6c496fd8f"
+                "1b9aecd141fbdb12"
             ]
         ]
     },
     {
-        "id": "a5e00d8adebed1bf",
+        "id": "194c7585f0fca29c",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "BAJAR",
         "func": "msg.payload = {}\nmsg.payload.comando= \"bajar\";\nreturn msg;",
         "outputs": 1,
@@ -1516,14 +1532,14 @@
         "y": 980,
         "wires": [
             [
-                "976fcee6c496fd8f"
+                "1b9aecd141fbdb12"
             ]
         ]
     },
     {
-        "id": "eb57529b7f6a87fd",
+        "id": "57519547c9f90266",
         "type": "mqtt in",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "topic": "II7/Entrada/BarreraEstado",
         "qos": "2",
@@ -1536,14 +1552,14 @@
         "y": 1040,
         "wires": [
             [
-                "eab69f326c8641d7"
+                "4d14ac040f63923e"
             ]
         ]
     },
     {
-        "id": "0369d3effe4e1943",
+        "id": "939691b393081d99",
         "type": "ui_ui_control",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "events": "change",
         "x": 2300,
@@ -1553,9 +1569,9 @@
         ]
     },
     {
-        "id": "4571ac86552b4305",
+        "id": "2d31bbd03b65035c",
         "type": "ui_button",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "group": "0960d7a0c6e6d08f",
         "order": 4,
@@ -1576,14 +1592,14 @@
         "y": 1060,
         "wires": [
             [
-                "1c0bc59b78095b76"
+                "d4d4efa9f29aaa8f"
             ]
         ]
     },
     {
-        "id": "1c0bc59b78095b76",
+        "id": "d4d4efa9f29aaa8f",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "func": "msg.payload = {\"tab\":\"Entrada\"}\nreturn msg;",
         "outputs": 1,
@@ -1595,14 +1611,14 @@
         "y": 1060,
         "wires": [
             [
-                "0369d3effe4e1943"
+                "939691b393081d99"
             ]
         ]
     },
     {
-        "id": "074966b389d78496",
+        "id": "8096519f6a446ae5",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "func": "var estado = msg.payload[0].payload.estado;\n\nmsg.payload = {};\nif (estado == \"bajado\")\n    msg.payload= {\n        \"category\": \"BARRERABAJADA\", \n        \"name\": \"photo6026011293393205026.jpg\"\n    };\nelse \n    msg.payload= {\n        \"category\": \"BARRERASUBIDA\", \n        \"name\": \"photo6026011293393205025.jpg\"\n    };\nreturn msg;",
         "outputs": 1,
@@ -1614,15 +1630,15 @@
         "y": 1040,
         "wires": [
             [
-                "8098f269de4bdad5",
-                "87880d3d3626add9"
+                "4207f3c1b1d48fd8",
+                "04c88387c0693264"
             ]
         ]
     },
     {
-        "id": "8098f269de4bdad5",
+        "id": "4207f3c1b1d48fd8",
         "type": "ui_media",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "group": "f49b27b85aa2aecc",
         "name": "",
         "width": 0,
@@ -1643,9 +1659,9 @@
         ]
     },
     {
-        "id": "e6974b49c129d3af",
+        "id": "ea88446edb51681c",
         "type": "ui_ui_control",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "events": "change",
         "x": 2300,
@@ -1655,9 +1671,9 @@
         ]
     },
     {
-        "id": "b91c4ea5bfcf2fa4",
+        "id": "48a92b037429ade2",
         "type": "ui_button",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "group": "0960d7a0c6e6d08f",
         "order": 4,
@@ -1678,14 +1694,14 @@
         "y": 1120,
         "wires": [
             [
-                "d51cb902f2eea31e"
+                "29ac578ac258679f"
             ]
         ]
     },
     {
-        "id": "d51cb902f2eea31e",
+        "id": "29ac578ac258679f",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "func": "msg.payload = {\"tab\":\"Plazas\"}\nreturn msg;",
         "outputs": 1,
@@ -1697,14 +1713,14 @@
         "y": 1120,
         "wires": [
             [
-                "e6974b49c129d3af"
+                "ea88446edb51681c"
             ]
         ]
     },
     {
-        "id": "837928aaf084f12d",
+        "id": "20be3dfc9f1277a9",
         "type": "ui_ui_control",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "events": "change",
         "x": 2300,
@@ -1714,9 +1730,9 @@
         ]
     },
     {
-        "id": "9eb973a18fdd1fbc",
+        "id": "337b5791e5612aa5",
         "type": "ui_button",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "group": "0960d7a0c6e6d08f",
         "order": 4,
@@ -1737,14 +1753,14 @@
         "y": 1180,
         "wires": [
             [
-                "70ddb70dc9b83b1d"
+                "dc22232bc46e4b2e"
             ]
         ]
     },
     {
-        "id": "70ddb70dc9b83b1d",
+        "id": "dc22232bc46e4b2e",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "func": "msg.payload = {\"tab\":\"Registros\"}\nreturn msg;",
         "outputs": 1,
@@ -1756,14 +1772,14 @@
         "y": 1180,
         "wires": [
             [
-                "837928aaf084f12d"
+                "20be3dfc9f1277a9"
             ]
         ]
     },
     {
-        "id": "c9e0055c84c508f5",
+        "id": "fc8b3d0b6c028ad0",
         "type": "ui_ui_control",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "events": "change",
         "x": 2300,
@@ -1773,9 +1789,9 @@
         ]
     },
     {
-        "id": "b1119169f71752c0",
+        "id": "c2e10eba142024d5",
         "type": "ui_button",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "group": "0960d7a0c6e6d08f",
         "order": 4,
@@ -1796,14 +1812,14 @@
         "y": 1240,
         "wires": [
             [
-                "0161992155cfc223"
+                "44349448b3d23d9a"
             ]
         ]
     },
     {
-        "id": "0161992155cfc223",
+        "id": "44349448b3d23d9a",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "func": "msg.payload = {\"tab\":\"Configuración\"}\nreturn msg;",
         "outputs": 1,
@@ -1815,14 +1831,14 @@
         "y": 1240,
         "wires": [
             [
-                "c9e0055c84c508f5"
+                "fc8b3d0b6c028ad0"
             ]
         ]
     },
     {
-        "id": "04f7461b0df0f6b9",
+        "id": "01e929b37a8da169",
         "type": "mongodb in",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "mongodb": "17e1c16e7a1086e9",
         "name": "",
         "collection": "registro_barrera_entrada",
@@ -1831,15 +1847,15 @@
         "y": 1040,
         "wires": [
             [
-                "074966b389d78496",
-                "b2676d20e69637c6"
+                "8096519f6a446ae5",
+                "55ae66fdeafa6550"
             ]
         ]
     },
     {
-        "id": "eab69f326c8641d7",
+        "id": "4d14ac040f63923e",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "func": "msg.sort = {\"payload.date\": -1}; // Ordena en orden descendente de más actual a menos\nmsg.limit = 1; // Limita la consulta a un objeto\nreturn msg;",
         "outputs": 1,
@@ -1851,14 +1867,14 @@
         "y": 1040,
         "wires": [
             [
-                "04f7461b0df0f6b9"
+                "01e929b37a8da169"
             ]
         ]
     },
     {
-        "id": "b2676d20e69637c6",
+        "id": "55ae66fdeafa6550",
         "type": "debug",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -1873,9 +1889,9 @@
         "wires": []
     },
     {
-        "id": "d8a6329bac6b5668",
+        "id": "cbae436c5c9ffc66",
         "type": "inject",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "props": [
             {
@@ -1897,14 +1913,14 @@
         "y": 1140,
         "wires": [
             [
-                "eab69f326c8641d7"
+                "4d14ac040f63923e"
             ]
         ]
     },
     {
-        "id": "87880d3d3626add9",
+        "id": "04c88387c0693264",
         "type": "debug",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -1919,9 +1935,9 @@
         "wires": []
     },
     {
-        "id": "ec94a8dfdae79b45",
+        "id": "336af012dea94209",
         "type": "ui_text",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "group": "25a568d686b7c56c",
         "order": 1,
         "width": 0,
@@ -1931,14 +1947,14 @@
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "className": "",
-        "x": 2020,
-        "y": 1420,
+        "x": 2120,
+        "y": 1440,
         "wires": []
     },
     {
-        "id": "d739fbb073ffbfc0",
+        "id": "f4a9c14d934a636d",
         "type": "ui_text",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "group": "25a568d686b7c56c",
         "order": 1,
         "width": 0,
@@ -1948,92 +1964,71 @@
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "className": "",
-        "x": 2020,
-        "y": 1480,
+        "x": 2120,
+        "y": 1500,
         "wires": []
     },
     {
-        "id": "0410918b753223a7",
-        "type": "ui_template",
-        "z": "98c3ce0bb5f2b157",
-        "group": "25a568d686b7c56c",
-        "name": "",
-        "order": 5,
-        "width": 0,
-        "height": 0,
-        "format": "<img src=\"/192.168.127.108/capture\" />",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "resendOnRefresh": true,
-        "templateScope": "local",
-        "className": "",
-        "x": 1980,
-        "y": 1560,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "292cc3859d54a372",
+        "id": "14f7003631487faa",
         "type": "mongodb in",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "mongodb": "17e1c16e7a1086e9",
         "name": "",
         "collection": "registro_matriculas_entrada",
         "operation": "find",
-        "x": 1500,
-        "y": 1480,
+        "x": 1600,
+        "y": 1500,
         "wires": [
             [
-                "1986bb8f5635d0c5",
-                "95562af986b2f496",
-                "9aee42bf0e9e03bb"
+                "8b9117651f7c984b",
+                "bb887283899aa98d",
+                "e5a7358196deae5b"
             ]
         ]
     },
     {
-        "id": "93af967f6399ed9d",
+        "id": "516c74965e3d1cf0",
         "type": "mqtt in",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
-        "topic": "II7/Entrada/BotonPulsado",
+        "topic": "II7/Entrada/Pulsador",
         "qos": "2",
         "datatype": "auto",
         "broker": "dbdec0508173add5",
         "nl": false,
         "rap": true,
         "rh": 0,
-        "x": 980,
-        "y": 1480,
+        "x": 810,
+        "y": 1500,
         "wires": [
             [
-                "aa16953d0e7f2428"
+                "2c22bb49f2214e54"
             ]
         ]
     },
     {
-        "id": "aa16953d0e7f2428",
+        "id": "90d68b710d72c6c6",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
-        "func": "msg.sort = {\"date\": -1}; // Ordena en orden descendente de más actual a menos\nmsg.limit = 1; // Limita la consulta a un objeto\nreturn msg;",
+        "func": "msg.sort = {\"payload.date\": -1}; // Ordena en orden descendente de más actual a menos\nmsg.limit = 1; // Limita la consulta a un objeto\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1200,
-        "y": 1480,
+        "x": 1300,
+        "y": 1500,
         "wires": [
             [
-                "292cc3859d54a372"
+                "14f7003631487faa"
             ]
         ]
     },
     {
-        "id": "1986bb8f5635d0c5",
+        "id": "8b9117651f7c984b",
         "type": "debug",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -2043,14 +2038,14 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1840,
-        "y": 1660,
+        "x": 1940,
+        "y": 1680,
         "wires": []
     },
     {
-        "id": "8e91b9352cf0810a",
+        "id": "a255affce866eb3d",
         "type": "inject",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "props": [
             {
@@ -2068,18 +2063,18 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 1030,
-        "y": 1560,
+        "x": 900,
+        "y": 1700,
         "wires": [
             [
-                "aa16953d0e7f2428"
+                "90d68b710d72c6c6"
             ]
         ]
     },
     {
-        "id": "95562af986b2f496",
+        "id": "bb887283899aa98d",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "func": "msg.payload = msg.payload[0].payload.matricula;\nreturn msg;",
         "outputs": 1,
@@ -2087,37 +2082,37 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1840,
-        "y": 1420,
+        "x": 1940,
+        "y": 1440,
         "wires": [
             [
-                "ec94a8dfdae79b45"
+                "336af012dea94209"
             ]
         ]
     },
     {
-        "id": "9aee42bf0e9e03bb",
+        "id": "e5a7358196deae5b",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
-        "func": "msg.payload = msg.payload[0].payload.date;\nreturn msg;",
+        "func": "fecha = new Date();\nmsg.payload= fecha.toLocaleString('es-ES', { timeZone: 'Europe/Madrid', hour12: false });\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1820,
-        "y": 1480,
+        "x": 1920,
+        "y": 1500,
         "wires": [
             [
-                "d739fbb073ffbfc0"
+                "f4a9c14d934a636d"
             ]
         ]
     },
     {
-        "id": "729f2a2509c240b1",
+        "id": "65bd491f718c9887",
         "type": "ui_ui_control",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "events": "change",
         "x": 2360,
@@ -2127,9 +2122,9 @@
         ]
     },
     {
-        "id": "4ce3be3bebb3399c",
+        "id": "4224f34a92046db2",
         "type": "ui_button",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "group": "c9f2a6c2d76e40b6",
         "order": 4,
@@ -2150,14 +2145,14 @@
         "y": 880,
         "wires": [
             [
-                "5897131a7fd22067"
+                "b1eb88c1c7e5ab52"
             ]
         ]
     },
     {
-        "id": "5897131a7fd22067",
+        "id": "b1eb88c1c7e5ab52",
         "type": "function",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "func": "msg.payload = {\"tab\":\"Parking\"}\nreturn msg;",
         "outputs": 1,
@@ -2169,14 +2164,14 @@
         "y": 940,
         "wires": [
             [
-                "729f2a2509c240b1"
+                "65bd491f718c9887"
             ]
         ]
     },
     {
-        "id": "52fdf4653991029f",
+        "id": "3610735dbc1622ea",
         "type": "ui_button",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "group": "68344837084a0c01",
         "order": 4,
@@ -2197,14 +2192,14 @@
         "y": 920,
         "wires": [
             [
-                "5897131a7fd22067"
+                "b1eb88c1c7e5ab52"
             ]
         ]
     },
     {
-        "id": "da968a1c60e785f8",
+        "id": "0984e54637c33b6a",
         "type": "ui_button",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "group": "c90548166402c440",
         "order": 4,
@@ -2225,14 +2220,14 @@
         "y": 960,
         "wires": [
             [
-                "5897131a7fd22067"
+                "b1eb88c1c7e5ab52"
             ]
         ]
     },
     {
-        "id": "ee14aa8c792e8ab1",
+        "id": "98a80cb6a5071534",
         "type": "ui_button",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "group": "55fba5c46f4f4433",
         "order": 4,
@@ -2253,14 +2248,14 @@
         "y": 1000,
         "wires": [
             [
-                "5897131a7fd22067"
+                "b1eb88c1c7e5ab52"
             ]
         ]
     },
     {
-        "id": "975086b99d82f5ee",
+        "id": "59274a9ad45fbe96",
         "type": "debug",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -2275,9 +2270,9 @@
         "wires": []
     },
     {
-        "id": "1cd387918c34a1f6",
+        "id": "53efec6f8133555b",
         "type": "debug",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -2292,9 +2287,9 @@
         "wires": []
     },
     {
-        "id": "161aeea910148522",
+        "id": "3bef7f82e660e29b",
         "type": "debug",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -2309,9 +2304,9 @@
         "wires": []
     },
     {
-        "id": "0c9c6554f1cade53",
+        "id": "e201baec1523f020",
         "type": "debug",
-        "z": "98c3ce0bb5f2b157",
+        "z": "b49183a3c7a702d0",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -2326,58 +2321,28 @@
         "wires": []
     },
     {
-        "id": "d40c4946a844e80e",
-        "type": "mqtt out",
-        "z": "98c3ce0bb5f2b157",
+        "id": "2c22bb49f2214e54",
+        "type": "delay",
+        "z": "b49183a3c7a702d0",
         "name": "",
-        "topic": "II7/SensoresPlazas/config",
-        "qos": "",
-        "retain": "true",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "dbdec0508173add5",
-        "x": 1150,
-        "y": 2060,
-        "wires": []
-    },
-    {
-        "id": "a194bb5e9e141603",
-        "type": "mqtt out",
-        "z": "98c3ce0bb5f2b157",
-        "name": "",
-        "topic": "II7/Entrada/config",
-        "qos": "",
-        "retain": "true",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "dbdec0508173add5",
-        "x": 1130,
-        "y": 2000,
-        "wires": []
-    },
-    {
-        "id": "66b6f620e0653b61",
-        "type": "mqtt out",
-        "z": "98c3ce0bb5f2b157",
-        "name": "",
-        "topic": "II7/ESP32/config",
-        "qos": "",
-        "retain": "true",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "dbdec0508173add5",
-        "x": 1130,
-        "y": 2120,
-        "wires": []
+        "pauseType": "delay",
+        "timeout": "6",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "x": 1060,
+        "y": 1500,
+        "wires": [
+            [
+                "90d68b710d72c6c6"
+            ]
+        ]
     },
     {
         "id": "dbdec0508173add5",
