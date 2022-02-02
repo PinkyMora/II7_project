@@ -67,7 +67,7 @@
         "type": "debug",
         "z": "aa2bc7e70c7b1ca2",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -85,7 +85,7 @@
         "method": "GET",
         "ret": "bin",
         "paytoqs": "ignore",
-        "url": "http://192.168.127.108/capture",
+        "url": "http://192.168.1.107/capture",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -230,7 +230,7 @@
         "type": "debug",
         "z": "aa2bc7e70c7b1ca2",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -315,25 +315,13 @@
         "wires": []
     },
     {
-        "id": "ade21a14d5e67cb7",
-        "type": "link in",
-        "z": "aa2bc7e70c7b1ca2",
-        "name": "PideFoto",
-        "links": [],
-        "x": 255,
-        "y": 280,
-        "wires": [
-            [
-                "9e2c9295.7f9a9"
-            ]
-        ]
-    },
-    {
         "id": "7c37e8c04f545a4d",
         "type": "link out",
         "z": "aa2bc7e70c7b1ca2",
         "name": "DevuelveFoto",
-        "links": [],
+        "links": [
+            "51397c01a1fccf20"
+        ],
         "x": 625,
         "y": 140,
         "wires": []
@@ -344,7 +332,8 @@
         "z": "aa2bc7e70c7b1ca2",
         "name": "matriculaObjeto",
         "links": [
-            "37ec769237f6934b"
+            "37ec769237f6934b",
+            "47bd5270819e5eba"
         ],
         "x": 915,
         "y": 200,
@@ -467,8 +456,7 @@
         "y": 1180,
         "wires": [
             [
-                "8a3b85255a89b4c0",
-                "f1e8a82e8cb904a1"
+                "d5cfb83b85c8902b"
             ]
         ]
     },
@@ -483,7 +471,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 560,
+        "x": 680,
         "y": 1180,
         "wires": [
             [
@@ -498,11 +486,11 @@
         "mongodb": "17e1c16e7a1086e9",
         "name": "",
         "collection": "registro_estado_plazas",
-        "payonly": false,
+        "payonly": true,
         "upsert": false,
         "multi": false,
         "operation": "store",
-        "x": 860,
+        "x": 960,
         "y": 1180,
         "wires": []
     },
@@ -614,14 +602,14 @@
         "type": "debug",
         "z": "aa2bc7e70c7b1ca2",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 470,
+        "x": 630,
         "y": 1220,
         "wires": []
     },
@@ -631,9 +619,9 @@
         "z": "aa2bc7e70c7b1ca2",
         "mongodb": "17e1c16e7a1086e9",
         "name": "",
-        "collection": "registro_estado_plazas",
+        "collection": "registro_matriculas_entrada",
         "operation": "find",
-        "x": 500,
+        "x": 520,
         "y": 1440,
         "wires": [
             [
@@ -691,6 +679,23 @@
         "x": 260,
         "y": 1000,
         "wires": []
+    },
+    {
+        "id": "d5cfb83b85c8902b",
+        "type": "json",
+        "z": "aa2bc7e70c7b1ca2",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 480,
+        "y": 1180,
+        "wires": [
+            [
+                "8a3b85255a89b4c0",
+                "f1e8a82e8cb904a1"
+            ]
+        ]
     },
     {
         "id": "7324406cf4d4e550",

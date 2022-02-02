@@ -25,7 +25,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "mensaje bienvenida",
-        "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"Hola soy el bot del grupo 7 de Informática Industrial. Puedo responderte a estos comandos:\\n/start\\n/ultregsensores\\n/ultentrada\\n/subirbarrera\\n/bajarbarrera\\n/regmatriculas\\n/plazasOcupadas\\n/plazasLibres\\n/temp_hum_Parking\\n/frecFOTA\\n/camara_ahora\";\n return msg;\n}",
+        "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"Hola soy el bot del grupo 7 de Informática Industrial. Puedo responderte a estos comandos:\\n/start\\n/ultregsensores\\n/ultentrada\\n/subirbarrera\\n/bajarbarrera\\n/plazasOcupadas\\n/plazasLibres\\n/temp_hum_Parking\\n/frecFOTA\\n/camara_ahora\";\n return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -255,41 +255,6 @@
         "wires": []
     },
     {
-        "id": "8da03c7bb0ec7913",
-        "type": "comment",
-        "z": "33676dab1b5dbc95",
-        "name": "MANDAR LA CAPTURA QUE SE LE MANDA AL RECONOCIMIENTO DE MATRICULAS POR TELEGRAM ESPECIF TIPO PHOTO, JUNTO CON LA HORA DE LLEGADA LA MATRÍCULA Y SI SE ENCUENTRA EN LA BASE DE DATOS",
-        "info": "",
-        "x": 760,
-        "y": 1140,
-        "wires": []
-    },
-    {
-        "id": "4cea0fad4f4daf71",
-        "type": "telegram command",
-        "z": "33676dab1b5dbc95",
-        "name": "",
-        "command": "/regmatriculas",
-        "description": "",
-        "registercommand": false,
-        "language": "",
-        "scope": "default",
-        "bot": "aa0e08fb665711b4",
-        "strict": false,
-        "hasresponse": true,
-        "useregex": false,
-        "removeregexcommand": false,
-        "outputs": 2,
-        "x": 110,
-        "y": 1320,
-        "wires": [
-            [
-                "9723db2e4918dc28"
-            ],
-            []
-        ]
-    },
-    {
         "id": "4c4f707d8086af30",
         "type": "telegram command",
         "z": "33676dab1b5dbc95",
@@ -418,7 +383,7 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "dbdec0508173add5",
+        "broker": "7324406cf4d4e550",
         "x": 650,
         "y": 480,
         "wires": []
@@ -464,42 +429,6 @@
         ]
     },
     {
-        "id": "30d3758ff71348bd",
-        "type": "mongodb in",
-        "z": "33676dab1b5dbc95",
-        "mongodb": "17e1c16e7a1086e9",
-        "name": "",
-        "collection": "matriculas_validas",
-        "operation": "find",
-        "x": 670,
-        "y": 1320,
-        "wires": [
-            [
-                "24cda073c3bea387",
-                "d9e3ecd647cd90da"
-            ]
-        ]
-    },
-    {
-        "id": "9723db2e4918dc28",
-        "type": "function",
-        "z": "33676dab1b5dbc95",
-        "name": "Todos Registros",
-        "func": "msg.sort={\"date\":-1};\nmsg.payload={};\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 360,
-        "y": 1320,
-        "wires": [
-            [
-                "30d3758ff71348bd"
-            ]
-        ]
-    },
-    {
         "id": "5c92d13ec9797d94",
         "type": "mongodb in",
         "z": "33676dab1b5dbc95",
@@ -521,7 +450,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "Ocupado == TRUE",
-        "func": "//msg.payload={\"payload.ocupado\":\"true\"}; // ocupado:\"true\"\n//{ \"$match\": { \"$and\": [ { \"payload.date\": { \"$lt\": ahora, \"$gt\": fiveminsago } }, { \"payload.ocupado\": \"true\" } ] } }\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.payload=\n[\n    { \"$match\": { \"$and\": [ { \"date\": {\"$gt\" : fiveminsago} }, { \"Ocupado\": true } ] } },\n    { \"$group\": {\n        \"_id\": 0,\n        \"numPlazasOcupadas\": {\"$sum\":1}\n    }}\n];\nreturn msg;\n//msg.payload=[\n//    {\"$match\": { \"temperatura\": 19}},\n//    { \"$group\": {\n//        \"_id\": 0,\n//        \"NumPlazasOcupadas\": {\"$sum\":1}\n//    }}\n//];",
+        "func": "//msg.payload={\"payload.ocupado\":\"true\"}; // ocupado:\"true\"\n//{ \"$match\": { \"$and\": [ { \"payload.date\": { \"$lt\": ahora, \"$gt\": fiveminsago } }, { \"payload.ocupado\": \"true\" } ] } }\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.chatId = msg.payload.chatId;\nmsg.payload=\n[\n    { \"$match\": { \"$and\": [ { \"date\": {\"$gt\" : fiveminsago} }, { \"Ocupado\": true } ] } },\n    { \"$group\": {\n        \"_id\": 0,\n        \"uniqueIds\": {\"$addToSet\": \"$NumPlaza\"},\n        \"numPlazasOcupadas\": {\"$sum\":1}\n    }}\n];\nreturn msg;\n//msg.payload=[\n//    {\"$match\": { \"temperatura\": 19}},\n//    { \"$group\": {\n//        \"_id\": 0,\n//        \"NumPlazasOcupadas\": {\"$sum\":1}\n//    }}\n//];",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -540,7 +469,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "Ocupado == FALSE",
-        "func": "//msg.payload={\"ocupado\":\"false\"}; //ocupado:\"false\" TAMBIEN SACAR EL NUMERO DE CADA PLAZA LIBRE AKA numPlaza\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.payload=\n[\n    { \"$match\": { \"$and\": [ { \"date\": {\"$gt\" : fiveminsago} }, { \"Ocupado\": false } ] } },\n    { \"$group\": {\n        \"_id\": 0,\n        \"numPlazasLibres\": {\"$sum\":1}\n    }}\n];\nreturn msg;",
+        "func": "//msg.payload={\"ocupado\":\"false\"}; //ocupado:\"false\" TAMBIEN SACAR EL NUMERO DE CADA PLAZA LIBRE AKA numPlaza\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.chatId = msg.payload.chatId;\nmsg.payload=\n[\n    { \"$match\": { \"$and\": [ { \"date\": {\"$gt\" : fiveminsago} }, { \"Ocupado\": false } ] } },\n    { \"$group\": {\n        \"_id\": 0,\n        \"uniqueIds\": {\"$addToSet\": \"$NumPlaza\"},\n        \"numPlazasLibres\": {\"$sum\":1}\n    }}\n];\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -559,7 +488,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "TEMP",
-        "func": "//sacamos temperatura y humedad de todas las plazas y podemos hacer una media incluso\n\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.payload=\n[\n    { \"$match\": { \"date\": {\"$gt\" : fiveminsago} } },\n    { \"$project\": {\n        \"temperatura\": \"$DHT11.Temperatura\", \n        \"humedad\":\"$DHT11.Humedad\"\n        }\n    },\n    { \"$group\": {\n        \"_id\": 1,\n        \"TempMedia\": {\"$avg\":\"$temperatura\"}, // SE HA INTENTADO REDONDEAR PERO LA OPERACION ROUND SE INTRODUJO EN VERSIONES POSTERIORES DE MONGODB PARA AGREGACIONES\n        \"HumMedia\": {\"$avg\":\"$humedad\"}, \n        \"datos\": {\"$sum\":1}\n    }}\n];\nreturn msg;",
+        "func": "//sacamos temperatura y humedad de todas las plazas y podemos hacer una media incluso\n\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.chatId = msg.payload.chatId;\nmsg.payload=\n[\n    { \"$match\": { \"date\": {\"$gt\" : fiveminsago} } },\n    { \"$project\": {\n        \"temperatura\": \"$DHT11.Temperatura\", \n        \"humedad\":\"$DHT11.Humedad\"\n        }\n    },\n    { \"$group\": {\n        \"_id\": 1,\n        \"TempMedia\": {\"$avg\":\"$temperatura\"}, // SE HA INTENTADO REDONDEAR PERO LA OPERACION ROUND SE INTRODUJO EN VERSIONES POSTERIORES DE MONGODB PARA AGREGACIONES\n        \"HumMedia\": {\"$avg\":\"$humedad\"}, \n        \"datos\": {\"$sum\":1}\n    }}\n];\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -585,7 +514,8 @@
         "y": 800,
         "wires": [
             [
-                "d5c108b6c3589205"
+                "d5c108b6c3589205",
+                "77dd4779def526c8"
             ]
         ]
     },
@@ -594,7 +524,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "",
-        "func": "var opts = {\n  reply_markup: JSON.stringify({\n    \"inline_keyboard\": [[\n                {\n                    \"text\": \"10000\",\n                    \"callback_data\": \"10000\"            \n                },\n                {\n                    \"text\": \"15000\",\n                    \"callback_data\": \"15000\"            \n                },\n                {\n                    \"text\": \"20000\",\n                    \"callback_data\": \"20000\"            \n                },\n                {\n                    \"text\": \"30000\",\n                    \"callback_data\": \"30000\"            \n                }]\n            ]\n  })\n};\n\nmsg.payload.content = \"Elige entre las posibles Frecuencias:\";\nmsg.payload.options = opts;\nmsg.payload.chatId = 589861369;// -1001612621169;\nmsg.payload.type = \"message\";\n\nreturn [ msg ];",
+        "func": "var opts = {\n  reply_markup: JSON.stringify({\n    \"inline_keyboard\": [[\n                {\n                    \"text\": \"10000\",\n                    \"callback_data\": \"10000\"            \n                },\n                {\n                    \"text\": \"15000\",\n                    \"callback_data\": \"15000\"            \n                },\n                {\n                    \"text\": \"20000\",\n                    \"callback_data\": \"20000\"            \n                },\n                {\n                    \"text\": \"30000\",\n                    \"callback_data\": \"30000\"            \n                }]\n            ]\n  })\n};\n\nmsg.payload.content = \"Elige entre las posibles Frecuencias:\";\nmsg.payload.options = opts;\n//msg.payload.chatId = 589861369;// -1001612621169;\nmsg.payload.type = \"message\";\n\nreturn [ msg ];",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -722,42 +652,11 @@
         "wires": []
     },
     {
-        "id": "b439819f72be576c",
-        "type": "link out",
-        "z": "33676dab1b5dbc95",
-        "name": "",
-        "links": [
-            "f8ea4540fa0aeffe"
-        ],
-        "x": 1215,
-        "y": 1320,
-        "wires": []
-    },
-    {
-        "id": "24cda073c3bea387",
-        "type": "function",
-        "z": "33676dab1b5dbc95",
-        "name": "Creamos mensaje",
-        "func": "// SACAR TODAS LAS MATRICULAS ARCHIVADAS\n// BUCLE FOR EN EL QUE SAQUEMOS TODAS LAS MATRICULAS ARCHIVADAS \n// INDICE I PARA RECORRER EL ARRAY DE LOS PAYLOADS\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1030,
-        "y": 1320,
-        "wires": [
-            [
-                "b439819f72be576c"
-            ]
-        ]
-    },
-    {
         "id": "781d0af347ad600d",
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "Creamos mensaje",
-        "func": "var plazas = msg.payload[0].numPlazasOcupadas;\nmsg.payload={};\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"El número de Plazas Ocupadas en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "func": "var plazas = msg.payload[0].numPlazasOcupadas;\nmsg.payload={};\nmsg.payload.chatId=msg.chatId;\nmsg.payload.content=\"El número de Plazas Ocupadas en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -776,7 +675,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "Creamos mensaje",
-        "func": "var plazas = msg.payload[0].numPlazasLibres;\nmsg.payload={};\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"El número de Plazas Libres en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "func": "var plazas = msg.payload[0].numPlazasLibres;\nmsg.payload={};\nmsg.payload.chatId=msg.chatId;\nmsg.payload.content=\"El número de Plazas Libres en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -795,7 +694,7 @@
         "type": "function",
         "z": "33676dab1b5dbc95",
         "name": "Creamos mensaje",
-        "func": "var temp = msg.payload[0].TempMedia;\nvar hum = msg.payload[0].HumMedia;\nmsg.payload={};\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"La temperatura media en el Parking es de  (\"+temp+\"ºC) y una humedad relativa del (\"+hum+\"%) .\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "func": "var temp = msg.payload[0].TempMedia;\nvar hum = msg.payload[0].HumMedia;\nmsg.payload={};\nmsg.payload.chatId=msg.chatId;\nmsg.payload.content=\"La temperatura media en el Parking es de  (\"+temp.toFixed(2)+\"ºC) y una humedad relativa del (\"+hum.toFixed(2)+\"%) .\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -853,7 +752,7 @@
         "type": "debug",
         "z": "33676dab1b5dbc95",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -952,31 +851,9 @@
         "type": "link out",
         "z": "33676dab1b5dbc95",
         "name": "",
-        "links": [
-            "02bcf209c3cc3db9"
-        ],
+        "links": [],
         "x": 435,
         "y": 1000,
-        "wires": []
-    },
-    {
-        "id": "3173d00fdcb48669",
-        "type": "comment",
-        "z": "33676dab1b5dbc95",
-        "name": "FALTA HACER QUE SI SON DE LA MISMA PLAZA SE OBVIE ESE NUMERO PARA NO CONTARLO",
-        "info": "",
-        "x": 590,
-        "y": 620,
-        "wires": []
-    },
-    {
-        "id": "81cf186e826bfc81",
-        "type": "comment",
-        "z": "33676dab1b5dbc95",
-        "name": "SE DEBE SACAR TODO EL REGISTRO DE LAS MATRICULAS QUE HAN PASADO POR EL PARKING -- NO SE COMO HACERLO",
-        "info": "",
-        "x": 580,
-        "y": 1240,
         "wires": []
     },
     {
@@ -987,13 +864,13 @@
         "method": "GET",
         "ret": "bin",
         "paytoqs": "ignore",
-        "url": "https://cdn-images.motor.es/image/m/694w/fotos-noticias/2020/04/como-saber-quien-es-coche-matricula-202066817-1587647861_1.jpg",
+        "url": "http://192.168.1.107/capture",
         "tls": "",
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 690,
-        "y": 1080,
+        "x": 330,
+        "y": 1120,
         "wires": [
             [
                 "8b8dba1ad38ef644"
@@ -1011,8 +888,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 860,
-        "y": 1080,
+        "x": 500,
+        "y": 1120,
         "wires": [
             [
                 "f89b61b25314a7d1"
@@ -1028,8 +905,8 @@
             "1863d931dacb1b5e",
             "f8ea4540fa0aeffe"
         ],
-        "x": 1015,
-        "y": 1080,
+        "x": 655,
+        "y": 1120,
         "wires": []
     },
     {
@@ -1048,8 +925,8 @@
         "useregex": false,
         "removeregexcommand": false,
         "outputs": 2,
-        "x": 480,
-        "y": 1080,
+        "x": 120,
+        "y": 1120,
         "wires": [
             [
                 "e3b3123c594d94ad"
@@ -1063,8 +940,7 @@
         "z": "33676dab1b5dbc95",
         "name": "",
         "links": [
-            "0a939f53a8405d73",
-            "78593d4ea5cef43e"
+            "7c37e8c04f545a4d"
         ],
         "x": 1475,
         "y": 800,
@@ -1095,7 +971,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1710,
+        "x": 1750,
         "y": 800,
         "wires": [
             [
@@ -1178,33 +1054,6 @@
         ],
         "x": 1175,
         "y": 380,
-        "wires": []
-    },
-    {
-        "id": "bcda4627a40588bf",
-        "type": "comment",
-        "z": "33676dab1b5dbc95",
-        "name": "ULTIMA PHOTO GUARDARLA COMO GLOBAL Y ASI PODER METERLA TAMBIEN EN EL COMANDO DE ULTIMA ENTRADA",
-        "info": "",
-        "x": 670,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "d9e3ecd647cd90da",
-        "type": "debug",
-        "z": "33676dab1b5dbc95",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 960,
-        "y": 1420,
         "wires": []
     },
     {
@@ -1323,7 +1172,7 @@
         "z": "33676dab1b5dbc95",
         "name": "",
         "links": [
-            "b2daf31ec1de6021"
+            "66a93283dc1150fb"
         ],
         "x": 1455,
         "y": 940,
@@ -1376,13 +1225,40 @@
         "randomUnits": "seconds",
         "drop": false,
         "allowrate": false,
-        "x": 1570,
+        "x": 1600,
         "y": 800,
         "wires": [
             [
                 "f9a37976ecf9585e"
             ]
         ]
+    },
+    {
+        "id": "f9203c2e3b41eae7",
+        "type": "comment",
+        "z": "33676dab1b5dbc95",
+        "name": "Token bot: 5083378127:AAFdHZADPeMwtTiobMOhYrU3h-lHQhkHDWI",
+        "info": "",
+        "x": 290,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "77dd4779def526c8",
+        "type": "debug",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 880,
+        "wires": []
     },
     {
         "id": "17e1c16e7a1086e9",
@@ -1419,9 +1295,9 @@
         "verboselogging": false
     },
     {
-        "id": "dbdec0508173add5",
+        "id": "7324406cf4d4e550",
         "type": "mqtt-broker",
-        "name": "II7-UMA",
+        "name": "proyecto (iot.ac.uma.es)",
         "broker": "iot.ac.uma.es",
         "port": "1883",
         "clientid": "",
