@@ -1,1461 +1,414 @@
 [
     {
-        "id": "b49183a3c7a702d0",
+        "id": "33676dab1b5dbc95",
         "type": "tab",
-        "label": "II7-ESPNOW",
+        "label": "II7--TELEGRAM",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "980707e1aaddfdc3",
-        "type": "mqtt in",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "topic": "II7/SensoresPlazas/EstadoPlazas",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "dbdec0508173add5",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "x": 130,
-        "y": 440,
-        "wires": [
-            [
-                "3d5ccaaddbe720ed"
-            ]
-        ]
-    },
-    {
-        "id": "b7c0a0d0a466ed40",
-        "type": "mqtt out",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "topic": "II7/SensoresPlazas/config",
-        "qos": "",
-        "retain": "true",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "dbdec0508173add5",
-        "x": 1090,
-        "y": 2000,
-        "wires": []
-    },
-    {
-        "id": "4e4e9571e4eeee7f",
-        "type": "ui_slider",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "label": "Frec_FOTA",
-        "tooltip": "",
-        "group": "264336e14127e811",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "outs": "end",
-        "topic": "topic",
-        "topicType": "msg",
-        "min": "10000",
-        "max": "50000",
-        "step": "5000",
-        "className": "",
-        "x": 250,
-        "y": 1960,
-        "wires": [
-            [
-                "bccc0630b41dcaca"
-            ]
-        ]
-    },
-    {
-        "id": "c49a4a80d0f261b3",
-        "type": "ui_slider",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "label": "Tiempo_Escucha",
-        "tooltip": "",
-        "group": "aa1d1ec0bfdf9014",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "outs": "end",
-        "topic": "topic",
-        "topicType": "msg",
-        "min": "10000",
-        "max": "50000",
-        "step": "5000",
-        "className": "",
-        "x": 270,
-        "y": 2040,
-        "wires": [
-            [
-                "b8e1e26d0ba66476"
-            ]
-        ]
-    },
-    {
-        "id": "9bc8b3e814a10d0e",
-        "type": "ui_led",
-        "z": "b49183a3c7a702d0",
-        "order": 2,
-        "group": "3cebbf1a9719e92c",
-        "width": 0,
-        "height": 0,
-        "label": "PLAZA OCUPADA",
-        "labelPlacement": "left",
-        "labelAlignment": "left",
-        "colorForValue": [
-            {
-                "color": "#ff0000",
-                "value": "true",
-                "valueType": "bool"
-            },
-            {
-                "color": "#808080",
-                "value": "true",
-                "valueType": "bool"
-            }
-        ],
-        "allowColorForValueInMessage": false,
-        "shape": "circle",
-        "showGlow": true,
-        "name": "",
-        "x": 1410,
-        "y": 540,
-        "wires": []
-    },
-    {
-        "id": "b80f987af7d46ce7",
-        "type": "ui_gauge",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "group": "9b8b8e9de3adfd24",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "gtype": "gage",
-        "title": "Humedad",
-        "label": "RH",
-        "format": "{{value}}",
-        "min": "20",
-        "max": "90",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "className": "",
-        "x": 1420,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "862c42e8f6eb50f0",
-        "type": "ui_gauge",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "group": "e4977db5da3f7d79",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "gtype": "gage",
-        "title": "Temperatura",
-        "label": "ºC",
-        "format": "{{value}}",
-        "min": 0,
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "className": "",
-        "x": 1430,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "ae7539e0e74d5317",
-        "type": "ui_chart",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "group": "e4977db5da3f7d79",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "label": "Temperatura",
-        "chartType": "line",
-        "legend": "false",
-        "xformat": "HH:mm:ss",
-        "interpolate": "linear",
-        "nodata": "",
-        "dot": false,
-        "ymin": "",
-        "ymax": "",
-        "removeOlder": 1,
-        "removeOlderPoints": "",
-        "removeOlderUnit": "3600",
-        "cutout": 0,
-        "useOneColor": false,
-        "useUTC": false,
-        "colors": [
-            "#1f77b4",
-            "#aec7e8",
-            "#ff7f0e",
-            "#2ca02c",
-            "#98df8a",
-            "#d62728",
-            "#ff9896",
-            "#9467bd",
-            "#c5b0d5"
-        ],
-        "outputs": 1,
-        "useDifferentColor": false,
-        "className": "",
-        "x": 1430,
-        "y": 320,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "732b9f8661d47395",
-        "type": "ui_chart",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "group": "9b8b8e9de3adfd24",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "label": "Humedad",
-        "chartType": "line",
-        "legend": "false",
-        "xformat": "HH:mm:ss",
-        "interpolate": "linear",
-        "nodata": "",
-        "dot": false,
-        "ymin": "",
-        "ymax": "",
-        "removeOlder": 1,
-        "removeOlderPoints": "",
-        "removeOlderUnit": "3600",
-        "cutout": 0,
-        "useOneColor": false,
-        "useUTC": false,
-        "colors": [
-            "#1f77b4",
-            "#aec7e8",
-            "#ff7f0e",
-            "#2ca02c",
-            "#98df8a",
-            "#d62728",
-            "#ff9896",
-            "#9467bd",
-            "#c5b0d5"
-        ],
-        "outputs": 1,
-        "useDifferentColor": false,
-        "className": "",
-        "x": 1420,
-        "y": 420,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "27aa69c7b99d7044",
-        "type": "change",
-        "z": "b49183a3c7a702d0",
-        "name": "Temperatura",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload[0].DHT11.Temperatura",
-                "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "Temperatura",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1230,
-        "y": 300,
-        "wires": [
-            [
-                "862c42e8f6eb50f0",
-                "ae7539e0e74d5317"
-            ]
-        ]
-    },
-    {
-        "id": "66f402460bb17c40",
-        "type": "change",
-        "z": "b49183a3c7a702d0",
-        "name": "Humedad",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload[0].DHT11.Humedad",
-                "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "Humedad",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1220,
-        "y": 400,
-        "wires": [
-            [
-                "b80f987af7d46ce7",
-                "732b9f8661d47395"
-            ]
-        ]
-    },
-    {
-        "id": "7895c4b576b5b63c",
-        "type": "change",
-        "z": "b49183a3c7a702d0",
-        "name": "Ocupado",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload[0].Ocupado",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1220,
-        "y": 540,
-        "wires": [
-            [
-                "9bc8b3e814a10d0e"
-            ]
-        ]
-    },
-    {
-        "id": "ff225965034dea19",
+        "id": "2d65b3c82c043d5e",
         "type": "debug",
-        "z": "b49183a3c7a702d0",
-        "name": "Publicación",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1050,
-        "y": 2100,
-        "wires": []
-    },
-    {
-        "id": "0665a9467db9d790",
-        "type": "change",
-        "z": "b49183a3c7a702d0",
-        "name": "NumPlaza",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload[0].NumPlaza",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1230,
-        "y": 480,
-        "wires": [
-            [
-                "17341739b3ddac32"
-            ]
-        ]
-    },
-    {
-        "id": "17341739b3ddac32",
-        "type": "ui_text",
-        "z": "b49183a3c7a702d0",
-        "group": "3cebbf1a9719e92c",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Número de Plaza:",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "x": 1450,
-        "y": 480,
-        "wires": []
-    },
-    {
-        "id": "3de44f9c366c826a",
-        "type": "json",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": false,
-        "x": 850,
-        "y": 2000,
-        "wires": [
-            [
-                "b7c0a0d0a466ed40",
-                "ff225965034dea19"
-            ]
-        ]
-    },
-    {
-        "id": "26a023072ab68cc5",
-        "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "func": "msg.payload = JSON.stringify({Frec_FOTA:  msg.frecFota, Tiempo_Escucha: msg.tEscucha});\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 660,
-        "y": 2000,
-        "wires": [
-            [
-                "3de44f9c366c826a"
-            ]
-        ]
-    },
-    {
-        "id": "b8e1e26d0ba66476",
-        "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "func": "msg.tEscucha = msg.payload;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 460,
-        "y": 2040,
-        "wires": [
-            [
-                "26a023072ab68cc5"
-            ]
-        ]
-    },
-    {
-        "id": "bccc0630b41dcaca",
-        "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "func": "msg.frecFota = msg.payload\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 460,
-        "y": 1960,
-        "wires": [
-            [
-                "26a023072ab68cc5"
-            ]
-        ]
-    },
-    {
-        "id": "61123bb4640c7d55",
-        "type": "comment",
-        "z": "b49183a3c7a702d0",
-        "name": "Representación de datos de la plaza en Dashboard",
-        "info": "",
-        "x": 250,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "0efc7f62be0e2e2b",
-        "type": "comment",
-        "z": "b49183a3c7a702d0",
-        "name": "Se publican parámetros de la configuración de la placa elegidos por el usuario en el dashboard",
-        "info": "",
-        "x": 380,
-        "y": 1880,
-        "wires": []
-    },
-    {
-        "id": "a119bd67979210a0",
-        "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "func": "msg.sort = {\"date\": -1}; // Ordena en orden descendente de más actual a menos\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 480,
-        "y": 600,
-        "wires": [
-            [
-                "e8372f4bc9bc74c0"
-            ]
-        ]
-    },
-    {
-        "id": "8769def2a9709714",
-        "type": "template",
-        "z": "b49183a3c7a702d0",
-        "name": "Lista en formato html",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": " <h1>Registros: </h1>\n <ul>\n{{#payload}}\n  <li>{{date}} : Temperatura: {{DHT11.Temperatura }}ºC, Humedad: {{DHT11.Humedad}}%, NumPlaza: {{NumPlaza}}, Ocupado: {{Ocupado}}  </li>\n{{/payload}}\n </ul>\n ",
-        "output": "str",
-        "x": 1120,
-        "y": 600,
-        "wires": [
-            [
-                "f4d418e1181afb4a"
-            ]
-        ]
-    },
-    {
-        "id": "f4d418e1181afb4a",
-        "type": "ui_template",
-        "z": "b49183a3c7a702d0",
-        "group": "3a9317165f2347fd",
-        "name": "Datos Últimos Registros",
-        "order": 1,
-        "width": "6",
-        "height": "9",
-        "format": "<div ng-bind-html=\"msg.payload\"></div>",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "resendOnRefresh": true,
-        "templateScope": "local",
-        "className": "",
-        "x": 1470,
-        "y": 600,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "fa7ec08623a2d5c5",
-        "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "func": "msg.sort = {\"date\": -1}; // Ordena en orden descendente de más actual a menos\nmsg.limit = 1; // Limita la consulta a un objeto\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 460,
-        "y": 220,
-        "wires": [
-            [
-                "873f32e53f60f338"
-            ]
-        ]
-    },
-    {
-        "id": "e5583778efeea97b",
-        "type": "template",
-        "z": "b49183a3c7a702d0",
-        "name": "Lista en formato html",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": " <h1>Último Registro: </h1>\n <ul>\n{{#payload}}\n  <li>{{date}} : Temperatura: {{DHT11.Temperatura }}ºC, Humedad: {{DHT11.Humedad}}%, NumPlaza: {{NumPlaza}}, Ocupado: {{Ocupado}}  </li>\n{{/payload}}\n </ul>\n ",
-        "output": "str",
-        "x": 1240,
-        "y": 220,
-        "wires": [
-            [
-                "d3c3d106294cca4e"
-            ]
-        ]
-    },
-    {
-        "id": "d3c3d106294cca4e",
-        "type": "ui_template",
-        "z": "b49183a3c7a702d0",
-        "group": "3bd19c569817da70",
-        "name": "Datos Último Registro",
-        "order": 2,
-        "width": "6",
-        "height": "9",
-        "format": "<div ng-bind-html=\"msg.payload\"></div>",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "resendOnRefresh": true,
-        "templateScope": "local",
-        "className": "",
-        "x": 1460,
-        "y": 220,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "e8372f4bc9bc74c0",
-        "type": "mongodb in",
-        "z": "b49183a3c7a702d0",
-        "mongodb": "17e1c16e7a1086e9",
-        "name": "",
-        "collection": "registro_estado_plazas",
-        "operation": "find",
-        "x": 780,
-        "y": 600,
-        "wires": [
-            [
-                "8769def2a9709714"
-            ]
-        ]
-    },
-    {
-        "id": "873f32e53f60f338",
-        "type": "mongodb in",
-        "z": "b49183a3c7a702d0",
-        "mongodb": "17e1c16e7a1086e9",
-        "name": "",
-        "collection": "registro_estado_plazas",
-        "operation": "find",
-        "x": 760,
-        "y": 220,
-        "wires": [
-            [
-                "09f5192668d2bc20",
-                "73c12bf466c2664b"
-            ]
-        ]
-    },
-    {
-        "id": "3d5ccaaddbe720ed",
-        "type": "link out",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "links": [
-            "b088120f683c8f36",
-            "3e26a6f8229fa603",
-            "0e0b173f12088eb0"
-        ],
-        "x": 295,
-        "y": 440,
-        "wires": []
-    },
-    {
-        "id": "3e26a6f8229fa603",
-        "type": "link in",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "links": [
-            "3d5ccaaddbe720ed"
-        ],
-        "x": 355,
-        "y": 600,
-        "wires": [
-            [
-                "a119bd67979210a0"
-            ]
-        ]
-    },
-    {
-        "id": "0e0b173f12088eb0",
-        "type": "link in",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "links": [
-            "3d5ccaaddbe720ed"
-        ],
-        "x": 335,
-        "y": 220,
-        "wires": [
-            [
-                "fa7ec08623a2d5c5"
-            ]
-        ]
-    },
-    {
-        "id": "73518e384e3229cf",
-        "type": "mongodb in",
-        "z": "b49183a3c7a702d0",
-        "mongodb": "17e1c16e7a1086e9",
-        "name": "",
-        "collection": "registro_estado_plazas",
-        "operation": "find",
-        "x": 780,
-        "y": 740,
-        "wires": [
-            [
-                "2db1469e97a9ceec",
-                "59274a9ad45fbe96"
-            ]
-        ]
-    },
-    {
-        "id": "ddc66e882bc26e4c",
-        "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "filtrado 24h",
-        "func": "var ms_per_horas = 3600000; \n// obtiene el timestamp actual\nvar now_ms = new Date().getTime();\n// crear objeto fecha con la hora de hace un dia\nvar dayago = new Date(now_ms-24*ms_per_horas);\n\n\n// seleccionar con fecha posterior o igual a hace un día\nmsg.payload = {\"date\": {\"$gte\": dayago}};\nmsg.sort = {\"date\":1}; // ordenar por fecha\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 470,
-        "y": 680,
-        "wires": [
-            [
-                "73518e384e3229cf",
-                "e201baec1523f020"
-            ]
-        ]
-    },
-    {
-        "id": "bd85db3623bfd227",
-        "type": "ui_template",
-        "z": "b49183a3c7a702d0",
-        "group": "8f01ab2d282de717",
-        "name": "Datos Registros Filtrados",
-        "order": 2,
-        "width": "6",
-        "height": "9",
-        "format": "<div ng-bind-html=\"msg.payload\"></div>",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "resendOnRefresh": true,
-        "templateScope": "local",
-        "className": "",
-        "x": 1470,
-        "y": 740,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "2db1469e97a9ceec",
-        "type": "template",
-        "z": "b49183a3c7a702d0",
-        "name": "Lista en formato html",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": " <h1>Registros Filtrados: </h1>\n <ul>\n{{#payload}}\n  <li>{{date}} : Temperatura: {{DHT11.Temperatura }}ºC, Humedad: {{DHT11.Humedad}}%, NumPlaza: {{NumPlaza}}, Ocupado: {{Ocupado}}  </li>\n{{/payload}}\n </ul>\n ",
-        "output": "str",
-        "x": 1120,
-        "y": 740,
-        "wires": [
-            [
-                "bd85db3623bfd227"
-            ]
-        ]
-    },
-    {
-        "id": "6bb12ad28a5c4dda",
-        "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "filtrado Semana",
-        "func": "var ms_per_week = 604800000;\n// obtiene el timestamp actual\nvar now_ms = new Date().getTime();\n// crea objeto fecha con la hora de hace una semana\nvar weekago = new Date(now_ms-ms_per_week);\n\n// seleccionar con fecha posterior o igual a hace una semana\nmsg.payload = {\"date\": {\"$gte\": weekago}};\nmsg.sort = {\"date\":1}; // ordenar por fecha\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 460,
-        "y": 740,
-        "wires": [
-            [
-                "73518e384e3229cf",
-                "3bef7f82e660e29b"
-            ]
-        ]
-    },
-    {
-        "id": "b9d936fc3fa8f251",
-        "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "filtrado Mes",
-        "func": "var ms_per_month = 2629750000;\n// obtiene el timestamp actual\nvar now_ms = new Date().getTime();\n// crea objeto fecha con la hora de hace un mes\nvar monthago = new Date(now_ms-ms_per_month);\n\n// seleccionar con fecha posterior o igual a hace un mes\nmsg.payload = {\"date\": {\"$gte\": monthago}};\nmsg.sort = {\"date\":1}; // ordenar por fecha\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 470,
-        "y": 800,
-        "wires": [
-            [
-                "73518e384e3229cf",
-                "53efec6f8133555b"
-            ]
-        ]
-    },
-    {
-        "id": "e392647401adfc7f",
-        "type": "ui_button",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "group": "8f01ab2d282de717",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "24h",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "topic",
-        "topicType": "msg",
-        "x": 250,
-        "y": 680,
-        "wires": [
-            [
-                "ddc66e882bc26e4c"
-            ]
-        ]
-    },
-    {
-        "id": "5e01689fbb0323c4",
-        "type": "ui_button",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "group": "8f01ab2d282de717",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "Semana",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "topic",
-        "topicType": "msg",
-        "x": 260,
-        "y": 740,
-        "wires": [
-            [
-                "6bb12ad28a5c4dda"
-            ]
-        ]
-    },
-    {
-        "id": "2d02f9809c8362c4",
-        "type": "ui_button",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "group": "8f01ab2d282de717",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "Mes",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "topic",
-        "topicType": "msg",
-        "x": 250,
-        "y": 800,
-        "wires": [
-            [
-                "b9d936fc3fa8f251"
-            ]
-        ]
-    },
-    {
-        "id": "09f5192668d2bc20",
-        "type": "link out",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "links": [
-            "9acbcc26452c5d80",
-            "11a379e22774c132",
-            "20c93f346778867a",
-            "0b5ea0e785a7eb45",
-            "d8ad081582be883f"
-        ],
-        "x": 995,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "9acbcc26452c5d80",
-        "type": "link in",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "links": [
-            "09f5192668d2bc20",
-            "c5e0bab77efb39be"
-        ],
-        "x": 1095,
-        "y": 220,
-        "wires": [
-            [
-                "e5583778efeea97b"
-            ]
-        ]
-    },
-    {
-        "id": "11a379e22774c132",
-        "type": "link in",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "links": [
-            "09f5192668d2bc20",
-            "c5e0bab77efb39be"
-        ],
-        "x": 1095,
-        "y": 540,
-        "wires": [
-            [
-                "7895c4b576b5b63c"
-            ]
-        ]
-    },
-    {
-        "id": "20c93f346778867a",
-        "type": "link in",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "links": [
-            "09f5192668d2bc20",
-            "c5e0bab77efb39be"
-        ],
-        "x": 1095,
-        "y": 480,
-        "wires": [
-            [
-                "0665a9467db9d790"
-            ]
-        ]
-    },
-    {
-        "id": "0b5ea0e785a7eb45",
-        "type": "link in",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "links": [
-            "09f5192668d2bc20",
-            "c5e0bab77efb39be"
-        ],
-        "x": 1095,
-        "y": 400,
-        "wires": [
-            [
-                "66f402460bb17c40"
-            ]
-        ]
-    },
-    {
-        "id": "d8ad081582be883f",
-        "type": "link in",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "links": [
-            "09f5192668d2bc20",
-            "c5e0bab77efb39be"
-        ],
-        "x": 1095,
-        "y": 300,
-        "wires": [
-            [
-                "27aa69c7b99d7044"
-            ]
-        ]
-    },
-    {
-        "id": "73c12bf466c2664b",
-        "type": "debug",
-        "z": "b49183a3c7a702d0",
+        "z": "33676dab1b5dbc95",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1050,
+        "x": 550,
         "y": 100,
         "wires": []
     },
     {
-        "id": "2430d0c774689309",
-        "type": "inject",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 230,
+        "id": "f6b3805ec493b8d4",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "mensaje bienvenida",
+        "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"Hola soy el bot del grupo 7 de Informática Industrial. Puedo responderte a estos comandos:\\n/start\\n/ultregsensores\\n/ultentrada\\n/subirbarrera\\n/bajarbarrera\\n/regmatriculas\\n/plazasOcupadas\\n/plazasLibres\\n/temp_hum_Parking\\n/frecFOTA\\n/camara_ahora\";\n return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 160,
+        "wires": [
+            [
+                "d520dfcb2a99a0fe"
+            ]
+        ]
+    },
+    {
+        "id": "b9cd46ba811ccbcf",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "ultima entrada",
+        "func": "msg.limit=1;\nmsg.sort={\"date\":-1};\nmsg.payload={};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
         "y": 280,
         "wires": [
             [
-                "fa7ec08623a2d5c5",
-                "a119bd67979210a0"
+                "a4dd2d28c0e3ed42"
             ]
         ]
     },
     {
-        "id": "5a618bba37e0fbfa",
-        "type": "http response",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "statusCode": "",
-        "headers": {
-            "Content-Disposition": "attachment; filename=registros.csv"
-        },
-        "x": 1290,
-        "y": 1360,
-        "wires": []
-    },
-    {
-        "id": "7f6fbdb877ccfb47",
-        "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "Unicode y separador",
-        "func": "//add Unicode BOM character (byte order mark) to make EXCEL knows this is UTF-8\nif(global.get(\"separador_decimal\")==\"punto\")\n{\n    msg.payload='\\ufeff'+msg.payload;\n\n}\nelse\n{\n    msg.payload='\\ufeff'+(msg.payload).replace(/\\./g,\",\");\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1075.9998626708984,
-        "y": 1362.9999866485596,
-        "wires": [
-            [
-                "5a618bba37e0fbfa"
-            ]
-        ]
-    },
-    {
-        "id": "39feb47ad79622d8",
-        "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "consulta",
-        "func": "// fecha por defecto es hoy\nvar ahora = new Date();\n// pillo los globales si los hay, si no la fecha de hoy\nvar desde = new Date(global.get(\"desde\") || ahora);\nvar hasta = new Date(global.get(\"hasta\") || ahora); \n// el día de inicio desde las cero horas\nvar inicio = new Date(desde.getFullYear(),desde.getMonth(),desde.getDate(),0,0,0,0);\n// el día final es hasta final del día\nvar final = new Date(hasta.getFullYear(),hasta.getMonth(),hasta.getDate(),23,59,59,999);\n\nmsg.payload=\n[\n    { \"$match\": { \"date\": { \"$gte\": inicio , \"$lte\": final } } },\n    { \"$project\": {\n        \"_id\": 0,\n        \"date\": 1,\n        \"Temperatura\": \"$DHT11.Temperatura\",\n        \"Humedad\": \"$DHT11.Humedad\",\n        \"NumPlaza\": \"$NumPlaza\",\n        \"Ocupado\" : \"$Ocupado\"\n        }\n    },\n    { \"$sort\": {\"date\": 1} }\n];\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 360,
-        "y": 1360,
-        "wires": [
-            [
-                "da37d470ea584f93"
-            ]
-        ]
-    },
-    {
-        "id": "ca9e70e30e1841a9",
-        "type": "http in",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "url": "/registros",
-        "method": "get",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 191,
-        "y": 1362.9999866485596,
-        "wires": [
-            [
-                "39feb47ad79622d8"
-            ]
-        ]
-    },
-    {
-        "id": "aee6d1d0f7fab891",
-        "type": "ui_template",
-        "z": "b49183a3c7a702d0",
-        "group": "0e650c3d27546fe5",
-        "name": "",
-        "order": 3,
-        "width": "0",
-        "height": "0",
-        "format": "<style>\n.button {\n    text-align: center;\n    font: bold 17px Arial;\n    text-decoration: none;\n    background-color: #339966;\n    color: white;\n    padding: 8px 10px;\n    border: 2px solid #CCCCCC;\n  }\n  \n  .button:hover\n  {\n   background-color: #26734d;\n  }\n\n</style>\n<a href=\"/registros\" class=\"button\">Descarga registros en CSV (EXCEL)</a>\n",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "resendOnRefresh": false,
-        "templateScope": "local",
-        "className": "",
-        "x": 220,
-        "y": 1260,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "7b21f79ae81310bf",
-        "type": "csv",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "sep": ";",
-        "hdrin": "",
-        "hdrout": "all",
-        "multi": "one",
-        "ret": "\\r\\n",
-        "temp": "date, Temperatura, Humedad, Ocupado,  NumPlaza",
-        "skip": 0,
-        "strings": true,
-        "include_empty_strings": false,
-        "include_null_values": false,
-        "x": 895.0000076293945,
-        "y": 1362.999963760376,
-        "wires": [
-            [
-                "7f6fbdb877ccfb47"
-            ]
-        ]
-    },
-    {
-        "id": "8221d9fed40df804",
-        "type": "ui_switch",
-        "z": "b49183a3c7a702d0",
-        "name": "separdor decimal",
-        "label": "{{msg.topic}}",
-        "tooltip": "",
-        "group": "0e650c3d27546fe5",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "decouple": "false",
-        "topic": "",
-        "topicType": "str",
-        "style": "",
-        "onvalue": "true",
-        "onvalueType": "bool",
-        "onicon": "",
-        "oncolor": "",
-        "offvalue": "false",
-        "offvalueType": "bool",
-        "officon": "",
-        "offcolor": "",
-        "animate": true,
-        "className": "",
-        "x": 270,
-        "y": 1820,
-        "wires": [
-            [
-                "d7d910da76d9607e"
-            ]
-        ]
-    },
-    {
-        "id": "bf84d01359406c7b",
-        "type": "inject",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "true",
-        "payloadType": "bool",
-        "x": 257.00002670288086,
-        "y": 1730.8889408111572,
-        "wires": [
-            [
-                "d7d910da76d9607e"
-            ]
-        ]
-    },
-    {
-        "id": "d7d910da76d9607e",
-        "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "set global separador_decimal",
-        "func": "if(msg.payload===true)\n{\n    global.set(\"separador_decimal\",\"coma\");\n    msg.topic=\"separador decimal = coma\";\n}\nelse\n{\n    global.set(\"separador_decimal\",\"punto\");\n    msg.topic=\"separador decimal = punto\";\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 585.0114135742188,
-        "y": 1731.5963134765625,
-        "wires": [
-            [
-                "8221d9fed40df804"
-            ]
-        ]
-    },
-    {
-        "id": "5eb88a9a48fbd650",
-        "type": "ui_date_picker",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "label": "Fecha inicio",
-        "group": "0e650c3d27546fe5",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "topic": "",
-        "topicType": "str",
-        "className": "",
-        "x": 413.7812728881836,
-        "y": 1558.7330231666565,
-        "wires": [
-            [
-                "8081c9fb17d3905e"
-            ]
-        ]
-    },
-    {
-        "id": "a194a5b5b670a65a",
-        "type": "ui_date_picker",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "label": "Fecha final",
-        "group": "0e650c3d27546fe5",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "topic": "",
-        "topicType": "str",
-        "className": "",
-        "x": 416.7926254272461,
-        "y": 1607.7272605895996,
-        "wires": [
-            [
-                "86e83e5cd6ee7ba0"
-            ]
-        ]
-    },
-    {
-        "id": "8081c9fb17d3905e",
-        "type": "change",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "desde",
-                "pt": "global",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 609.7869491577148,
-        "y": 1557.394910812378,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "86e83e5cd6ee7ba0",
-        "type": "change",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "hasta",
-                "pt": "global",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 613.0142288208008,
-        "y": 1608.278465270996,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "4a24c4dd72963c99",
-        "type": "inject",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 215.7897720336914,
-        "y": 1583.1534633636475,
-        "wires": [
-            [
-                "5eb88a9a48fbd650",
-                "a194a5b5b670a65a"
-            ]
-        ]
-    },
-    {
-        "id": "d43ed5c2bf85fea0",
-        "type": "comment",
-        "z": "b49183a3c7a702d0",
-        "name": "Controles para seleccionar fechas",
-        "info": "",
-        "x": 272.7897605895996,
-        "y": 1486.630747795105,
-        "wires": []
-    },
-    {
-        "id": "d80b8c2e863cee5c",
-        "type": "comment",
-        "z": "b49183a3c7a702d0",
-        "name": "Botón en HTML para lanzar descarga de fichero",
-        "info": "",
-        "x": 319.78977966308594,
-        "y": 1207.0822734832764,
-        "wires": []
-    },
-    {
-        "id": "002c7458b2a3f60d",
-        "type": "comment",
-        "z": "b49183a3c7a702d0",
-        "name": "Flujo para descarga de fichero",
-        "info": "",
-        "x": 262.0142059326172,
-        "y": 1305.0056400299072,
-        "wires": []
-    },
-    {
-        "id": "c8c2105ab829e224",
-        "type": "comment",
-        "z": "b49183a3c7a702d0",
-        "name": "Selector de separador decimal",
-        "info": "",
-        "x": 269.0141906738281,
-        "y": 1670.5510654449463,
-        "wires": []
-    },
-    {
-        "id": "da37d470ea584f93",
+        "id": "a4dd2d28c0e3ed42",
         "type": "mongodb in",
-        "z": "b49183a3c7a702d0",
+        "z": "33676dab1b5dbc95",
+        "mongodb": "17e1c16e7a1086e9",
+        "name": "",
+        "collection": "registro_matriculas_entrada",
+        "operation": "find",
+        "x": 680,
+        "y": 280,
+        "wires": [
+            [
+                "98ea08c40147b07e",
+                "151ce85b831cc28c"
+            ]
+        ]
+    },
+    {
+        "id": "98ea08c40147b07e",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "mensaje respuesta",
+        "func": "var matri=msg.payload[0].payload.matricula;\nvar fecha=msg.payload[0].payload.date;\nmsg.payload = {};\nmsg.payload.chatId=msg.originalMessage.from.id;\nmsg.payload.type = \"message\";\nmsg.payload.content=\"La matrícula del último vehículo es: \"+matri+\".\\n\";\nmsg.payload.content+=\"Hora de llegada: \"+fecha.toLocaleString('es-ES', { timeZone: 'Europe/Madrid', hour12: false });\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 280,
+        "wires": [
+            [
+                "e31ac1db62f9f450",
+                "7c695195afe7c280"
+            ]
+        ]
+    },
+    {
+        "id": "d0cd6a4f2217197e",
+        "type": "telegram command",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "command": "/ultentrada",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "aa0e08fb665711b4",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 80,
+        "y": 280,
+        "wires": [
+            [
+                "b9cd46ba811ccbcf"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "aad8c56ff74d90d5",
+        "type": "telegram receiver",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "bot": "aa0e08fb665711b4",
+        "saveDataDir": "",
+        "filterCommands": true,
+        "x": 230,
+        "y": 100,
+        "wires": [
+            [
+                "2d65b3c82c043d5e",
+                "f6b3805ec493b8d4"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "e31ac1db62f9f450",
+        "type": "debug",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "cc844b9c806fd32e",
+        "type": "telegram sender",
+        "z": "33676dab1b5dbc95",
+        "name": "Proyecto_II7_bot",
+        "bot": "aa0e08fb665711b4",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 2010,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1e39752b0c2c7d43",
+        "type": "telegram command",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "command": "/start",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "aa0e08fb665711b4",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 190,
+        "y": 160,
+        "wires": [
+            [
+                "f6b3805ec493b8d4"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "ebddb3b510c808d3",
+        "type": "telegram command",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "command": "/subirbarrera",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "aa0e08fb665711b4",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 110,
+        "y": 460,
+        "wires": [
+            [
+                "8dd3b913771a2853"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b54cb3b717ca7e0c",
+        "type": "telegram command",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "command": "/bajarbarrera",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "aa0e08fb665711b4",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 110,
+        "y": 520,
+        "wires": [
+            [
+                "1a5277f3749ad485"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "7507b187fc11e5e9",
+        "type": "comment",
+        "z": "33676dab1b5dbc95",
+        "name": "-1001612621169",
+        "info": "",
+        "x": 120,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "8da03c7bb0ec7913",
+        "type": "comment",
+        "z": "33676dab1b5dbc95",
+        "name": "MANDAR LA CAPTURA QUE SE LE MANDA AL RECONOCIMIENTO DE MATRICULAS POR TELEGRAM ESPECIF TIPO PHOTO, JUNTO CON LA HORA DE LLEGADA LA MATRÍCULA Y SI SE ENCUENTRA EN LA BASE DE DATOS",
+        "info": "",
+        "x": 760,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "4cea0fad4f4daf71",
+        "type": "telegram command",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "command": "/regmatriculas",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "aa0e08fb665711b4",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 110,
+        "y": 1320,
+        "wires": [
+            [
+                "9723db2e4918dc28"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "4c4f707d8086af30",
+        "type": "telegram command",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "command": "/plazasOcupadas",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "aa0e08fb665711b4",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 120,
+        "y": 660,
+        "wires": [
+            [
+                "19ec4d6d4f8d2a8e"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "c885a4729c0b8eb8",
+        "type": "telegram command",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "command": "/plazasLibres",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "aa0e08fb665711b4",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 110,
+        "y": 720,
+        "wires": [
+            [
+                "7c8b9f8ae80a330a"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8a5c34aaa94efa06",
+        "type": "telegram command",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "command": "/temp_hum_Parking",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "aa0e08fb665711b4",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 130,
+        "y": 800,
+        "wires": [
+            [
+                "fc2172b025d8b00e"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "4fc83e1d2378c2be",
+        "type": "telegram command",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "command": "/ultregsensores",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "aa0e08fb665711b4",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 100,
+        "y": 360,
+        "wires": [
+            [
+                "e8d4b3737159d109"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "ad587c3d99ca0122",
+        "type": "mongodb in",
+        "z": "33676dab1b5dbc95",
         "mongodb": "17e1c16e7a1086e9",
         "name": "",
         "collection": "registro_estado_plazas",
         "operation": "aggregate",
-        "x": 640,
-        "y": 1360,
+        "x": 700,
+        "y": 660,
         "wires": [
             [
-                "7b21f79ae81310bf"
+                "781d0af347ad600d"
             ]
         ]
     },
     {
-        "id": "2d227e1abd0dd769",
-        "type": "ui_button",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "group": "3065d767bf05f5b5",
-        "order": 3,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "SUBIR BARRERA",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "topic",
-        "topicType": "msg",
-        "x": 290,
-        "y": 920,
-        "wires": [
-            [
-                "eedd49c769902bb8"
-            ]
-        ]
-    },
-    {
-        "id": "1b9aecd141fbdb12",
+        "id": "6fd0b05180b10680",
         "type": "mqtt out",
-        "z": "b49183a3c7a702d0",
+        "z": "33676dab1b5dbc95",
         "name": "",
         "topic": "II7/Entrada/BarreraCMD",
         "qos": "",
@@ -1466,42 +419,14 @@
         "correl": "",
         "expiry": "",
         "broker": "dbdec0508173add5",
-        "x": 870,
-        "y": 940,
+        "x": 650,
+        "y": 480,
         "wires": []
     },
     {
-        "id": "489bcb5a74aa111f",
-        "type": "ui_button",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "group": "3065d767bf05f5b5",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "BAJAR BARRERA",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "topic",
-        "topicType": "msg",
-        "x": 290,
-        "y": 980,
-        "wires": [
-            [
-                "194c7585f0fca29c"
-            ]
-        ]
-    },
-    {
-        "id": "eedd49c769902bb8",
+        "id": "8dd3b913771a2853",
         "type": "function",
-        "z": "b49183a3c7a702d0",
+        "z": "33676dab1b5dbc95",
         "name": "SUBIR",
         "func": "msg.payload = {}\nmsg.payload.comando= \"subir\";\nreturn msg;",
         "outputs": 1,
@@ -1509,753 +434,202 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 470,
-        "y": 920,
+        "x": 310,
+        "y": 460,
         "wires": [
             [
-                "1b9aecd141fbdb12"
+                "6fd0b05180b10680",
+                "459ef2b3b67f81f9"
             ]
         ]
     },
     {
-        "id": "194c7585f0fca29c",
+        "id": "1a5277f3749ad485",
         "type": "function",
-        "z": "b49183a3c7a702d0",
+        "z": "33676dab1b5dbc95",
         "name": "BAJAR",
-        "func": "msg.payload = {}\nmsg.payload.comando= \"bajar\";\nreturn msg;",
+        "func": "msg.payload = {}\nmsg.payload.bajar = \"bajar\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 480,
-        "y": 980,
+        "x": 320,
+        "y": 520,
         "wires": [
             [
-                "1b9aecd141fbdb12"
+                "6fd0b05180b10680",
+                "e7562e62052dfa40"
             ]
         ]
     },
     {
-        "id": "57519547c9f90266",
-        "type": "mqtt in",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "topic": "II7/Entrada/BarreraEstado",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "dbdec0508173add5",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "x": 110,
-        "y": 1040,
-        "wires": [
-            [
-                "4d14ac040f63923e"
-            ]
-        ]
-    },
-    {
-        "id": "939691b393081d99",
-        "type": "ui_ui_control",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "events": "change",
-        "x": 2300,
-        "y": 1060,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "2d31bbd03b65035c",
-        "type": "ui_button",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "group": "0960d7a0c6e6d08f",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "ENTRADA",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "topic",
-        "topicType": "msg",
-        "x": 1830,
-        "y": 1060,
-        "wires": [
-            [
-                "d4d4efa9f29aaa8f"
-            ]
-        ]
-    },
-    {
-        "id": "d4d4efa9f29aaa8f",
-        "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "func": "msg.payload = {\"tab\":\"Entrada\"}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 2080,
-        "y": 1060,
-        "wires": [
-            [
-                "939691b393081d99"
-            ]
-        ]
-    },
-    {
-        "id": "8096519f6a446ae5",
-        "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "func": "var estado = msg.payload[0].payload.estado;\n\nmsg.payload = {};\nif (estado == \"bajado\")\n    msg.payload= {\n        \"category\": \"BARRERABAJADA\", \n        \"name\": \"photo6026011293393205026.jpg\"\n    };\nelse \n    msg.payload= {\n        \"category\": \"BARRERASUBIDA\", \n        \"name\": \"photo6026011293393205025.jpg\"\n    };\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1080,
-        "y": 1040,
-        "wires": [
-            [
-                "4207f3c1b1d48fd8",
-                "04c88387c0693264"
-            ]
-        ]
-    },
-    {
-        "id": "4207f3c1b1d48fd8",
-        "type": "ui_media",
-        "z": "b49183a3c7a702d0",
-        "group": "f49b27b85aa2aecc",
-        "name": "",
-        "width": 0,
-        "height": 0,
-        "order": 0,
-        "category": "BARRERABAJADA",
-        "file": "photo6026011293393205026.jpg",
-        "layout": "adjust",
-        "showcontrols": true,
-        "loop": false,
-        "onstart": false,
-        "scope": "local",
-        "tooltip": "",
-        "x": 1230,
-        "y": 1040,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "ea88446edb51681c",
-        "type": "ui_ui_control",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "events": "change",
-        "x": 2300,
-        "y": 1120,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "48a92b037429ade2",
-        "type": "ui_button",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "group": "0960d7a0c6e6d08f",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "PLAZAS",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "topic",
-        "topicType": "msg",
-        "x": 1820,
-        "y": 1120,
-        "wires": [
-            [
-                "29ac578ac258679f"
-            ]
-        ]
-    },
-    {
-        "id": "29ac578ac258679f",
-        "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "func": "msg.payload = {\"tab\":\"Plazas\"}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 2080,
-        "y": 1120,
-        "wires": [
-            [
-                "ea88446edb51681c"
-            ]
-        ]
-    },
-    {
-        "id": "20be3dfc9f1277a9",
-        "type": "ui_ui_control",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "events": "change",
-        "x": 2300,
-        "y": 1180,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "337b5791e5612aa5",
-        "type": "ui_button",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "group": "0960d7a0c6e6d08f",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "REGISTROS",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "topic",
-        "topicType": "msg",
-        "x": 1830,
-        "y": 1180,
-        "wires": [
-            [
-                "dc22232bc46e4b2e"
-            ]
-        ]
-    },
-    {
-        "id": "dc22232bc46e4b2e",
-        "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "func": "msg.payload = {\"tab\":\"Registros\"}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 2080,
-        "y": 1180,
-        "wires": [
-            [
-                "20be3dfc9f1277a9"
-            ]
-        ]
-    },
-    {
-        "id": "fc8b3d0b6c028ad0",
-        "type": "ui_ui_control",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "events": "change",
-        "x": 2300,
-        "y": 1240,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "c2e10eba142024d5",
-        "type": "ui_button",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "group": "0960d7a0c6e6d08f",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "CONFIGURACIÓN",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "topic",
-        "topicType": "msg",
-        "x": 1850,
-        "y": 1240,
-        "wires": [
-            [
-                "44349448b3d23d9a"
-            ]
-        ]
-    },
-    {
-        "id": "44349448b3d23d9a",
-        "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "func": "msg.payload = {\"tab\":\"Configuración\"}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 2080,
-        "y": 1240,
-        "wires": [
-            [
-                "fc8b3d0b6c028ad0"
-            ]
-        ]
-    },
-    {
-        "id": "01e929b37a8da169",
+        "id": "30d3758ff71348bd",
         "type": "mongodb in",
-        "z": "b49183a3c7a702d0",
+        "z": "33676dab1b5dbc95",
         "mongodb": "17e1c16e7a1086e9",
         "name": "",
-        "collection": "registro_barrera_entrada",
+        "collection": "matriculas_validas",
         "operation": "find",
-        "x": 690,
-        "y": 1040,
+        "x": 670,
+        "y": 1320,
         "wires": [
             [
-                "8096519f6a446ae5",
-                "55ae66fdeafa6550"
+                "24cda073c3bea387",
+                "d9e3ecd647cd90da"
             ]
         ]
     },
     {
-        "id": "4d14ac040f63923e",
+        "id": "9723db2e4918dc28",
         "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "func": "msg.sort = {\"payload.date\": -1}; // Ordena en orden descendente de más actual a menos\nmsg.limit = 1; // Limita la consulta a un objeto\nreturn msg;",
+        "z": "33676dab1b5dbc95",
+        "name": "Todos Registros",
+        "func": "msg.sort={\"date\":-1};\nmsg.payload={};\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 420,
-        "y": 1040,
+        "x": 360,
+        "y": 1320,
         "wires": [
             [
-                "01e929b37a8da169"
+                "30d3758ff71348bd"
             ]
         ]
     },
     {
-        "id": "55ae66fdeafa6550",
-        "type": "debug",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1200,
-        "y": 960,
-        "wires": []
-    },
-    {
-        "id": "cbae436c5c9ffc66",
-        "type": "inject",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 140,
-        "y": 1140,
-        "wires": [
-            [
-                "4d14ac040f63923e"
-            ]
-        ]
-    },
-    {
-        "id": "04c88387c0693264",
-        "type": "debug",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1240,
-        "y": 1200,
-        "wires": []
-    },
-    {
-        "id": "336af012dea94209",
-        "type": "ui_text",
-        "z": "b49183a3c7a702d0",
-        "group": "25a568d686b7c56c",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Matrícula:",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "x": 2120,
-        "y": 1440,
-        "wires": []
-    },
-    {
-        "id": "f4a9c14d934a636d",
-        "type": "ui_text",
-        "z": "b49183a3c7a702d0",
-        "group": "25a568d686b7c56c",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Fecha de la entrada:",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "x": 2120,
-        "y": 1500,
-        "wires": []
-    },
-    {
-        "id": "14f7003631487faa",
+        "id": "5c92d13ec9797d94",
         "type": "mongodb in",
-        "z": "b49183a3c7a702d0",
+        "z": "33676dab1b5dbc95",
         "mongodb": "17e1c16e7a1086e9",
         "name": "",
-        "collection": "registro_matriculas_entrada",
-        "operation": "find",
-        "x": 1600,
-        "y": 1500,
+        "collection": "registro_estado_plazas",
+        "operation": "aggregate",
+        "x": 700,
+        "y": 720,
         "wires": [
             [
-                "8b9117651f7c984b",
-                "bb887283899aa98d",
-                "e5a7358196deae5b"
+                "e81c930c2639f57a",
+                "ba6e1bccc2e81604"
             ]
         ]
     },
     {
-        "id": "516c74965e3d1cf0",
-        "type": "mqtt in",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "topic": "II7/Entrada/Pulsador",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "dbdec0508173add5",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "x": 810,
-        "y": 1500,
-        "wires": [
-            [
-                "2c22bb49f2214e54"
-            ]
-        ]
-    },
-    {
-        "id": "90d68b710d72c6c6",
+        "id": "19ec4d6d4f8d2a8e",
         "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "func": "msg.sort = {\"payload.date\": -1}; // Ordena en orden descendente de más actual a menos\nmsg.limit = 1; // Limita la consulta a un objeto\nreturn msg;",
+        "z": "33676dab1b5dbc95",
+        "name": "Ocupado == TRUE",
+        "func": "//msg.payload={\"payload.ocupado\":\"true\"}; // ocupado:\"true\"\n//{ \"$match\": { \"$and\": [ { \"payload.date\": { \"$lt\": ahora, \"$gt\": fiveminsago } }, { \"payload.ocupado\": \"true\" } ] } }\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.payload=\n[\n    { \"$match\": { \"$and\": [ { \"date\": {\"$gt\" : fiveminsago} }, { \"Ocupado\": true } ] } },\n    { \"$group\": {\n        \"_id\": 0,\n        \"numPlazasOcupadas\": {\"$sum\":1}\n    }}\n];\nreturn msg;\n//msg.payload=[\n//    {\"$match\": { \"temperatura\": 19}},\n//    { \"$group\": {\n//        \"_id\": 0,\n//        \"NumPlazasOcupadas\": {\"$sum\":1}\n//    }}\n//];",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1300,
-        "y": 1500,
+        "x": 370,
+        "y": 660,
         "wires": [
             [
-                "14f7003631487faa"
+                "ad587c3d99ca0122"
             ]
         ]
     },
     {
-        "id": "8b9117651f7c984b",
-        "type": "debug",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1940,
-        "y": 1680,
-        "wires": []
-    },
-    {
-        "id": "a255affce866eb3d",
-        "type": "inject",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 900,
-        "y": 1700,
-        "wires": [
-            [
-                "90d68b710d72c6c6"
-            ]
-        ]
-    },
-    {
-        "id": "bb887283899aa98d",
+        "id": "7c8b9f8ae80a330a",
         "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "func": "msg.payload = msg.payload[0].payload.matricula;\nreturn msg;",
+        "z": "33676dab1b5dbc95",
+        "name": "Ocupado == FALSE",
+        "func": "//msg.payload={\"ocupado\":\"false\"}; //ocupado:\"false\" TAMBIEN SACAR EL NUMERO DE CADA PLAZA LIBRE AKA numPlaza\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.payload=\n[\n    { \"$match\": { \"$and\": [ { \"date\": {\"$gt\" : fiveminsago} }, { \"Ocupado\": false } ] } },\n    { \"$group\": {\n        \"_id\": 0,\n        \"numPlazasLibres\": {\"$sum\":1}\n    }}\n];\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1940,
-        "y": 1440,
+        "x": 380,
+        "y": 720,
         "wires": [
             [
-                "336af012dea94209"
+                "5c92d13ec9797d94"
             ]
         ]
     },
     {
-        "id": "e5a7358196deae5b",
+        "id": "fc2172b025d8b00e",
         "type": "function",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "func": "fecha = new Date();\nmsg.payload= fecha.toLocaleString('es-ES', { timeZone: 'Europe/Madrid', hour12: false });\nreturn msg;",
+        "z": "33676dab1b5dbc95",
+        "name": "TEMP",
+        "func": "//sacamos temperatura y humedad de todas las plazas y podemos hacer una media incluso\n\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.payload=\n[\n    { \"$match\": { \"date\": {\"$gt\" : fiveminsago} } },\n    { \"$project\": {\n        \"temperatura\": \"$DHT11.Temperatura\", \n        \"humedad\":\"$DHT11.Humedad\"\n        }\n    },\n    { \"$group\": {\n        \"_id\": 1,\n        \"TempMedia\": {\"$avg\":\"$temperatura\"}, // SE HA INTENTADO REDONDEAR PERO LA OPERACION ROUND SE INTRODUJO EN VERSIONES POSTERIORES DE MONGODB PARA AGREGACIONES\n        \"HumMedia\": {\"$avg\":\"$humedad\"}, \n        \"datos\": {\"$sum\":1}\n    }}\n];\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1920,
-        "y": 1500,
+        "x": 350,
+        "y": 800,
         "wires": [
             [
-                "f4a9c14d934a636d"
+                "a74cc0d466f9e60e"
             ]
         ]
     },
     {
-        "id": "65bd491f718c9887",
-        "type": "ui_ui_control",
-        "z": "b49183a3c7a702d0",
+        "id": "a74cc0d466f9e60e",
+        "type": "mongodb in",
+        "z": "33676dab1b5dbc95",
+        "mongodb": "17e1c16e7a1086e9",
         "name": "",
-        "events": "change",
-        "x": 2360,
-        "y": 940,
+        "collection": "registro_estado_plazas",
+        "operation": "aggregate",
+        "x": 680,
+        "y": 800,
         "wires": [
-            []
+            [
+                "d5c108b6c3589205"
+            ]
         ]
     },
     {
-        "id": "4224f34a92046db2",
-        "type": "ui_button",
-        "z": "b49183a3c7a702d0",
+        "id": "e7c7f6fc7621b238",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
         "name": "",
-        "group": "c9f2a6c2d76e40b6",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "VUELTA AL MENÚ PRINCIPAL",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "topic",
-        "topicType": "msg",
-        "x": 1890,
+        "func": "var opts = {\n  reply_markup: JSON.stringify({\n    \"inline_keyboard\": [[\n                {\n                    \"text\": \"10000\",\n                    \"callback_data\": \"10000\"            \n                },\n                {\n                    \"text\": \"15000\",\n                    \"callback_data\": \"15000\"            \n                },\n                {\n                    \"text\": \"20000\",\n                    \"callback_data\": \"20000\"            \n                },\n                {\n                    \"text\": \"30000\",\n                    \"callback_data\": \"30000\"            \n                }]\n            ]\n  })\n};\n\nmsg.payload.content = \"Elige entre las posibles Frecuencias:\";\nmsg.payload.options = opts;\nmsg.payload.chatId = 589861369;// -1001612621169;\nmsg.payload.type = \"message\";\n\nreturn [ msg ];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
         "y": 880,
         "wires": [
             [
-                "b1eb88c1c7e5ab52"
+                "d6fdd4c89c729d11"
             ]
         ]
     },
     {
-        "id": "b1eb88c1c7e5ab52",
-        "type": "function",
-        "z": "b49183a3c7a702d0",
+        "id": "ac4ffdb40b451282",
+        "type": "telegram event",
+        "z": "33676dab1b5dbc95",
         "name": "",
-        "func": "msg.payload = {\"tab\":\"Parking\"}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 2140,
-        "y": 940,
+        "bot": "aa0e08fb665711b4",
+        "event": "callback_query",
+        "autoanswer": false,
+        "x": 160,
+        "y": 980,
         "wires": [
             [
-                "65bd491f718c9887"
+                "3ef8e49b919bf436",
+                "60dc8372e00bda1b",
+                "0a33b65408b06891"
             ]
         ]
     },
     {
-        "id": "3610735dbc1622ea",
-        "type": "ui_button",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "group": "68344837084a0c01",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "VUELTA AL MENÚ PRINCIPAL",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "topic",
-        "topicType": "msg",
-        "x": 1890,
-        "y": 920,
-        "wires": [
-            [
-                "b1eb88c1c7e5ab52"
-            ]
-        ]
-    },
-    {
-        "id": "0984e54637c33b6a",
-        "type": "ui_button",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "group": "c90548166402c440",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "VUELTA AL MENÚ PRINCIPAL",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "topic",
-        "topicType": "msg",
-        "x": 1890,
-        "y": 960,
-        "wires": [
-            [
-                "b1eb88c1c7e5ab52"
-            ]
-        ]
-    },
-    {
-        "id": "98a80cb6a5071534",
-        "type": "ui_button",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "group": "55fba5c46f4f4433",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "VUELTA AL MENÚ PRINCIPAL",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "topic",
-        "topicType": "msg",
-        "x": 1890,
-        "y": 1000,
-        "wires": [
-            [
-                "b1eb88c1c7e5ab52"
-            ]
-        ]
-    },
-    {
-        "id": "59274a9ad45fbe96",
+        "id": "3ef8e49b919bf436",
         "type": "debug",
-        "z": "b49183a3c7a702d0",
+        "z": "33676dab1b5dbc95",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -2265,14 +639,219 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1070,
+        "x": 510,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "8ffd799cedee6056",
+        "type": "telegram command",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "command": "/frecFOTA",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "aa0e08fb665711b4",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 90,
+        "y": 880,
+        "wires": [
+            [
+                "e7c7f6fc7621b238"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "f8ea4540fa0aeffe",
+        "type": "link in",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "d520dfcb2a99a0fe",
+            "7c695195afe7c280",
+            "b439819f72be576c",
+            "8be7614c8989949f",
+            "55ab5e40de9ef43c",
+            "14392bcb51d7c878",
+            "1515d2fc60388ae0",
+            "d6fdd4c89c729d11",
+            "f89b61b25314a7d1",
+            "fe9b65c8780855a3",
+            "38283175e42822a0",
+            "86799f5915a07852",
+            "825ad4fab3e96185"
+        ],
+        "x": 1835,
+        "y": 540,
+        "wires": [
+            [
+                "cc844b9c806fd32e"
+            ]
+        ]
+    },
+    {
+        "id": "d520dfcb2a99a0fe",
+        "type": "link out",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "f8ea4540fa0aeffe"
+        ],
+        "x": 795,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "7c695195afe7c280",
+        "type": "link out",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "f8ea4540fa0aeffe",
+            "1863d931dacb1b5e"
+        ],
+        "x": 1215,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "b439819f72be576c",
+        "type": "link out",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "f8ea4540fa0aeffe"
+        ],
+        "x": 1215,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "24cda073c3bea387",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "Creamos mensaje",
+        "func": "// SACAR TODAS LAS MATRICULAS ARCHIVADAS\n// BUCLE FOR EN EL QUE SAQUEMOS TODAS LAS MATRICULAS ARCHIVADAS \n// INDICE I PARA RECORRER EL ARRAY DE LOS PAYLOADS\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 1320,
+        "wires": [
+            [
+                "b439819f72be576c"
+            ]
+        ]
+    },
+    {
+        "id": "781d0af347ad600d",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "Creamos mensaje",
+        "func": "var plazas = msg.payload[0].numPlazasOcupadas;\nmsg.payload={};\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"El número de Plazas Ocupadas en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 660,
+        "wires": [
+            [
+                "8be7614c8989949f"
+            ]
+        ]
+    },
+    {
+        "id": "e81c930c2639f57a",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "Creamos mensaje",
+        "func": "var plazas = msg.payload[0].numPlazasLibres;\nmsg.payload={};\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"El número de Plazas Libres en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 720,
+        "wires": [
+            [
+                "55ab5e40de9ef43c"
+            ]
+        ]
+    },
+    {
+        "id": "d5c108b6c3589205",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "Creamos mensaje",
+        "func": "var temp = msg.payload[0].TempMedia;\nvar hum = msg.payload[0].HumMedia;\nmsg.payload={};\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"La temperatura media en el Parking es de  (\"+temp+\"ºC) y una humedad relativa del (\"+hum+\"%) .\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 800,
+        "wires": [
+            [
+                "14392bcb51d7c878"
+            ]
+        ]
+    },
+    {
+        "id": "8be7614c8989949f",
+        "type": "link out",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "1863d931dacb1b5e",
+            "f8ea4540fa0aeffe"
+        ],
+        "x": 1215,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "55ab5e40de9ef43c",
+        "type": "link out",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "1863d931dacb1b5e",
+            "f8ea4540fa0aeffe"
+        ],
+        "x": 1215,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "14392bcb51d7c878",
+        "type": "link out",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "f8ea4540fa0aeffe",
+            "1863d931dacb1b5e"
+        ],
+        "x": 1215,
         "y": 800,
         "wires": []
     },
     {
-        "id": "53efec6f8133555b",
+        "id": "ba6e1bccc2e81604",
         "type": "debug",
-        "z": "b49183a3c7a702d0",
+        "z": "33676dab1b5dbc95",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -2282,67 +861,536 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 800,
-        "y": 840,
+        "x": 1270,
+        "y": 540,
         "wires": []
     },
     {
-        "id": "3bef7f82e660e29b",
-        "type": "debug",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 760,
-        "y": 680,
+        "id": "528e178dbbc3e92f",
+        "type": "comment",
+        "z": "33676dab1b5dbc95",
+        "name": "Mandamos al flow del dashboard para que publique en el topic  II7/+/config",
+        "info": "",
+        "x": 400,
+        "y": 1040,
         "wires": []
     },
     {
-        "id": "e201baec1523f020",
-        "type": "debug",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 670,
-        "y": 640,
-        "wires": []
-    },
-    {
-        "id": "2c22bb49f2214e54",
-        "type": "delay",
-        "z": "b49183a3c7a702d0",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "6",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "x": 1060,
-        "y": 1500,
+        "id": "e8d4b3737159d109",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "ultimo registro",
+        "func": "msg.limit=1;\nmsg.sort={\"date\":-1};\nmsg.payload={};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 360,
         "wires": [
             [
-                "90d68b710d72c6c6"
+                "7e522488dc2605fc"
             ]
         ]
+    },
+    {
+        "id": "7e522488dc2605fc",
+        "type": "mongodb in",
+        "z": "33676dab1b5dbc95",
+        "mongodb": "17e1c16e7a1086e9",
+        "name": "",
+        "collection": "registro_estado_plazas",
+        "operation": "find",
+        "x": 660,
+        "y": 360,
+        "wires": [
+            [
+                "449896a5887532e2",
+                "c953969a14acd4fb"
+            ]
+        ]
+    },
+    {
+        "id": "1863d931dacb1b5e",
+        "type": "link in",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "8be7614c8989949f",
+            "55ab5e40de9ef43c",
+            "f89b61b25314a7d1",
+            "945f23299531eb2f",
+            "14392bcb51d7c878",
+            "7c695195afe7c280",
+            "38283175e42822a0",
+            "86799f5915a07852",
+            "825ad4fab3e96185"
+        ],
+        "x": 1495,
+        "y": 640,
+        "wires": [
+            [
+                "60b5a49f7ce0ef93"
+            ]
+        ]
+    },
+    {
+        "id": "d6fdd4c89c729d11",
+        "type": "link out",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "f8ea4540fa0aeffe"
+        ],
+        "x": 495,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "60dc8372e00bda1b",
+        "type": "link out",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "02bcf209c3cc3db9"
+        ],
+        "x": 435,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "3173d00fdcb48669",
+        "type": "comment",
+        "z": "33676dab1b5dbc95",
+        "name": "FALTA HACER QUE SI SON DE LA MISMA PLAZA SE OBVIE ESE NUMERO PARA NO CONTARLO",
+        "info": "",
+        "x": 590,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "81cf186e826bfc81",
+        "type": "comment",
+        "z": "33676dab1b5dbc95",
+        "name": "SE DEBE SACAR TODO EL REGISTRO DE LAS MATRICULAS QUE HAN PASADO POR EL PARKING -- NO SE COMO HACERLO",
+        "info": "",
+        "x": 580,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "e3b3123c594d94ad",
+        "type": "http request",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "method": "GET",
+        "ret": "bin",
+        "paytoqs": "ignore",
+        "url": "https://cdn-images.motor.es/image/m/694w/fotos-noticias/2020/04/como-saber-quien-es-coche-matricula-202066817-1587647861_1.jpg",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 690,
+        "y": 1080,
+        "wires": [
+            [
+                "8b8dba1ad38ef644"
+            ]
+        ]
+    },
+    {
+        "id": "8b8dba1ad38ef644",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "func": "var pl = {\n  content: msg.payload,\n  caption: \"Foto tomada de la entrada de vehículos\",\n  type : 'photo',\n  chatId: msg.originalMessage.chat.id,\n  chat: msg.originalMessage.chat,\n  from: msg.originalMessage.from,\n  message_id : msg.originalMessage.message_id\n}\n\nmsg.payload = pl;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 1080,
+        "wires": [
+            [
+                "f89b61b25314a7d1"
+            ]
+        ]
+    },
+    {
+        "id": "f89b61b25314a7d1",
+        "type": "link out",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "1863d931dacb1b5e",
+            "f8ea4540fa0aeffe"
+        ],
+        "x": 1015,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "0ec0ac0abe359544",
+        "type": "telegram command",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "command": "/camara_ahora",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "aa0e08fb665711b4",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 480,
+        "y": 1080,
+        "wires": [
+            [
+                "e3b3123c594d94ad"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "51397c01a1fccf20",
+        "type": "link in",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "0a939f53a8405d73",
+            "78593d4ea5cef43e"
+        ],
+        "x": 1475,
+        "y": 800,
+        "wires": [
+            [
+                "f9a37976ecf9585e"
+            ]
+        ]
+    },
+    {
+        "id": "a52a67aa05202ab0",
+        "type": "comment",
+        "z": "33676dab1b5dbc95",
+        "name": "ESTE LINK PROVIENE JUSTO DESPUES DEL NODO HTTP REQUEST DE LA CAMARA Y ENVÍA LA FOTO POR TELEGRAM AL CANAL DE DIFUSION CADA VEZ QUE LLEGA UN VEHÍCULO",
+        "info": "",
+        "x": 1980,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "f9a37976ecf9585e",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "FOTO",
+        "func": "var photo = msg.payload;\nvar matri = flow.get(\"Matricula\");\nvar fecha = flow.get(\"FechaEntrada\")\nmsg.payload = {};\nmsg.payload.content = photo;\nmsg.payload.type = \"photo\";\nmsg.payload.caption = \"Llegada de vehículo a la hora (\"+fecha+\").\\nMatrícula: (\"+matri+\").\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1590,
+        "y": 800,
+        "wires": [
+            [
+                "945f23299531eb2f"
+            ]
+        ]
+    },
+    {
+        "id": "945f23299531eb2f",
+        "type": "link out",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "1863d931dacb1b5e"
+        ],
+        "x": 1735,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "151ce85b831cc28c",
+        "type": "debug",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "449896a5887532e2",
+        "type": "debug",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "c953969a14acd4fb",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "mensaje respuesta",
+        "func": "var Plaza=msg.payload[0].NumPlaza;\nvar Ocupado=msg.payload[0].Ocupado;\nvar temp = msg.payload[0].DHT11.Temperatura;\nvar hum = msg.payload[0].DHT11.Humedad;\nvar fecha = msg.payload[0].date;\nmsg.payload = {};\nmsg.payload.chatId = msg.originalMessage.from.id;\nmsg.payload.type = \"message\";\nmsg.payload.content=\"Último registro del sensor de la plaza número:(\"+Plaza+\").\\n¿Esta plaza se encuentra ocupada? (\"+Ocupado+\").\\nLa temperatura recogida es de (\"+temp+\"ºC) y la humedad relativa es de (\"+hum+\"%).\\n\";\nmsg.payload.content+=\"Hora del registro: \"+fecha.toLocaleString('es-ES', { timeZone: 'Europe/Madrid', hour12: false });\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 360,
+        "wires": [
+            [
+                "fe9b65c8780855a3"
+            ]
+        ]
+    },
+    {
+        "id": "fe9b65c8780855a3",
+        "type": "link out",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "f8ea4540fa0aeffe"
+        ],
+        "x": 1175,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "bcda4627a40588bf",
+        "type": "comment",
+        "z": "33676dab1b5dbc95",
+        "name": "ULTIMA PHOTO GUARDARLA COMO GLOBAL Y ASI PODER METERLA TAMBIEN EN EL COMANDO DE ULTIMA ENTRADA",
+        "info": "",
+        "x": 670,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "d9e3ecd647cd90da",
+        "type": "debug",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "60b5a49f7ce0ef93",
+        "type": "change",
+        "z": "33676dab1b5dbc95",
+        "name": "Cambio ChatID para difusión por el canal",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.chatId",
+                "pt": "msg",
+                "to": "-1001612621169",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1720,
+        "y": 640,
+        "wires": [
+            [
+                "cc844b9c806fd32e"
+            ]
+        ]
+    },
+    {
+        "id": "0a33b65408b06891",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "func": "var frec = msg.payload.content;\nvar user = msg.payload.from.username;\nmsg.payload={};\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"Frecuencia FOTA Actualizada a  (\"+frec+\") por el usuario (\"+user+\").\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 960,
+        "wires": [
+            [
+                "38283175e42822a0"
+            ]
+        ]
+    },
+    {
+        "id": "38283175e42822a0",
+        "type": "link out",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "1863d931dacb1b5e",
+            "f8ea4540fa0aeffe"
+        ],
+        "x": 635,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "459ef2b3b67f81f9",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "SUBIDO",
+        "func": "msg.payload={};\nmsg.payload.content = \"La barrera se ha subido.\";\nmsg.payload.chatId=589861369;\nmsg.payload.type = \"message\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 420,
+        "wires": [
+            [
+                "86799f5915a07852"
+            ]
+        ]
+    },
+    {
+        "id": "e7562e62052dfa40",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "BAJADO",
+        "func": "msg.payload={};\nmsg.payload.content = \"La barrera se ha bajado.\";\nmsg.payload.chatId=589861369;\nmsg.payload.type = \"message\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 540,
+        "wires": [
+            [
+                "86799f5915a07852"
+            ]
+        ]
+    },
+    {
+        "id": "86799f5915a07852",
+        "type": "link out",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [
+            "1863d931dacb1b5e",
+            "f8ea4540fa0aeffe"
+        ],
+        "x": 875,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "47bd5270819e5eba",
+        "type": "link in",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "links": [],
+        "x": 1655,
+        "y": 940,
+        "wires": [
+            [
+                "117424b7d4604041"
+            ]
+        ]
+    },
+    {
+        "id": "12968f2c0b74a0d7",
+        "type": "comment",
+        "z": "33676dab1b5dbc95",
+        "name": "DEFINIMOS COMO GLOBALES LAS VARIABLES DE MATRICULA Y FECHA DE LA ENTRADA QUE SE ACABA DE DAR  PARA MEJORAR SU PROCESAMIENTO Y VISUALIZACION",
+        "info": "",
+        "x": 1780,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "117424b7d4604041",
+        "type": "function",
+        "z": "33676dab1b5dbc95",
+        "name": "",
+        "func": "var matric = msg.payload.results[0].plate;\nvar fecha = new Date();\nflow.set(\"Matricula\",matric);\nflow.set(\"FechaEntrada\",fecha);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1780,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "17e1c16e7a1086e9",
+        "type": "mongodb",
+        "hostname": "iot.ac.uma.es",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "II7",
+        "name": "Base de datos proyecto"
+    },
+    {
+        "id": "aa0e08fb665711b4",
+        "type": "telegram bot",
+        "botname": "Proyecto_II7_bot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
     },
     {
         "id": "dbdec0508173add5",
@@ -2368,243 +1416,5 @@
         "willPayload": "",
         "willMsg": {},
         "sessionExpiry": ""
-    },
-    {
-        "id": "264336e14127e811",
-        "type": "ui_group",
-        "name": "Configuración FOTA",
-        "tab": "42ee521c54e35ea5",
-        "order": 3,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "aa1d1ec0bfdf9014",
-        "type": "ui_group",
-        "name": "Tiempo de Escucha",
-        "tab": "42ee521c54e35ea5",
-        "order": 2,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "3cebbf1a9719e92c",
-        "type": "ui_group",
-        "name": "Estado Plaza",
-        "tab": "c23e73087ae2cbd8",
-        "order": 3,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "9b8b8e9de3adfd24",
-        "type": "ui_group",
-        "name": "Humedad",
-        "tab": "c23e73087ae2cbd8",
-        "order": 2,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "e4977db5da3f7d79",
-        "type": "ui_group",
-        "name": "Temperatura",
-        "tab": "c23e73087ae2cbd8",
-        "order": 1,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "3a9317165f2347fd",
-        "type": "ui_group",
-        "name": "Todos Registros",
-        "tab": "42ce5df569af2475",
-        "order": 2,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "3bd19c569817da70",
-        "type": "ui_group",
-        "name": "Último registro",
-        "tab": "42ce5df569af2475",
-        "order": 1,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "17e1c16e7a1086e9",
-        "type": "mongodb",
-        "hostname": "iot.ac.uma.es",
-        "topology": "direct",
-        "connectOptions": "",
-        "port": "27017",
-        "db": "II7",
-        "name": "Base de datos proyecto"
-    },
-    {
-        "id": "8f01ab2d282de717",
-        "type": "ui_group",
-        "name": "Registros Filtrados",
-        "tab": "42ce5df569af2475",
-        "order": 3,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "0e650c3d27546fe5",
-        "type": "ui_group",
-        "name": "Descarga CSV",
-        "tab": "42ce5df569af2475",
-        "order": 4,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "3065d767bf05f5b5",
-        "type": "ui_group",
-        "name": "Control Barrera",
-        "tab": "1356825819f1607d",
-        "order": 2,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "0960d7a0c6e6d08f",
-        "type": "ui_group",
-        "name": "MENÚ PRINCIPAL",
-        "tab": "b51a5fa4c5a24420",
-        "order": 3,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "f49b27b85aa2aecc",
-        "type": "ui_group",
-        "name": "Estado Barrera",
-        "tab": "1356825819f1607d",
-        "order": 1,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "25a568d686b7c56c",
-        "type": "ui_group",
-        "name": "Última Entrada",
-        "tab": "1356825819f1607d",
-        "order": 3,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "c9f2a6c2d76e40b6",
-        "type": "ui_group",
-        "name": "HOME",
-        "tab": "1356825819f1607d",
-        "order": 4,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "68344837084a0c01",
-        "type": "ui_group",
-        "name": "HOME",
-        "tab": "42ee521c54e35ea5",
-        "order": 3,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "c90548166402c440",
-        "type": "ui_group",
-        "name": "HOME",
-        "tab": "42ce5df569af2475",
-        "order": 5,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "55fba5c46f4f4433",
-        "type": "ui_group",
-        "name": "HOME",
-        "tab": "c23e73087ae2cbd8",
-        "order": 4,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "42ee521c54e35ea5",
-        "type": "ui_tab",
-        "name": "Configuración",
-        "icon": "dashboard",
-        "disabled": false,
-        "hidden": false
-    },
-    {
-        "id": "c23e73087ae2cbd8",
-        "type": "ui_tab",
-        "name": "Plazas",
-        "icon": "dashboard",
-        "disabled": false,
-        "hidden": false
-    },
-    {
-        "id": "42ce5df569af2475",
-        "type": "ui_tab",
-        "name": "Registros",
-        "icon": "dashboard",
-        "disabled": false,
-        "hidden": false
-    },
-    {
-        "id": "1356825819f1607d",
-        "type": "ui_tab",
-        "name": "Entrada",
-        "icon": "dashboard",
-        "disabled": false,
-        "hidden": false
-    },
-    {
-        "id": "b51a5fa4c5a24420",
-        "type": "ui_tab",
-        "name": "Parking",
-        "icon": "dashboard",
-        "order": 13,
-        "disabled": false,
-        "hidden": false
     }
 ]
