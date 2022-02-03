@@ -6,18 +6,8 @@
 #include "pulsador_int.h"
 // -------------------  Configuración WiFi  ------------------- //
 
-//const char* ssid = "vodafoneAAXFSN";
-//const char* password = "AfG7CZqGYRMJYRG3";
-//const char* ssid = "infind";
-//const char* password = "1518wifi";
 const char* ssid = "Redmi";
 const char* password = "Redmi103";
-//const char* ssid = "Lecom-e0-31-0E";
-//const char* password = "athoo5ooJai6aif8";
-//const char* ssid = "Lecom-Fibra-69-99-d6";
-//const char* password = "fie6roh5Xah9ua4D";
-//const char* ssid = "OnePlus Nord2 5G";
-//const char* password = "eo792ndpw75kw";
 
 
 // ---------------------------------------------------------- //

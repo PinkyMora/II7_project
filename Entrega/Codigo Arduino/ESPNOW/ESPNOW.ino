@@ -21,8 +21,8 @@ extern "C" {                          // Utiliza librerias definidas en C, por l
 uint8_t mac[] = {0x48, 0x3F, 0xDA, 0x0C, 0xB7, 0xCF};// MACMORA--> 48:3F:DA:0C:B7:CF     MACDAVID--> 48:3F:DA:77:1F:67
 
 // Definicion de variables para conexión Wifi
-char *ssid      =  "vodafoneAAXFSN";  // "sagemcom1928";    // "infind";               // Set you WiFi SSID
-char *password  =  "AfG7CZqGYRMJYRG3"; // "UMMZUJNLTY3EMN";  //"1518wifi";               // Set you WiFi password
+char *ssid      =  "vodafoneAAXFSN";    // Set you WiFi SSID
+char *password  =  "AfG7CZqGYRMJYRG3";  // Set you WiFi password
 
 const char* mqtt_server = "iot.ac.uma.es"; 
 const char* mqtt_user = "II7";
