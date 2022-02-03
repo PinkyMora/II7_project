@@ -367,7 +367,7 @@
         "wires": [
             [
                 "388f08e51fdf92a1",
-                "efda1b28f08ac9ae"
+                "f9887b4638dcf28e"
             ]
         ]
     },
@@ -442,7 +442,7 @@
         "wires": [
             [
                 "205342c001ce5376",
-                "f9887b4638dcf28e"
+                "efda1b28f08ac9ae"
             ]
         ]
     },
@@ -451,7 +451,7 @@
         "type": "function",
         "z": "30c1b21053b21498",
         "name": "Ocupado == TRUE",
-        "func": "//msg.payload={\"payload.ocupado\":\"true\"}; // ocupado:\"true\"\n//{ \"$match\": { \"$and\": [ { \"payload.date\": { \"$lt\": ahora, \"$gt\": fiveminsago } }, { \"payload.ocupado\": \"true\" } ] } }\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.chatId = msg.payload.chatId;\nmsg.payload=\n[   { \"$sort\": {\"date\":-1}}, //ordena por fecha\n    { \"$group\": {            //agrupa por numero de plaza\n        \"_id\": \"$NumPlaza\",\n        \"Ocupacion\":{\"$first\":\"$Ocupado\"}, //Guarda ultimo estado de la plaza\n        \"Fecha\":{\"$first\":\"$date\"}  \n    }},\n    { \"$group\": {\n        \"_id\":\"$Ocupacion\",\n        \"$cond\":{\n            \"if\": {\n                \"$and\":[\n                    {\n                    \"$_id\":false}]},\n                    \"then\": {\"numPlazasLibres\":{\"$sum\":1}},\n                    \"else\": {\"numPlazasOcupadas\":{\"$sum\":1}},\n                    }}\n    },    \n];\nreturn msg;\n//msg.payload=[\n//    {\"$match\": { \"temperatura\": 19}},\n//    { \"$group\": {\n//        \"_id\": 0,\n//        \"NumPlazasOcupadas\": {\"$sum\":1}\n//    }}\n//];",
+        "func": "//msg.payload={\"payload.ocupado\":\"true\"}; // ocupado:\"true\"\n//{ \"$match\": { \"$and\": [ { \"payload.date\": { \"$lt\": ahora, \"$gt\": fiveminsago } }, { \"payload.ocupado\": \"true\" } ] } }\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.chatId = msg.payload.chatId;\nmsg.payload=\n[   { \"$sort\": {\"date\":-1}}, //ordena por fecha\n    { \"$group\": {            //agrupa por \n        \"_id\": \"$NumPlaza\",\n        \"Ocupacion\":{\"$first\":\"$Ocupado\"},\n        \"Fecha\":{\"$first\":\"$date\"}\n    }},\n    { \"$match\": { \"$and\": [{ \"Ocupacion\": true } ] } },\n    { \"$group\": {\n        \"_id\":0,\n        \"numPlazasLibres\":{\"$sum\":1},\n    }},    \n];\nreturn msg;\n//msg.payload=[\n//    {\"$match\": { \"temperatura\": 19}},\n//    { \"$group\": {\n//        \"_id\": 0,\n//        \"NumPlazasOcupadas\": {\"$sum\":1}\n//    }}\n//];",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -657,7 +657,7 @@
         "type": "function",
         "z": "30c1b21053b21498",
         "name": "Creamos mensaje",
-        "func": "var plazas = msg.payload[0].numPlazasOcupadas;\nmsg.payload={};\nmsg.payload.chatId=msg.chatId;\nmsg.payload.content=\"El número de Plazas Ocupadas en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "func": "var plazas;\nif (msg.payload==''){\n    plazas=0;\n}\nelse{\n    plazas=msg.payload[0].numPlazasOcupadas;\n}\nmsg.plazas=plazas;\nmsg.payload={};\nmsg.payload.chatId=msg.chatId;\nmsg.payload.content=\"El número de Plazas Ocupadas en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -667,7 +667,8 @@
         "y": 660,
         "wires": [
             [
-                "6a8432e16e7d65ab"
+                "6a8432e16e7d65ab",
+                "589cde68f19a736f"
             ]
         ]
     },
@@ -676,7 +677,7 @@
         "type": "function",
         "z": "30c1b21053b21498",
         "name": "Creamos mensaje",
-        "func": "var plazas = msg.payload[0].numPlazasLibres;\nmsg.payload={};\nmsg.payload.chatId=msg.chatId;\nmsg.payload.content=\"El número de Plazas Libres en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "func": "var plazas;\nif (msg.payload==''){\n    plazas=0;\n}\nelse{\n    plazas=msg.payload[0].numPlazasLibres;\n}\nmsg.payload={};\nmsg.payload.chatId=msg.chatId;\nmsg.payload.content=\"El número de Plazas Libres en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -753,7 +754,7 @@
         "type": "debug",
         "z": "30c1b21053b21498",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -761,8 +762,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1270,
-        "y": 540,
+        "x": 1090,
+        "y": 500,
         "wires": []
     },
     {
@@ -1357,6 +1358,23 @@
         "statusType": "auto",
         "x": 1050,
         "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "589cde68f19a736f",
+        "type": "debug",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1230,
+        "y": 540,
         "wires": []
     },
     {
