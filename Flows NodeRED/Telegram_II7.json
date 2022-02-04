@@ -1,0 +1,1439 @@
+[
+    {
+        "id": "30c1b21053b21498",
+        "type": "tab",
+        "label": "II7--TELEGRAM",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "1bcb1745fb3a308d",
+        "type": "debug",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 550,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "9817f733e6a588e2",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "mensaje bienvenida",
+        "func": "if(msg.payload.content.substring(0,1)!=\"/\")\n{\n msg.payload.content=\"Hola soy el bot del grupo 7 de Informática Industrial. Puedo responderte a estos comandos:\\n/start\\n/ultregsensores\\n/ultentrada\\n/subirbarrera\\n/bajarbarrera\\n/plazasOcupadas\\n/plazasLibres\\n/temp_hum_Parking\\n/frecFOTA\\n/camara_ahora\";\n return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 160,
+        "wires": [
+            [
+                "15ee43d0264e4ee8"
+            ]
+        ]
+    },
+    {
+        "id": "5895cceacaed5442",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "ultima entrada",
+        "func": "msg.limit=1;\nmsg.sort={\"date\":-1};\nmsg.payload={};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 280,
+        "wires": [
+            [
+                "3ba4afa461e96346"
+            ]
+        ]
+    },
+    {
+        "id": "3ba4afa461e96346",
+        "type": "mongodb in",
+        "z": "30c1b21053b21498",
+        "mongodb": "17e1c16e7a1086e9",
+        "name": "",
+        "collection": "registro_matriculas_entrada",
+        "operation": "find",
+        "x": 680,
+        "y": 280,
+        "wires": [
+            [
+                "b8d592f5b517277b",
+                "adf00526b3bdf450"
+            ]
+        ]
+    },
+    {
+        "id": "b8d592f5b517277b",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "mensaje respuesta",
+        "func": "var matri=msg.payload[0].payload.matricula;\nvar fecha=msg.payload[0].payload.date;\nmsg.payload = {};\nmsg.payload.chatId=msg.originalMessage.from.id;\nmsg.payload.type = \"message\";\nmsg.payload.content=\"La matrícula del último vehículo es: \"+matri+\".\\n\";\nmsg.payload.content+=\"Hora de llegada: \"+fecha.toLocaleString('es-ES', { timeZone: 'Europe/Madrid', hour12: false });\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 280,
+        "wires": [
+            [
+                "4b554e18f1a4ce95",
+                "9d65fb9f2984d3aa"
+            ]
+        ]
+    },
+    {
+        "id": "efc1bc308740765c",
+        "type": "telegram command",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "command": "/ultentrada",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "ed52304362e45dcd",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 80,
+        "y": 280,
+        "wires": [
+            [
+                "5895cceacaed5442"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "5feda5234d036881",
+        "type": "telegram receiver",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "bot": "ed52304362e45dcd",
+        "saveDataDir": "",
+        "filterCommands": true,
+        "x": 230,
+        "y": 100,
+        "wires": [
+            [
+                "1bcb1745fb3a308d",
+                "9817f733e6a588e2"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "4b554e18f1a4ce95",
+        "type": "debug",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "e3f97c6e188510d7",
+        "type": "telegram sender",
+        "z": "30c1b21053b21498",
+        "name": "Proyecto_II7_bot",
+        "bot": "ed52304362e45dcd",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 2010,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0b54bb527364030f",
+        "type": "telegram command",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "command": "/start",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "ed52304362e45dcd",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 190,
+        "y": 160,
+        "wires": [
+            [
+                "9817f733e6a588e2"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "690a5d3f02fc1108",
+        "type": "telegram command",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "command": "/subirbarrera",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "ed52304362e45dcd",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 110,
+        "y": 460,
+        "wires": [
+            [
+                "2a47a239882e5575"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "484e0776d3d33a7c",
+        "type": "telegram command",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "command": "/bajarbarrera",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "ed52304362e45dcd",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 110,
+        "y": 520,
+        "wires": [
+            [
+                "64300e6ca00f4866"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "69c93625037c3852",
+        "type": "comment",
+        "z": "30c1b21053b21498",
+        "name": "-1001612621169",
+        "info": "",
+        "x": 120,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "7a2ab31dbe2cc63e",
+        "type": "telegram command",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "command": "/plazasOcupadas",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "ed52304362e45dcd",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 120,
+        "y": 660,
+        "wires": [
+            [
+                "e8858e8bdab1b9cb"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "dc67f2bbc0f09aaa",
+        "type": "telegram command",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "command": "/plazasLibres",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "ed52304362e45dcd",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 110,
+        "y": 720,
+        "wires": [
+            [
+                "3fb21abfbdab845f"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "41ae25164b231e18",
+        "type": "telegram command",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "command": "/temp_hum_Parking",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "ed52304362e45dcd",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 130,
+        "y": 800,
+        "wires": [
+            [
+                "c50e1adf3caee7c4"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "5545d1c498e6d027",
+        "type": "telegram command",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "command": "/ultregsensores",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "ed52304362e45dcd",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 100,
+        "y": 360,
+        "wires": [
+            [
+                "1c504c39de086455"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "d77ec248d0cd8300",
+        "type": "mongodb in",
+        "z": "30c1b21053b21498",
+        "mongodb": "17e1c16e7a1086e9",
+        "name": "",
+        "collection": "registro_estado_plazas",
+        "operation": "aggregate",
+        "x": 700,
+        "y": 660,
+        "wires": [
+            [
+                "388f08e51fdf92a1",
+                "f9887b4638dcf28e"
+            ]
+        ]
+    },
+    {
+        "id": "93cfa93bd0ef45e7",
+        "type": "mqtt out",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "topic": "II7/Entrada/BarreraCMD",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f6cea4c0f08824c9",
+        "x": 650,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "2a47a239882e5575",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "SUBIR",
+        "func": "msg.payload = {}\nmsg.payload.comando= \"subir\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 460,
+        "wires": [
+            [
+                "93cfa93bd0ef45e7",
+                "4a160f6c1c97e967"
+            ]
+        ]
+    },
+    {
+        "id": "64300e6ca00f4866",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "BAJAR",
+        "func": "msg.payload = {}\nmsg.payload.bajar = \"bajar\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 520,
+        "wires": [
+            [
+                "93cfa93bd0ef45e7",
+                "d008d9a2e24b37df"
+            ]
+        ]
+    },
+    {
+        "id": "77af2b5f3e0fab0f",
+        "type": "mongodb in",
+        "z": "30c1b21053b21498",
+        "mongodb": "17e1c16e7a1086e9",
+        "name": "",
+        "collection": "registro_estado_plazas",
+        "operation": "aggregate",
+        "x": 700,
+        "y": 720,
+        "wires": [
+            [
+                "205342c001ce5376",
+                "efda1b28f08ac9ae"
+            ]
+        ]
+    },
+    {
+        "id": "e8858e8bdab1b9cb",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "Ocupado == TRUE",
+        "func": "//msg.payload={\"payload.ocupado\":\"true\"}; // ocupado:\"true\"\n//{ \"$match\": { \"$and\": [ { \"payload.date\": { \"$lt\": ahora, \"$gt\": fiveminsago } }, { \"payload.ocupado\": \"true\" } ] } }\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.chatId = msg.payload.chatId;\nmsg.payload=\n[   { \"$sort\": {\"date\":-1}}, //ordena por fecha\n    { \"$group\": {            //agrupa por \n        \"_id\": \"$NumPlaza\",\n        \"Ocupacion\":{\"$first\":\"$Ocupado\"},\n        \"Fecha\":{\"$first\":\"$date\"}\n    }},\n    { \"$match\": { \"$and\": [{ \"Ocupacion\": true } ] } },\n    { \"$group\": {\n        \"_id\":0,\n        \"numPlazasLibres\":{\"$sum\":1},\n    }},    \n];\nreturn msg;\n//msg.payload=[\n//    {\"$match\": { \"temperatura\": 19}},\n//    { \"$group\": {\n//        \"_id\": 0,\n//        \"NumPlazasOcupadas\": {\"$sum\":1}\n//    }}\n//];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 660,
+        "wires": [
+            [
+                "d77ec248d0cd8300"
+            ]
+        ]
+    },
+    {
+        "id": "3fb21abfbdab845f",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "Ocupado == FALSE",
+        "func": "//msg.payload={\"ocupado\":\"false\"}; //ocupado:\"false\" TAMBIEN SACAR EL NUMERO DE CADA PLAZA LIBRE AKA numPlaza\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.chatId = msg.payload.chatId;\nmsg.payload=\n[   { \"$sort\": {\"date\":-1}}, //ordena por fecha\n    { \"$group\": {            //agrupa por \n        \"_id\": \"$NumPlaza\",\n        \"Ocupacion\":{\"$first\":\"$Ocupado\"},\n        \"Fecha\":{\"$first\":\"$date\"}\n    }},\n    { \"$match\": { \"$and\": [{ \"Ocupacion\": false } ] } },\n    { \"$group\": {\n        \"_id\":0,\n        \"numPlazasLibres\":{\"$sum\":1},\n    }},    \n];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 720,
+        "wires": [
+            [
+                "77af2b5f3e0fab0f"
+            ]
+        ]
+    },
+    {
+        "id": "c50e1adf3caee7c4",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "TEMP",
+        "func": "//sacamos temperatura y humedad de todas las plazas y podemos hacer una media incluso\n\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.chatId = msg.payload.chatId;\nmsg.payload=\n[\n    { \"$match\": { \"date\": {\"$gt\" : fiveminsago} } },\n    { \"$project\": {\n        \"temperatura\": \"$DHT11.Temperatura\", \n        \"humedad\":\"$DHT11.Humedad\"\n        }\n    },\n    { \"$group\": {\n        \"_id\": 1,\n        \"TempMedia\": {\"$avg\":\"$temperatura\"}, // SE HA INTENTADO REDONDEAR PERO LA OPERACION ROUND SE INTRODUJO EN VERSIONES POSTERIORES DE MONGODB PARA AGREGACIONES\n        \"HumMedia\": {\"$avg\":\"$humedad\"}, \n        \"datos\": {\"$sum\":1}\n    }}\n];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 800,
+        "wires": [
+            [
+                "53ffe3757b62cff9"
+            ]
+        ]
+    },
+    {
+        "id": "53ffe3757b62cff9",
+        "type": "mongodb in",
+        "z": "30c1b21053b21498",
+        "mongodb": "17e1c16e7a1086e9",
+        "name": "",
+        "collection": "registro_estado_plazas",
+        "operation": "aggregate",
+        "x": 660,
+        "y": 800,
+        "wires": [
+            [
+                "08f1079b64b2ea59",
+                "ea374e3815a5dac1"
+            ]
+        ]
+    },
+    {
+        "id": "13336c0beecd0e24",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "func": "var opts = {\n  reply_markup: JSON.stringify({\n    \"inline_keyboard\": [[\n                {\n                    \"text\": \"10000\",\n                    \"callback_data\": \"10000\"            \n                },\n                {\n                    \"text\": \"15000\",\n                    \"callback_data\": \"15000\"            \n                },\n                {\n                    \"text\": \"20000\",\n                    \"callback_data\": \"20000\"            \n                },\n                {\n                    \"text\": \"30000\",\n                    \"callback_data\": \"30000\"            \n                }]\n            ]\n  })\n};\n\nmsg.payload.content = \"Elige entre las posibles Frecuencias:\";\nmsg.payload.options = opts;\n//msg.payload.chatId = 589861369;// -1001612621169;\nmsg.payload.type = \"message\";\n\nreturn [ msg ];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 880,
+        "wires": [
+            [
+                "91b9f0ebb38a0977"
+            ]
+        ]
+    },
+    {
+        "id": "41b653c4da1a6102",
+        "type": "telegram event",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "bot": "ed52304362e45dcd",
+        "event": "callback_query",
+        "autoanswer": false,
+        "x": 160,
+        "y": 980,
+        "wires": [
+            [
+                "33548a813979ba4f",
+                "e6ded021a6b5a491",
+                "5f358faa8cf6b871"
+            ]
+        ]
+    },
+    {
+        "id": "33548a813979ba4f",
+        "type": "debug",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "3cbfa9e07f498b6a",
+        "type": "telegram command",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "command": "/frecFOTA",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "ed52304362e45dcd",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 90,
+        "y": 880,
+        "wires": [
+            [
+                "13336c0beecd0e24"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "e4d3218dbd30cec1",
+        "type": "link in",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "links": [
+            "15ee43d0264e4ee8",
+            "9d65fb9f2984d3aa",
+            "b439819f72be576c",
+            "6a8432e16e7d65ab",
+            "2b540f83ea222247",
+            "76e04a5b674a8649",
+            "1515d2fc60388ae0",
+            "91b9f0ebb38a0977",
+            "78850611b35f8f5f",
+            "84c3f892b7ed14a7",
+            "123c774465de239b",
+            "882e1ce7d1b1e929",
+            "825ad4fab3e96185"
+        ],
+        "x": 1835,
+        "y": 540,
+        "wires": [
+            [
+                "e3f97c6e188510d7"
+            ]
+        ]
+    },
+    {
+        "id": "15ee43d0264e4ee8",
+        "type": "link out",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "links": [
+            "e4d3218dbd30cec1"
+        ],
+        "x": 795,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "9d65fb9f2984d3aa",
+        "type": "link out",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "links": [
+            "e4d3218dbd30cec1",
+            "259929671fb81f78"
+        ],
+        "x": 1215,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "388f08e51fdf92a1",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "Creamos mensaje",
+        "func": "var plazas;\nif (msg.payload==''){\n    plazas=0;\n}\nelse{\n    plazas=msg.payload[0].numPlazasOcupadas;\n}\nmsg.plazas=plazas;\nmsg.payload={};\nmsg.payload.chatId=msg.chatId;\nmsg.payload.content=\"El número de Plazas Ocupadas en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 660,
+        "wires": [
+            [
+                "6a8432e16e7d65ab",
+                "589cde68f19a736f"
+            ]
+        ]
+    },
+    {
+        "id": "205342c001ce5376",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "Creamos mensaje",
+        "func": "var plazas;\nif (msg.payload==''){\n    plazas=0;\n}\nelse{\n    plazas=msg.payload[0].numPlazasLibres;\n}\nmsg.payload={};\nmsg.payload.chatId=msg.chatId;\nmsg.payload.content=\"El número de Plazas Libres en el Parking es de  (\"+plazas+\") plazas.\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 720,
+        "wires": [
+            [
+                "2b540f83ea222247"
+            ]
+        ]
+    },
+    {
+        "id": "08f1079b64b2ea59",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "Creamos mensaje",
+        "func": "var temp = msg.payload[0].TempMedia;\nvar hum = msg.payload[0].HumMedia;\nmsg.payload={};\nmsg.payload.chatId=msg.chatId;\nmsg.payload.content=\"La temperatura media en el Parking es de  (\"+temp.toFixed(2)+\"ºC) y una humedad relativa del (\"+hum.toFixed(2)+\"%) .\\nComprobación realizada en el intervalo de los últimos 5 minutos.\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 800,
+        "wires": [
+            [
+                "76e04a5b674a8649"
+            ]
+        ]
+    },
+    {
+        "id": "6a8432e16e7d65ab",
+        "type": "link out",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "links": [
+            "259929671fb81f78",
+            "e4d3218dbd30cec1"
+        ],
+        "x": 1215,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "2b540f83ea222247",
+        "type": "link out",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "links": [
+            "259929671fb81f78",
+            "e4d3218dbd30cec1"
+        ],
+        "x": 1215,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "76e04a5b674a8649",
+        "type": "link out",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "links": [
+            "e4d3218dbd30cec1",
+            "259929671fb81f78"
+        ],
+        "x": 1215,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "f9887b4638dcf28e",
+        "type": "debug",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "34d2108868be2d0d",
+        "type": "comment",
+        "z": "30c1b21053b21498",
+        "name": "Mandamos al flow del dashboard para que publique en el topic  II7/+/config",
+        "info": "",
+        "x": 400,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "1c504c39de086455",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "ultimo registro",
+        "func": "msg.limit=1;\nmsg.sort={\"date\":-1};\nmsg.payload={};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 360,
+        "wires": [
+            [
+                "70308e84b6f34a83"
+            ]
+        ]
+    },
+    {
+        "id": "70308e84b6f34a83",
+        "type": "mongodb in",
+        "z": "30c1b21053b21498",
+        "mongodb": "17e1c16e7a1086e9",
+        "name": "",
+        "collection": "registro_estado_plazas",
+        "operation": "find",
+        "x": 660,
+        "y": 360,
+        "wires": [
+            [
+                "1474b5522e25d794",
+                "18d4cc5b16790353"
+            ]
+        ]
+    },
+    {
+        "id": "259929671fb81f78",
+        "type": "link in",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "links": [
+            "6a8432e16e7d65ab",
+            "2b540f83ea222247",
+            "78850611b35f8f5f",
+            "24da27a3b382480e",
+            "76e04a5b674a8649",
+            "9d65fb9f2984d3aa",
+            "123c774465de239b",
+            "882e1ce7d1b1e929",
+            "825ad4fab3e96185"
+        ],
+        "x": 1495,
+        "y": 640,
+        "wires": [
+            [
+                "60d130d58edc5e22"
+            ]
+        ]
+    },
+    {
+        "id": "91b9f0ebb38a0977",
+        "type": "link out",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "links": [
+            "e4d3218dbd30cec1"
+        ],
+        "x": 495,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "e6ded021a6b5a491",
+        "type": "link out",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "links": [],
+        "x": 435,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "86578d188444cab8",
+        "type": "http request",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "method": "GET",
+        "ret": "bin",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.107/capture",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 330,
+        "y": 1120,
+        "wires": [
+            [
+                "1dbc07b3e06ee1f1"
+            ]
+        ]
+    },
+    {
+        "id": "1dbc07b3e06ee1f1",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "func": "var pl = {\n  content: msg.payload,\n  caption: \"Foto tomada de la entrada de vehículos\",\n  type : 'photo',\n  chatId: msg.originalMessage.chat.id,\n  chat: msg.originalMessage.chat,\n  from: msg.originalMessage.from,\n  message_id : msg.originalMessage.message_id\n}\n\nmsg.payload = pl;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 1120,
+        "wires": [
+            [
+                "78850611b35f8f5f"
+            ]
+        ]
+    },
+    {
+        "id": "78850611b35f8f5f",
+        "type": "link out",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "links": [
+            "259929671fb81f78",
+            "e4d3218dbd30cec1"
+        ],
+        "x": 655,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "205df5035970cd27",
+        "type": "telegram command",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "command": "/camara_ahora",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "ed52304362e45dcd",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 120,
+        "y": 1120,
+        "wires": [
+            [
+                "86578d188444cab8"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "24fd36e797131f5a",
+        "type": "link in",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "links": [
+            "7c37e8c04f545a4d"
+        ],
+        "x": 1475,
+        "y": 800,
+        "wires": [
+            [
+                "9d19777c038da7a0"
+            ]
+        ]
+    },
+    {
+        "id": "5902978b3e6a8999",
+        "type": "comment",
+        "z": "30c1b21053b21498",
+        "name": "ESTE LINK PROVIENE JUSTO DESPUES DEL NODO HTTP REQUEST DE LA CAMARA Y ENVÍA LA FOTO POR TELEGRAM AL CANAL DE DIFUSION CADA VEZ QUE LLEGA UN VEHÍCULO",
+        "info": "",
+        "x": 1980,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "98f27f35e6709b67",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "FOTO",
+        "func": "var photo = msg.payload;\nvar matri = global.get(\"Matricula\");\nvar fecha = global.get(\"FechaEntrada\")\nmsg.payload = {};\nmsg.payload.content = photo;\nmsg.payload.type = \"photo\";\nmsg.payload.caption = \"Llegada de vehículo a la hora (\"+fecha+\").\\nMatrícula: (\"+matri+\").\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1750,
+        "y": 800,
+        "wires": [
+            [
+                "24da27a3b382480e"
+            ]
+        ]
+    },
+    {
+        "id": "24da27a3b382480e",
+        "type": "link out",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "links": [
+            "259929671fb81f78"
+        ],
+        "x": 1855,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "adf00526b3bdf450",
+        "type": "debug",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "1474b5522e25d794",
+        "type": "debug",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "18d4cc5b16790353",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "mensaje respuesta",
+        "func": "var Plaza=msg.payload[0].NumPlaza;\nvar Ocupado=msg.payload[0].Ocupado;\nvar temp = msg.payload[0].DHT11.Temperatura;\nvar hum = msg.payload[0].DHT11.Humedad;\nvar fecha = msg.payload[0].date;\nmsg.payload = {};\nmsg.payload.chatId = msg.originalMessage.from.id;\nmsg.payload.type = \"message\";\nmsg.payload.content=\"Último registro del sensor de la plaza número:(\"+Plaza+\").\\n¿Esta plaza se encuentra ocupada? (\"+Ocupado+\").\\nLa temperatura recogida es de (\"+temp+\"ºC) y la humedad relativa es de (\"+hum+\"%).\\n\";\nmsg.payload.content+=\"Hora del registro: \"+fecha.toLocaleString('es-ES', { timeZone: 'Europe/Madrid', hour12: false });\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 360,
+        "wires": [
+            [
+                "84c3f892b7ed14a7"
+            ]
+        ]
+    },
+    {
+        "id": "84c3f892b7ed14a7",
+        "type": "link out",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "links": [
+            "e4d3218dbd30cec1"
+        ],
+        "x": 1175,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "60d130d58edc5e22",
+        "type": "change",
+        "z": "30c1b21053b21498",
+        "name": "Cambio ChatID para difusión por el canal",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.chatId",
+                "pt": "msg",
+                "to": "-1001612621169",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1720,
+        "y": 640,
+        "wires": [
+            [
+                "e3f97c6e188510d7"
+            ]
+        ]
+    },
+    {
+        "id": "5f358faa8cf6b871",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "func": "var frec = msg.payload.content;\nvar user = msg.payload.from.username;\nmsg.payload={};\nmsg.payload.chatId=589861369;\nmsg.payload.content=\"Frecuencia FOTA Actualizada a  (\"+frec+\") por el usuario (\"+user+\").\\n\";\nmsg.payload.type = \"message\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 960,
+        "wires": [
+            [
+                "123c774465de239b"
+            ]
+        ]
+    },
+    {
+        "id": "123c774465de239b",
+        "type": "link out",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "links": [
+            "259929671fb81f78",
+            "e4d3218dbd30cec1"
+        ],
+        "x": 635,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "4a160f6c1c97e967",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "SUBIDO",
+        "func": "msg.payload={};\nmsg.payload.content = \"La barrera se ha subido.\";\nmsg.payload.chatId=589861369;\nmsg.payload.type = \"message\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 420,
+        "wires": [
+            [
+                "882e1ce7d1b1e929"
+            ]
+        ]
+    },
+    {
+        "id": "d008d9a2e24b37df",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "BAJADO",
+        "func": "msg.payload={};\nmsg.payload.content = \"La barrera se ha bajado.\";\nmsg.payload.chatId=589861369;\nmsg.payload.type = \"message\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 540,
+        "wires": [
+            [
+                "882e1ce7d1b1e929"
+            ]
+        ]
+    },
+    {
+        "id": "882e1ce7d1b1e929",
+        "type": "link out",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "links": [
+            "259929671fb81f78",
+            "e4d3218dbd30cec1"
+        ],
+        "x": 875,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "be02fdd3bd89703f",
+        "type": "link in",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "links": [
+            "66a93283dc1150fb"
+        ],
+        "x": 1455,
+        "y": 940,
+        "wires": [
+            [
+                "72cd85e6595259bb"
+            ]
+        ]
+    },
+    {
+        "id": "91dd85581a0fb620",
+        "type": "comment",
+        "z": "30c1b21053b21498",
+        "name": "DEFINIMOS COMO GLOBALES LAS VARIABLES DE MATRICULA Y FECHA DE LA ENTRADA QUE SE ACABA DE DAR  PARA MEJORAR SU PROCESAMIENTO Y VISUALIZACION",
+        "info": "",
+        "x": 1780,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "72cd85e6595259bb",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "func": "var matric = msg.payload.results[0].plate;\nvar fecha = new Date();\nglobal.set(\"Matricula\",matric);\nglobal.set(\"FechaEntrada\",fecha);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1600,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9d19777c038da7a0",
+        "type": "delay",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "x": 1600,
+        "y": 800,
+        "wires": [
+            [
+                "98f27f35e6709b67"
+            ]
+        ]
+    },
+    {
+        "id": "bb76d90151127c75",
+        "type": "comment",
+        "z": "30c1b21053b21498",
+        "name": "Token bot: 5083378127:AAFdHZADPeMwtTiobMOhYrU3h-lHQhkHDWI",
+        "info": "",
+        "x": 290,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "ea374e3815a5dac1",
+        "type": "debug",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "efda1b28f08ac9ae",
+        "type": "debug",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "269397bfe322cc13",
+        "type": "mongodb in",
+        "z": "30c1b21053b21498",
+        "mongodb": "17e1c16e7a1086e9",
+        "name": "",
+        "collection": "registro_estado_plazas",
+        "operation": "find",
+        "x": 720,
+        "y": 1300,
+        "wires": [
+            [
+                "01935b3b9ae3ce56"
+            ]
+        ]
+    },
+    {
+        "id": "4be23556534f24c9",
+        "type": "function",
+        "z": "30c1b21053b21498",
+        "name": "Ocupado == FALSE",
+        "func": "//msg.payload={\"ocupado\":\"false\"}; //ocupado:\"false\" TAMBIEN SACAR EL NUMERO DE CADA PLAZA LIBRE AKA numPlaza\nvar ms_per_min= 60000;\nvar now_ms= new Date().getTime();\nvar fiveminsago = new Date(now_ms - 5*ms_per_min);\nmsg.chatId = msg.payload.chatId;\nmsg.date=-1;\nmsg.payload={};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 1300,
+        "wires": [
+            [
+                "269397bfe322cc13"
+            ]
+        ]
+    },
+    {
+        "id": "9dc058a7e27b265a",
+        "type": "inject",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 1300,
+        "wires": [
+            [
+                "4be23556534f24c9"
+            ]
+        ]
+    },
+    {
+        "id": "01935b3b9ae3ce56",
+        "type": "debug",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "589cde68f19a736f",
+        "type": "debug",
+        "z": "30c1b21053b21498",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1230,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "17e1c16e7a1086e9",
+        "type": "mongodb",
+        "hostname": "iot.ac.uma.es",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "II7",
+        "name": "Base de datos proyecto"
+    },
+    {
+        "id": "ed52304362e45dcd",
+        "type": "telegram bot",
+        "botname": "Proyecto_II7_bot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "f6cea4c0f08824c9",
+        "type": "mqtt-broker",
+        "name": "proyecto (iot.ac.uma.es)",
+        "broker": "iot.ac.uma.es",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]
